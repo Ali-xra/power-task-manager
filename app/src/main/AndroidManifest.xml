@@ -105,6 +105,12 @@
             android:label="پشتیبان‌گیری و بازیابی"
             android:exported="false" />
 
+        <!-- Activity صفحه تنظیمات -->
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:label="تنظیمات"
+            android:exported="false" />
+
         <!-- سرویس پخش صدا و ویبره صبحگاهی -->
         <service
             android:name=".service.AlarmService"

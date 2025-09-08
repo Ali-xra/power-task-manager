@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/alarms_subtitle"
-                        android:textColor="#64748B"
+                        android:textColor="#374151"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -178,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/goals_subtitle"
-                        android:textColor="#64748B"
+                        android:textColor="#374151"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -237,7 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tasks_subtitle"
-                        android:textColor="#64748B"
+                        android:textColor="#374151"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -296,7 +296,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/reports_subtitle"
-                        android:textColor="#64748B"
+                        android:textColor="#374151"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -311,9 +311,9 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- دکمه پشتیبان‌گیری -->
+        <!-- دکمه تنظیمات -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/backupBtn"
+            android:id="@+id/settingsBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -321,7 +321,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="#10B981"
+            app:rippleColor="#6366F1"
             app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
@@ -334,7 +334,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="💾"
+                    android:text="⚙️"
                     android:textSize="32sp" />
 
                 <LinearLayout
@@ -347,7 +347,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/backup_title"
+                        android:text="@string/settings_title"
                         android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -356,8 +356,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/backup_subtitle"
-                        android:textColor="#64748B"
+                        android:text="@string/settings_subtitle"
+                        android:textColor="#374151"
                         android:textSize="14sp" />
 
                 </LinearLayout>

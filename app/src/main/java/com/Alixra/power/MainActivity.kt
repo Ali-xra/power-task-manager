@@ -16,7 +16,7 @@ import android.widget.TextView
 import com.Alixra.power.data.PreferencesManager
 import com.Alixra.power.ui.AlarmActivity
 import com.Alixra.power.ui.AlarmsActivity
-import com.Alixra.power.ui.BackupActivity
+import com.Alixra.power.ui.SettingsActivity
 import com.Alixra.power.ui.GoalsActivity
 import com.Alixra.power.ui.BaseActivity
 import com.Alixra.power.ui.LoginActivity
@@ -30,7 +30,7 @@ class MainActivity : BaseActivity() {
     private lateinit var goalsBtn: MaterialCardView
     private lateinit var tasksBtn: MaterialCardView
     private lateinit var reportsBtn: MaterialCardView
-    private lateinit var backupBtn: MaterialCardView
+    private lateinit var settingsBtn: MaterialCardView
     
     private lateinit var userEmailHeader: TextView
     private lateinit var preferencesManager: PreferencesManager
@@ -98,7 +98,7 @@ class MainActivity : BaseActivity() {
         goalsBtn = findViewById(R.id.goalsBtn)
         tasksBtn = findViewById(R.id.tasksBtn)
         reportsBtn = findViewById(R.id.reportsBtn)
-        backupBtn = findViewById(R.id.backupBtn)
+        settingsBtn = findViewById(R.id.settingsBtn)
         userEmailHeader = findViewById(R.id.userEmailHeader)
     }
     
@@ -183,9 +183,9 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        // دکمه پشتیبان‌گیری
-        backupBtn.setOnClickListener {
-            val intent = Intent(this, BackupActivity::class.java)
+        // دکمه تنظیمات
+        settingsBtn.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
     }

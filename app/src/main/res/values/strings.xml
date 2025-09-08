@@ -155,4 +155,12 @@
     <string name="cancel_button">❌ لغو</string>
     <string name="confirm_button">✅ تأیید</string>
     <string name="typing_hint">💡 نکته: تایپ باید دقیقاً مطابق متن بالا باشد</string>
+    
+    <!-- Settings Activity -->
+    <string name="settings_title">⚙️ تنظیمات</string>
+    <string name="settings_subtitle">پیکربندی برنامه</string>
+    <string name="language_selection_title">انتخاب زبان</string>
+    <string name="language_selection_subtitle">تغییر زبان رابط کاربری</string>
+    <string name="quick_language_change">تغییر سریع زبان</string>
+    <string name="language_changed_message">زبان تغییر کرد</string>
 </resources>
