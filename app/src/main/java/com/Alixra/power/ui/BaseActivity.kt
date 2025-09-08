@@ -2,6 +2,7 @@ package com.Alixra.power.ui
 
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.Alixra.power.data.PreferencesManager
 import java.util.*
@@ -11,20 +12,21 @@ import java.util.*
  */
 abstract class BaseActivity : AppCompatActivity() {
     
-    private lateinit var preferencesManager: PreferencesManager
-    
     override fun attachBaseContext(newBase: Context?) {
-        if (newBase != null) {
-            val prefsManager = PreferencesManager(newBase)
-            val language = prefsManager.getLanguage()
-            val context = updateLocale(newBase, language)
-            super.attachBaseContext(context)
-        } else {
-            super.attachBaseContext(newBase)
-        }
+        val context = newBase?.let { updateLocale(it) } ?: newBase
+        super.attachBaseContext(context)
     }
     
-    private fun updateLocale(context: Context, language: String): Context {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // اعمال زبان هنگام ایجاد Activity
+        updateAppLanguage()
+    }
+    
+    private fun updateLocale(context: Context): Context {
+        val prefsManager = PreferencesManager(context)
+        val language = prefsManager.getLanguage()
+        
         val locale = Locale(language)
         Locale.setDefault(locale)
         
@@ -32,5 +34,18 @@ abstract class BaseActivity : AppCompatActivity() {
         config.setLocale(locale)
         
         return context.createConfigurationContext(config)
+    }
+    
+    private fun updateAppLanguage() {
+        val prefsManager = PreferencesManager(this)
+        val language = prefsManager.getLanguage()
+        
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        
+        val config = Configuration(resources.configuration)
+        config.setLocale(locale)
+        
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 }

@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.Alixra.power.MainActivity
+import com.Alixra.power.PowerApplication
 import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
 import com.google.android.material.button.MaterialButton
@@ -59,6 +60,7 @@ class LoginActivity : BaseActivity() {
         persianButton.setOnClickListener {
             if (selectedLanguage != "fa") {
                 selectedLanguage = "fa"
+                PowerApplication.changeLanguage(this, selectedLanguage)
                 preferencesManager.setLanguage(selectedLanguage)
                 recreate() // راه‌اندازی مجدد برای اعمال تغییرات
             }
@@ -67,6 +69,7 @@ class LoginActivity : BaseActivity() {
         englishButton.setOnClickListener {
             if (selectedLanguage != "en") {
                 selectedLanguage = "en"
+                PowerApplication.changeLanguage(this, selectedLanguage)
                 preferencesManager.setLanguage(selectedLanguage)
                 recreate() // راه‌اندازی مجدد برای اعمال تغییرات
             }

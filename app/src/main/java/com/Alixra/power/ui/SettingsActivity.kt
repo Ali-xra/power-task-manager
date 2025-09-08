@@ -6,9 +6,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.Alixra.power.PowerApplication
 import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
 /**
@@ -80,6 +80,9 @@ class SettingsActivity : BaseActivity() {
     private fun changeLanguage(languageCode: String) {
         if (selectedLanguage != languageCode) {
             selectedLanguage = languageCode
+            
+            // استفاده از PowerApplication برای تغییر زبان سراسری
+            PowerApplication.changeLanguage(this, selectedLanguage)
             preferencesManager.setLanguage(selectedLanguage)
             
             Toast.makeText(
