@@ -1,7 +1,6 @@
 package com.Alixra.power.ui
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -11,12 +10,11 @@ import com.Alixra.power.MainActivity
 import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
 import com.google.android.material.button.MaterialButton
-import java.util.*
 
 /**
  * صفحه ورود به برنامه
  */
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     
     private lateinit var emailEditText: EditText
     private lateinit var loginButton: Button
@@ -33,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
         
         // تنظیم زبان ذخیره شده
         selectedLanguage = preferencesManager.getLanguage()
-        setAppLanguage(selectedLanguage)
         
         // بررسی اینکه آیا کاربر قبلاً وارد شده یا نه
         if (preferencesManager.isUserLoggedIn()) {
@@ -63,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
             if (selectedLanguage != "fa") {
                 selectedLanguage = "fa"
                 preferencesManager.setLanguage(selectedLanguage)
-                setAppLanguage(selectedLanguage)
                 recreate() // راه‌اندازی مجدد برای اعمال تغییرات
             }
         }
@@ -72,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
             if (selectedLanguage != "en") {
                 selectedLanguage = "en"
                 preferencesManager.setLanguage(selectedLanguage)
-                setAppLanguage(selectedLanguage)
                 recreate() // راه‌اندازی مجدد برای اعمال تغییرات
             }
         }
@@ -92,15 +87,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     
-    private fun setAppLanguage(languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        
-        val config = Configuration()
-        config.setLocale(locale)
-        
-        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-    }
     
     private fun setupClickListeners() {
         loginButton.setOnClickListener {

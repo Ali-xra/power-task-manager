@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E3A8A"
-    android:orientation="vertical"
-    android:padding="24dp"
+    android:fillViewport="true"
     tools:context=".MainActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <!-- Header -->
     <LinearLayout
@@ -65,9 +70,9 @@
     <!-- منوی اصلی -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
         android:orientation="vertical">
 
         <!-- دکمه زنگ‌ها -->
@@ -164,7 +169,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="مدیریت اهداف"
+                        android:text="@string/goals_title"
                         android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -172,7 +177,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="سلامتی، کار، آموزش و سایر بخش‌های زندگی"
+                        android:text="@string/goals_subtitle"
                         android:textColor="#64748B"
                         android:textSize="14sp" />
 
@@ -223,7 +228,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="مدیریت کارها"
+                        android:text="@string/tasks_title"
                         android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -231,7 +236,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="امروز، این هفته، امسال و دوره‌های زمانی"
+                        android:text="@string/tasks_subtitle"
                         android:textColor="#64748B"
                         android:textSize="14sp" />
 
@@ -282,7 +287,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="گزارشات و آمار"
+                        android:text="@string/reports_title"
                         android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -290,7 +295,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="مشاهده عملکرد و پیشرفت کارها"
+                        android:text="@string/reports_subtitle"
                         android:textColor="#64748B"
                         android:textSize="14sp" />
 
@@ -375,7 +380,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="32dp"
+        android:paddingBottom="24dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -397,3 +403,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</ScrollView>

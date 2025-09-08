@@ -12,20 +12,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import android.content.res.Configuration
 import android.widget.TextView
 import com.Alixra.power.data.PreferencesManager
-import java.util.*
 import com.Alixra.power.ui.AlarmActivity
 import com.Alixra.power.ui.AlarmsActivity
 import com.Alixra.power.ui.BackupActivity
 import com.Alixra.power.ui.GoalsActivity
+import com.Alixra.power.ui.BaseActivity
 import com.Alixra.power.ui.LoginActivity
 import com.Alixra.power.ui.TasksActivity
 import com.Alixra.power.ui.StatsActivity
 import com.google.android.material.card.MaterialCardView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var alarmsBtn: MaterialCardView
     private lateinit var goalsBtn: MaterialCardView
@@ -71,8 +70,7 @@ class MainActivity : AppCompatActivity() {
         
         preferencesManager = PreferencesManager(this)
         
-        // تنظیم زبان برنامه
-        setAppLanguage(preferencesManager.getLanguage())
+        // زبان توسط BaseActivity تنظیم می‌شود
         
         // بررسی وضعیت ورود کاربر
         if (!preferencesManager.isUserLoggedIn()) {
@@ -88,15 +86,6 @@ class MainActivity : AppCompatActivity() {
         setupClickListeners()
     }
     
-    private fun setAppLanguage(languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        
-        val config = Configuration()
-        config.setLocale(locale)
-        
-        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-    }
     
     private fun goToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
