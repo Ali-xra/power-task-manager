@@ -34,6 +34,20 @@ class PreferencesManager(context: Context) {
         // کلیدهای جدید برای وضعیت فعال/غیرفعال آلارم‌ها
         private const val MORNING_ALARM_ENABLED_KEY = "MORNING_ALARM_ENABLED"
         private const val EVENING_ALARM_ENABLED_KEY = "EVENING_ALARM_ENABLED"
+        
+        // کلیدهای جدید برای backup/restore
+        private const val ALARM_HOUR_KEY = "ALARM_HOUR"
+        private const val ALARM_MINUTE_KEY = "ALARM_MINUTE"
+        private const val SELECTED_DAYS_KEY = "SELECTED_DAYS"
+        private const val VIBRATION_ENABLED_KEY = "VIBRATION_ENABLED"
+        private const val ALARM_SOUND_URI_KEY = "ALARM_SOUND_URI"
+        private const val MOTIVATIONAL_TEXTS_KEY = "MOTIVATIONAL_TEXTS"
+        private const val EVENING_HOUR_KEY = "EVENING_HOUR"
+        private const val EVENING_MINUTE_KEY = "EVENING_MINUTE"
+        private const val DARK_MODE_KEY = "DARK_MODE"
+        private const val LANGUAGE_KEY = "LANGUAGE"
+        private const val NOTIFICATIONS_ENABLED_KEY = "NOTIFICATIONS_ENABLED"
+        private const val AUTO_BACKUP_ENABLED_KEY = "AUTO_BACKUP_ENABLED"
     }
 
     // --- توابع مربوط به جملات انگیزشی (قدیمی) ---
@@ -690,5 +704,121 @@ class PreferencesManager(context: Context) {
         if (eveningTime.isNotEmpty() && !prefs.contains(EVENING_ALARM_ENABLED_KEY)) {
             setEveningAlarmEnabled(true)
         }
+    }
+    
+    // === متدهای جدید برای Backup/Restore ===
+    
+    // --- تنظیمات آلارم صبح ---
+    fun isAlarmEnabled(): Boolean = isMorningAlarmEnabled()
+    
+    fun getAlarmHour(): Int = prefs.getInt(ALARM_HOUR_KEY, 7)
+    
+    fun getAlarmMinute(): Int = prefs.getInt(ALARM_MINUTE_KEY, 0)
+    
+    fun setAlarmEnabled(enabled: Boolean) = setMorningAlarmEnabled(enabled)
+    
+    fun setAlarmTime(hour: Int, minute: Int) {
+        editor.putInt(ALARM_HOUR_KEY, hour)
+        editor.putInt(ALARM_MINUTE_KEY, minute)
+        editor.apply()
+    }
+    
+    // --- روزهای انتخاب شده ---
+    fun getSelectedDays(): List<Int> {
+        val json = prefs.getString(SELECTED_DAYS_KEY, null)
+        return if (json != null) {
+            val type = object : TypeToken<List<Int>>() {}.type
+            gson.fromJson(json, type) ?: listOf(1, 2, 3, 4, 5, 6, 7)
+        } else {
+            listOf(1, 2, 3, 4, 5, 6, 7) // همه روزهای هفته
+        }
+    }
+    
+    fun setSelectedDays(days: List<Int>) {
+        val json = gson.toJson(days)
+        editor.putString(SELECTED_DAYS_KEY, json)
+        editor.apply()
+    }
+    
+    // --- تنظیمات لرزش ---
+    fun isVibrationEnabled(): Boolean = prefs.getBoolean(VIBRATION_ENABLED_KEY, true)
+    
+    fun setVibrationEnabled(enabled: Boolean) {
+        editor.putBoolean(VIBRATION_ENABLED_KEY, enabled)
+        editor.apply()
+    }
+    
+    // --- صدای آلارم ---
+    fun getAlarmSoundUri(): String? = prefs.getString(ALARM_SOUND_URI_KEY, null)
+    
+    fun setAlarmSoundUri(uri: String) {
+        editor.putString(ALARM_SOUND_URI_KEY, uri)
+        editor.apply()
+    }
+    
+    // --- متن‌های انگیزشی ---
+    fun getMotivationalTexts(): List<String> = getQuotes()
+    
+    fun setMotivationalTexts(texts: List<String>) = saveQuotes(texts)
+    
+    // --- تنظیمات آلارم شب ---
+    fun isEveningEnabled(): Boolean = isEveningAlarmEnabled()
+    
+    fun getEveningHour(): Int = prefs.getInt(EVENING_HOUR_KEY, 21)
+    
+    fun getEveningMinute(): Int = prefs.getInt(EVENING_MINUTE_KEY, 0)
+    
+    fun setEveningEnabled(enabled: Boolean) = setEveningAlarmEnabled(enabled)
+    
+    fun setEveningTime(hour: Int, minute: Int) {
+        editor.putInt(EVENING_HOUR_KEY, hour)
+        editor.putInt(EVENING_MINUTE_KEY, minute)
+        editor.apply()
+    }
+    
+    // --- دسته‌بندی‌ها ---
+    fun getAllTaskCategories(): List<TaskCategory> = getTaskCategories()
+    
+    fun getAllCategoryRatings(): Map<String, List<Int>> {
+        val allRatings = getCategoryRatings()
+        val result = mutableMapOf<String, List<Int>>()
+        
+        allRatings.forEach { (date, categoryRatings) ->
+            categoryRatings.forEach { (categoryId, rating) ->
+                val currentList = result[categoryId] ?: emptyList()
+                result[categoryId] = currentList + rating
+            }
+        }
+        
+        return result
+    }
+    
+    // --- تنظیمات اپلیکیشن ---
+    fun isDarkMode(): Boolean = prefs.getBoolean(DARK_MODE_KEY, false)
+    
+    fun setDarkMode(enabled: Boolean) {
+        editor.putBoolean(DARK_MODE_KEY, enabled)
+        editor.apply()
+    }
+    
+    fun getLanguage(): String = prefs.getString(LANGUAGE_KEY, "fa") ?: "fa"
+    
+    fun setLanguage(language: String) {
+        editor.putString(LANGUAGE_KEY, language)
+        editor.apply()
+    }
+    
+    fun areNotificationsEnabled(): Boolean = prefs.getBoolean(NOTIFICATIONS_ENABLED_KEY, true)
+    
+    fun setNotificationsEnabled(enabled: Boolean) {
+        editor.putBoolean(NOTIFICATIONS_ENABLED_KEY, enabled)
+        editor.apply()
+    }
+    
+    fun isAutoBackupEnabled(): Boolean = prefs.getBoolean(AUTO_BACKUP_ENABLED_KEY, false)
+    
+    fun setAutoBackupEnabled(enabled: Boolean) {
+        editor.putBoolean(AUTO_BACKUP_ENABLED_KEY, enabled)
+        editor.apply()
     }
 }

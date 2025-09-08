@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.Alixra.power.ui.AlarmActivity
 import com.Alixra.power.ui.AlarmsActivity
+import com.Alixra.power.ui.BackupActivity
 import com.Alixra.power.ui.GoalsActivity
 import com.Alixra.power.ui.TasksActivity
 import com.Alixra.power.ui.StatsActivity
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var goalsBtn: MaterialCardView
     private lateinit var tasksBtn: MaterialCardView
     private lateinit var reportsBtn: MaterialCardView
+    private lateinit var backupBtn: MaterialCardView
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -70,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         goalsBtn = findViewById(R.id.goalsBtn)
         tasksBtn = findViewById(R.id.tasksBtn)
         reportsBtn = findViewById(R.id.reportsBtn)
+        backupBtn = findViewById(R.id.backupBtn)
     }
 
     private fun checkAllPermissions() {
@@ -101,6 +104,12 @@ class MainActivity : AppCompatActivity() {
         // دکمه گزارشات
         reportsBtn.setOnClickListener {
             val intent = Intent(this, StatsActivity::class.java)
+            startActivity(intent)
+        }
+
+        // دکمه پشتیبان‌گیری
+        backupBtn.setOnClickListener {
+            val intent = Intent(this, BackupActivity::class.java)
             startActivity(intent)
         }
     }

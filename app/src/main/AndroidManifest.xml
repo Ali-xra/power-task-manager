@@ -13,6 +13,11 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    
+    <!-- مجوزهای فایل برای backup/restore -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -85,6 +90,12 @@
         <activity
             android:name=".ui.CalendarActivity"
             android:label="تقویم"
+            android:exported="false" />
+
+        <!-- Activity صفحه پشتیبان‌گیری -->
+        <activity
+            android:name=".ui.BackupActivity"
+            android:label="پشتیبان‌گیری و بازیابی"
             android:exported="false" />
 
         <!-- سرویس پخش صدا و ویبره صبحگاهی -->
