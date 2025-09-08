@@ -48,6 +48,10 @@ class PreferencesManager(context: Context) {
         private const val LANGUAGE_KEY = "LANGUAGE"
         private const val NOTIFICATIONS_ENABLED_KEY = "NOTIFICATIONS_ENABLED"
         private const val AUTO_BACKUP_ENABLED_KEY = "AUTO_BACKUP_ENABLED"
+        
+        // کلیدهای مربوط به کاربر
+        private const val USER_EMAIL_KEY = "USER_EMAIL"
+        private const val USER_LOGGED_IN_KEY = "USER_LOGGED_IN"
     }
 
     // --- توابع مربوط به جملات انگیزشی (قدیمی) ---
@@ -820,5 +824,61 @@ class PreferencesManager(context: Context) {
     fun setAutoBackupEnabled(enabled: Boolean) {
         editor.putBoolean(AUTO_BACKUP_ENABLED_KEY, enabled)
         editor.apply()
+    }
+    
+    // === متدهای مربوط به کاربر ===
+    
+    /**
+     * ذخیره ایمیل کاربر
+     */
+    fun saveUserEmail(email: String) {
+        editor.putString(USER_EMAIL_KEY, email)
+        editor.apply()
+    }
+    
+    /**
+     * دریافت ایمیل کاربر
+     */
+    fun getUserEmail(): String? {
+        return prefs.getString(USER_EMAIL_KEY, null)
+    }
+    
+    /**
+     * تنظیم وضعیت ورود کاربر
+     */
+    fun setUserLoggedIn(isLoggedIn: Boolean) {
+        editor.putBoolean(USER_LOGGED_IN_KEY, isLoggedIn)
+        editor.apply()
+    }
+    
+    /**
+     * بررسی وضعیت ورود کاربر
+     */
+    fun isUserLoggedIn(): Boolean {
+        return prefs.getBoolean(USER_LOGGED_IN_KEY, false)
+    }
+    
+    /**
+     * خروج کاربر از حساب
+     */
+    fun logoutUser() {
+        editor.remove(USER_EMAIL_KEY)
+        editor.putBoolean(USER_LOGGED_IN_KEY, false)
+        editor.apply()
+    }
+    
+    /**
+     * دریافت نام کاربر از ایمیل
+     */
+    fun getUserDisplayName(): String {
+        val email = getUserEmail()
+        return if (email != null) {
+            // استخراج نام از قسمت قبل از @ در ایمیل
+            email.substringBefore("@").replaceFirstChar { 
+                if (it.isLowerCase()) it.titlecase() else it.toString() 
+            }
+        } else {
+            "کاربر"
+        }
     }
 }

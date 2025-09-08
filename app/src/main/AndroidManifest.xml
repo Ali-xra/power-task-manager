@@ -30,9 +30,9 @@
         android:theme="@style/Theme.AlixraPower"
         tools:targetApi="31">
 
-        <!-- Activity صفحه اصلی -->
+        <!-- Activity صفحه ورود -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AlixraPower">
@@ -41,6 +41,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Activity صفحه اصلی -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AlixraPower" />
 
         <!-- Activity صفحه آلارم -->
         <activity

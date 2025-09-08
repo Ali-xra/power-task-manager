@@ -41,6 +41,25 @@
             android:alpha="0.8"
             android:textSize="16sp" />
 
+        <!-- نمایش کاربر -->
+        <TextView
+            android:id="@+id/userEmailHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/modern_edittext_background"
+            android:backgroundTint="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="👋 سلام کاربر"
+            android:textColor="#1E3A8A"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@android:color/transparent"
+            tools:text="👋 سلام علی" />
+
     </LinearLayout>
 
     <!-- منوی اصلی -->

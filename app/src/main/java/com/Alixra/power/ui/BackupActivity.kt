@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.Alixra.power.R
 import com.Alixra.power.data.BackupManager
 import android.widget.TextView
+import android.widget.EditText
 import com.google.android.material.button.MaterialButton
 import java.text.SimpleDateFormat
 import java.util.*
@@ -133,8 +134,39 @@ class BackupActivity : AppCompatActivity() {
     }
     
     private fun createBackup() {
-        val fileName = backupManager.generateBackupFileName()
+        showBackupNameDialog()
+    }
+    
+    private fun showBackupNameDialog() {
+        val defaultFileName = backupManager.generateBackupFileName()
         
+        val editText = EditText(this).apply {
+            setText(defaultFileName.replace(".json", ""))
+            selectAll()
+            setPadding(50, 30, 50, 30)
+        }
+        
+        AlertDialog.Builder(this)
+            .setTitle("نام فایل پشتیبان")
+            .setMessage("لطفاً نام مورد نظر برای فایل پشتیبان خود انتخاب کنید:")
+            .setView(editText)
+            .setPositiveButton("ایجاد فایل") { _, _ ->
+                val customName = editText.text.toString().trim()
+                val finalFileName = if (customName.isNotEmpty()) {
+                    if (customName.endsWith(".json")) customName else "$customName.json"
+                } else {
+                    defaultFileName
+                }
+                createBackupWithName(finalFileName)
+            }
+            .setNegativeButton("لغو", null)
+            .setNeutralButton("نام پیش‌فرض") { _, _ ->
+                createBackupWithName(defaultFileName)
+            }
+            .show()
+    }
+    
+    private fun createBackupWithName(fileName: String) {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/json"

@@ -12,10 +12,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import android.widget.TextView
+import com.Alixra.power.data.PreferencesManager
 import com.Alixra.power.ui.AlarmActivity
 import com.Alixra.power.ui.AlarmsActivity
 import com.Alixra.power.ui.BackupActivity
 import com.Alixra.power.ui.GoalsActivity
+import com.Alixra.power.ui.LoginActivity
 import com.Alixra.power.ui.TasksActivity
 import com.Alixra.power.ui.StatsActivity
 import com.google.android.material.card.MaterialCardView
@@ -27,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tasksBtn: MaterialCardView
     private lateinit var reportsBtn: MaterialCardView
     private lateinit var backupBtn: MaterialCardView
+    
+    private lateinit var userEmailHeader: TextView
+    private lateinit var preferencesManager: PreferencesManager
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -60,11 +66,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        preferencesManager = PreferencesManager(this)
+        
+        // بررسی وضعیت ورود کاربر
+        if (!preferencesManager.isUserLoggedIn()) {
+            goToLoginActivity()
+            return
+        }
+        
         setContentView(R.layout.activity_main)
 
         initViews()
+        setupUserHeader()
         checkAllPermissions()
         setupClickListeners()
+    }
+    
+    private fun goToLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun initViews() {
@@ -73,6 +95,57 @@ class MainActivity : AppCompatActivity() {
         tasksBtn = findViewById(R.id.tasksBtn)
         reportsBtn = findViewById(R.id.reportsBtn)
         backupBtn = findViewById(R.id.backupBtn)
+        userEmailHeader = findViewById(R.id.userEmailHeader)
+    }
+    
+    private fun setupUserHeader() {
+        val userEmail = preferencesManager.getUserEmail()
+        val userName = preferencesManager.getUserDisplayName()
+        
+        userEmailHeader.text = "👋 سلام $userName"
+        
+        // اضافه کردن قابلیت کلیک برای نمایش منو کاربر
+        userEmailHeader.setOnClickListener {
+            showUserMenu()
+        }
+    }
+    
+    private fun showUserMenu() {
+        val userEmail = preferencesManager.getUserEmail() ?: ""
+        
+        val options = arrayOf(
+            "👤 $userEmail",
+            "🔄 تغییر کاربر", 
+            "🚪 خروج از حساب"
+        )
+        
+        AlertDialog.Builder(this)
+            .setTitle("منوی کاربر")
+            .setItems(options) { _, which ->
+                when (which) {
+                    1 -> changeUser() // تغییر کاربر
+                    2 -> logoutUser() // خروج
+                }
+            }
+            .setNegativeButton("بستن", null)
+            .show()
+    }
+    
+    private fun changeUser() {
+        preferencesManager.logoutUser()
+        goToLoginActivity()
+    }
+    
+    private fun logoutUser() {
+        AlertDialog.Builder(this)
+            .setTitle("خروج از حساب")
+            .setMessage("آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟")
+            .setPositiveButton("بله، خروج") { _, _ ->
+                preferencesManager.logoutUser()
+                goToLoginActivity()
+            }
+            .setNegativeButton("لغو", null)
+            .show()
     }
 
     private fun checkAllPermissions() {
