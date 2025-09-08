@@ -91,9 +91,22 @@ class SettingsActivity : BaseActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             
-            // بازسازی Activity برای اعمال زبان جدید
-            recreate()
+            // راه‌اندازی مجدد کل برنامه با زبان جدید
+            restartApplication()
         }
+    }
+    
+    private fun restartApplication() {
+        // پاک کردن تمام Activity ها و شروع مجدد از MainActivity
+        val intent = Intent(this, com.Alixra.power.MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        
+        // خروج از Activity جاری
+        finishAffinity()
+        
+        // خروج از process برای اعمال کامل تغییرات
+        android.os.Process.killProcess(android.os.Process.myPid())
     }
     
 }

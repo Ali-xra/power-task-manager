@@ -62,7 +62,7 @@ class LoginActivity : BaseActivity() {
                 selectedLanguage = "fa"
                 PowerApplication.changeLanguage(this, selectedLanguage)
                 preferencesManager.setLanguage(selectedLanguage)
-                recreate() // راه‌اندازی مجدد برای اعمال تغییرات
+                restartApplication() // راه‌اندازی مجدد کل برنامه
             }
         }
         
@@ -71,7 +71,7 @@ class LoginActivity : BaseActivity() {
                 selectedLanguage = "en"
                 PowerApplication.changeLanguage(this, selectedLanguage)
                 preferencesManager.setLanguage(selectedLanguage)
-                recreate() // راه‌اندازی مجدد برای اعمال تغییرات
+                restartApplication() // راه‌اندازی مجدد کل برنامه
             }
         }
     }
@@ -121,6 +121,19 @@ class LoginActivity : BaseActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+    
+    private fun restartApplication() {
+        // پاک کردن تمام Activity ها و شروع مجدد از LoginActivity
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        
+        // خروج از Activity جاری
+        finishAffinity()
+        
+        // خروج از process برای اعمال کامل تغییرات
+        android.os.Process.killProcess(android.os.Process.myPid())
     }
     
     private fun showError(message: String) {
