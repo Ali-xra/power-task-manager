@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,7 +70,7 @@ class GoalsActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         // دکمه بازگشت
         backButton.setOnClickListener {
-            onBackPressed()
+            finish()
         }
 
         // دکمه افزودن هدف جدید

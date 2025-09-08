@@ -116,7 +116,7 @@ class TasksActivity : AppCompatActivity() {
             if (currentViewState == ViewState.TASKS) {
                 showTimePeriodsView()
             } else {
-                onBackPressed()
+                finish()
             }
         }
 

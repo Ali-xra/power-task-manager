@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.Alixra.power.data.PreferencesManager
@@ -90,6 +91,9 @@ class EveningActivity : AppCompatActivity() {
         // بازیابی مرحله فعلی (در صورت قطع ناگهانی)
         currentStep = prefsManager.getEveningStep()
         showCurrentStep()
+        
+        // تنظیم OnBackPressedCallback
+        setupBackPressedCallback()
     }
 
     private fun setupRecyclerViews() {
@@ -453,37 +457,35 @@ class EveningActivity : AppCompatActivity() {
     }
 
     // === بازگشت به عقب ===
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        when (currentStep) {
-            1 -> {
-                // *** تغییر اصلی: در مرحله اول، خروج مجاز نیست ***
-                if (!isEveningServiceStopped) {
-                    // اگر هنوز سرویس در حال اجراست، جلوگیری از خروج
-                    Toast.makeText(
-                        this,
-                        "🚫 برای خروج، ابتدا مرحله اول را تکمیل کنید",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    return // جلوگیری از خروج
-                } else {
-                    // اگر سرویس متوقف شده، اجازه خروج
-                    clearEveningNotification()
-                    resetEveningStep()
-                    super.onBackPressed()
+    private fun setupBackPressedCallback() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                when (currentStep) {
+                    1 -> {
+                        if (!isEveningServiceStopped) {
+                            Toast.makeText(
+                                this@EveningActivity,
+                                "🚫 برای خروج، ابتدا مرحله اول را تکمیل کنید",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            clearEveningNotification()
+                            resetEveningStep()
+                            finish()
+                        }
+                    }
+                    2 -> {
+                        currentStep = 1
+                        showCurrentStep()
+                    }
+                    3 -> {
+                        currentStep = 2
+                        showCurrentStep()
+                    }
                 }
             }
-            2 -> {
-                // بازگشت به مرحله اول - اما سرویس را دوباره شروع نمی‌کنیم
-                currentStep = 1
-                showCurrentStep()
-            }
-            3 -> {
-                // بازگشت به مرحله دوم
-                currentStep = 2
-                showCurrentStep()
-            }
         }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onDestroy() {

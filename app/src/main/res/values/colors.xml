@@ -38,14 +38,14 @@
     <color name="md_theme_light_onWarningContainer">#78350F</color>
 
     <!-- Background colors - Clean and Minimal -->
-    <color name="md_theme_light_background">#FEFEFE</color>
+    <color name="md_theme_light_background">#F8FAFC</color>
     <color name="md_theme_light_onBackground">#0F172A</color>
 
-    <!-- Surface colors - Subtle Variations -->
+    <!-- Surface colors - Better Contrast -->
     <color name="md_theme_light_surface">#FFFFFF</color>
-    <color name="md_theme_light_onSurface">#0F172A</color>
-    <color name="md_theme_light_surfaceVariant">#F8FAFC</color>
-    <color name="md_theme_light_onSurfaceVariant">#475569</color>
+    <color name="md_theme_light_onSurface">#1E293B</color>
+    <color name="md_theme_light_surfaceVariant">#F1F5F9</color>
+    <color name="md_theme_light_onSurfaceVariant">#64748B</color>
 
     <!-- Outline colors - Sophisticated -->
     <color name="md_theme_light_outline">#CBD5E1</color>

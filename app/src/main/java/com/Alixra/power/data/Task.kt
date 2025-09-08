@@ -69,8 +69,6 @@ data class Task(
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, 1)
 
-        val tomorrow = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
-
         return this.copy(
             id = "task_${System.currentTimeMillis()}", // ID جدید
             createdAt = calendar.timeInMillis,
@@ -117,7 +115,6 @@ data class Task(
             when (priority) {
                 TaskPriority.URGENT -> "🚨"
                 TaskPriority.HIGH -> "⚠️"
-                TaskPriority.NORMAL -> "📋"
                 TaskPriority.NORMAL -> "📋"
             }
         }

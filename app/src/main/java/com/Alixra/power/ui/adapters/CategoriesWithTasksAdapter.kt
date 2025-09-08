@@ -82,7 +82,7 @@ class CategoriesWithTasksAdapter(
 
             // تنظیم RecyclerView برای کارها
             if (!::tasksAdapter.isInitialized) {
-                tasksAdapter = TasksAdapter(preferencesManager) { task, isCompleted ->
+                tasksAdapter = TasksAdapter(preferencesManager) { task, _ ->
                     onTaskClick(task)
                 }
                 tasksRecyclerView.layoutManager = LinearLayoutManager(itemView.context)

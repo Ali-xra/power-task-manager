@@ -61,7 +61,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="#1976D2">
+            app:rippleColor="?colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="تنظیم زنگ‌ها"
-                        android:textColor="#333333"
+                        android:textColor="?colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مدیریت آلارم صبحگاهی و شبانه"
-                        android:textColor="#666666"
+                        android:textColor="?colorOnSurfaceVariant"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="#999999"
+                    android:textColor="?colorOnSurfaceVariant"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -120,7 +120,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="#4CAF50">
+            app:rippleColor="?colorSecondary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مدیریت اهداف"
-                        android:textColor="#333333"
+                        android:textColor="?colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -154,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="سلامتی، کار، آموزش و سایر بخش‌های زندگی"
-                        android:textColor="#666666"
+                        android:textColor="?colorOnSurfaceVariant"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="#999999"
+                    android:textColor="?colorOnSurfaceVariant"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -179,7 +179,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="#FF9800">
+            app:rippleColor="?colorTertiary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -205,7 +205,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مدیریت کارها"
-                        android:textColor="#333333"
+                        android:textColor="?colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -213,7 +213,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="امروز، این هفته، امسال و دوره‌های زمانی"
-                        android:textColor="#666666"
+                        android:textColor="?colorOnSurfaceVariant"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -222,7 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="#999999"
+                    android:textColor="?colorOnSurfaceVariant"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -238,7 +238,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="#9C27B0">
+            app:rippleColor="?colorSecondary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -264,7 +264,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="گزارشات و آمار"
-                        android:textColor="#333333"
+                        android:textColor="?colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -272,7 +272,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مشاهده عملکرد و پیشرفت کارها"
-                        android:textColor="#666666"
+                        android:textColor="?colorOnSurfaceVariant"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -281,7 +281,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="#999999"
+                    android:textColor="?colorOnSurfaceVariant"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -301,7 +301,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="نسخه 1.0"
-            android:textColor="#B3E5FC"
+            android:textColor="?colorOnPrimary"
+            android:alpha="0.8"
             android:textSize="12sp" />
 
         <TextView
@@ -309,7 +310,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="ساخته شده با ❤️ برای بهتر زندگی کردن"
-            android:textColor="#B3E5FC"
+            android:textColor="?colorOnPrimary"
+            android:alpha="0.8"
             android:textSize="12sp" />
 
     </LinearLayout>
