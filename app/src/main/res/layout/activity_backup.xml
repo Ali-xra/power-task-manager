@@ -29,7 +29,7 @@
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="◄"
+                android:text="@string/back_button"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:gravity="center" />
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:text="پشتیبان‌گیری و بازیابی"
+                android:text="@string/backup_activity_title"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -97,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="وضعیت فعلی داده‌ها"
+                            android:text="@string/current_data_status"
                             android:textColor="#1E293B"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"
                             android:minWidth="0dp"
-                            android:text="جزئیات"
+                            android:text="@string/details_button"
                             android:textSize="12sp"
                         app:cornerRadius="18dp" />
 
@@ -130,7 +130,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="📝 کارها:"
+                                android:text="@string/tasks_count"
                                 android:textColor="#64748B"
                                 android:textSize="14sp" />
 
@@ -159,7 +159,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="🎯 اهداف:"
+                                android:text="@string/goals_count"
                                 android:textColor="#64748B"
                                 android:textSize="14sp" />
 

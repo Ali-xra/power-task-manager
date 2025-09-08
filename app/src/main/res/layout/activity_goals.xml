@@ -22,7 +22,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:text="←"
+            android:text="@string/back_button"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="🎯 مدیریت اهداف"
+            android:text="@string/goals_activity_title"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -42,7 +42,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:text="+"
+            android:text="@string/add_button"
             android:textColor="#FFFFFF"
             android:textSize="28sp" />
 
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📋 اهداف و بخش‌های مختلف زندگی"
+            android:text="@string/goals_description"
             android:textColor="#333333"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="در این صفحه می‌توانید اهداف مختلف زندگی خود را مدیریت کنید و آمار هر بخش را مشاهده کنید."
+            android:text="@string/goals_subtitle_text"
             android:textColor="#666666"
             android:textSize="14sp" />
 
@@ -94,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🏆 اهداف شما"
+                android:text="@string/your_goals_title"
                 android:textColor="#333333"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -145,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="هنوز هدفی تعریف نکرده‌اید"
+                android:text="@string/no_goals_message"
                 android:textColor="#666666"
                 android:textSize="16sp"
                 android:textStyle="bold" />

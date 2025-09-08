@@ -22,7 +22,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:text="←"
+            android:text="@string/back_button"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="📅 مدیریت کارها بر اساس زمان"
+            android:text="@string/tasks_activity_title"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -42,7 +42,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:text="⋮"
+            android:text="@string/tasks_menu"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="⏰ انتخاب بازه زمانی"
+                    android:text="@string/time_period_title"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="کارهای خود را بر اساس دوره‌های زمانی مختلف مدیریت کنید"
+                    android:text="@string/time_period_subtitle"
                     android:textColor="#666666"
                     android:textSize="14sp" />
 
@@ -125,7 +125,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="امروز"
+                            android:text="@string/today_tasks"
                             android:textColor="#333333"
                             android:textSize="18sp"
                             android:textStyle="bold" />
