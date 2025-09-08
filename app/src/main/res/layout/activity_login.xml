@@ -99,10 +99,8 @@
                     android:text="@string/language_persian"
                     android:textSize="14sp"
                     app:cornerRadius="12dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:textColor="#1E3A8A"
-                    android:strokeColor="#1E3A8A"
-                    android:strokeWidth="1dp" />
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#1E3A8A" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/englishButton"
@@ -113,10 +111,8 @@
                     android:text="@string/language_english"
                     android:textSize="14sp"
                     app:cornerRadius="12dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:textColor="#1E3A8A"
-                    android:strokeColor="#1E3A8A"
-                    android:strokeWidth="1dp" />
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#1E3A8A" />
 
             </LinearLayout>
 

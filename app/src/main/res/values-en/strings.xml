@@ -2,7 +2,7 @@
 <resources>
     <!-- App Info -->
     <string name="app_name">Power Task Manager</string>
-    <string name="app_subtitle">Smart Alarm &amp; Task Management</string>
+    <string name="app_subtitle">Smart Alarm and Task Management</string>
     
     <!-- Login Screen -->
     <string name="login_title">Login to App</string>
@@ -18,15 +18,15 @@
     
     <!-- Main Menu -->
     <string name="alarms_title">Alarm Settings</string>
-    <string name="alarms_subtitle">Morning &amp; Evening Alarms</string>
+    <string name="alarms_subtitle">Morning and Evening Alarms</string>
     <string name="goals_title">Goals Management</string>
-    <string name="goals_subtitle">Create &amp; Manage Goals</string>
+    <string name="goals_subtitle">Create and Manage Goals</string>
     <string name="tasks_title">Task Management</string>
-    <string name="tasks_subtitle">Daily Tasks &amp; Planning</string>
-    <string name="reports_title">Stats &amp; Reports</string>
+    <string name="tasks_subtitle">Daily Tasks and Planning</string>
+    <string name="reports_title">Stats and Reports</string>
     <string name="reports_subtitle">View Progress</string>
-    <string name="backup_title">Backup &amp; Restore</string>
-    <string name="backup_subtitle">Save &amp; Restore Data</string>
+    <string name="backup_title">Backup and Restore</string>
+    <string name="backup_subtitle">Save and Restore Data</string>
     
     <!-- User Menu -->
     <string name="user_menu_title">User Menu</string>

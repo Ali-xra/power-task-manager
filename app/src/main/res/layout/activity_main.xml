@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimary"
+    android:background="#1E3A8A"
     android:orientation="vertical"
     android:padding="24dp"
     tools:context=".MainActivity">
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/app_name"
-            android:textColor="?colorOnPrimary"
+            android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/app_subtitle"
-            android:textColor="?colorOnPrimary"
+            android:textColor="#FFFFFF"
             android:alpha="0.8"
             android:textSize="16sp" />
 
@@ -80,7 +80,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="?colorPrimary">
+            app:rippleColor="#3B82F6">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/alarms_title"
-                        android:textColor="?colorOnSurface"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="?colorOnSurfaceVariant"
+                    android:textColor="#64748B"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -139,7 +139,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="?colorSecondary">
+            app:rippleColor="#10B981">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مدیریت اهداف"
-                        android:textColor="?colorOnSurface"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -182,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="?colorOnSurfaceVariant"
+                    android:textColor="#64748B"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -198,7 +198,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="?colorTertiary">
+            app:rippleColor="#F59E0B">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مدیریت کارها"
-                        android:textColor="?colorOnSurface"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -241,7 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="?colorOnSurfaceVariant"
+                    android:textColor="#64748B"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -257,7 +257,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="?colorSecondary">
+            app:rippleColor="#10B981">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -283,7 +283,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="گزارشات و آمار"
-                        android:textColor="?colorOnSurface"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -300,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
-                    android:textColor="?colorOnSurfaceVariant"
+                    android:textColor="#64748B"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -361,7 +361,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="◄"
-                    android:textColor="?colorOnSurfaceVariant"
+                    android:textColor="#64748B"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -381,7 +381,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/version"
-            android:textColor="?colorOnPrimary"
+            android:textColor="#FFFFFF"
             android:alpha="0.8"
             android:textSize="12sp" />
 
@@ -390,7 +390,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/footer_message"
-            android:textColor="?colorOnPrimary"
+            android:textColor="#FFFFFF"
             android:alpha="0.8"
             android:textSize="12sp" />
 
