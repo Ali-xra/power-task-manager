@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- مجوزهای برنامه -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AlixraPower"
+        tools:targetApi="31">
+
+        <!-- Activity صفحه اصلی -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AlixraPower">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Activity صفحه آلارم -->
+        <activity
+            android:name=".ui.AlarmActivity"
+            android:label="چالش صبحگاهی"
+            android:screenOrientation="portrait"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
+        <!-- Activity صفحه ارزیابی شبانه -->
+        <activity
+            android:name=".ui.EveningActivity"
+            android:label="ارزیابی روزانه"
+            android:screenOrientation="portrait"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
+        <!-- Activity صفحه آمار -->
+        <activity
+            android:name=".ui.StatsActivity"
+            android:label="آمار و گزارش"
+            android:exported="false" />
+
+        <!-- Activity صفحه تنظیم زنگ‌ها -->
+        <activity
+            android:name=".ui.AlarmsActivity"
+            android:label="تنظیم زنگ‌ها"
+            android:exported="false" />
+
+        <!-- Activity صفحه مدیریت اهداف (جدید) -->
+        <activity
+            android:name=".ui.GoalsActivity"
+            android:label="مدیریت اهداف"
+            android:exported="false" />
+
+        <!-- Activity صفحه مدیریت کارها بر اساس زمان (ویرایش شده) -->
+        <activity
+            android:name=".ui.TasksActivity"
+            android:label="مدیریت کارها"
+            android:exported="false" />
+
+        <!-- سرویس پخش صدا و ویبره صبحگاهی -->
+        <service
+            android:name=".service.AlarmService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false" />
+
+        <!-- سرویس پخش صدا و ویبره شبانه -->
+        <service
+            android:name=".service.EveningService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false" />
+
+        <!-- دریافت‌کننده‌ها -->
+        <receiver android:name=".receiver.AlarmReceiver" android:exported="false" />
+        <receiver android:name=".receiver.EveningReceiver" android:exported="false" />
+        <receiver
+            android:name=".receiver.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

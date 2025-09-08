@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/categoryCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    android:layout_marginHorizontal="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#2196F3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- هدر هدف -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- نام هدف -->
+            <TextView
+                android:id="@+id/categoryName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🎯 نام هدف"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="🏃 سلامتی" />
+
+            <!-- دکمه‌های عملیات -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- دکمه ویرایش -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="✏️"
+                    android:textSize="16sp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:cornerRadius="20dp"
+                    app:backgroundTint="#FFC107"
+                    app:iconTint="#FFFFFF"
+                    style="@style/Widget.Material3.Button.IconButton" />
+
+                <!-- دکمه حذف -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🗑️"
+                    android:textSize="16sp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:cornerRadius="20dp"
+                    app:backgroundTint="#F44336"
+                    app:iconTint="#FFFFFF"
+                    style="@style/Widget.Material3.Button.IconButton" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- آمار کلی -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totalTasksCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0 کار"
+                android:textColor="#E3F2FD"
+                android:textSize="14sp"
+                android:gravity="center"
+                tools:text="5 کار" />
+
+            <TextView
+                android:id="@+id/completedTasksCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0 انجام شده"
+                android:textColor="#4CAF50"
+                android:textSize="14sp"
+                android:gravity="center"
+                tools:text="3 انجام شده" />
+
+            <TextView
+                android:id="@+id/progressPercentage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0%"
+                android:textColor="#FFC107"
+                android:textSize="14sp"
+                android:gravity="center"
+                tools:text="60%" />
+
+        </LinearLayout>
+
+        <!-- لیست کارها -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasksRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxHeight="200dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <!-- دکمه نمایش/مخفی کردن کارها -->
+        <Button
+            android:id="@+id/toggleTasksButton"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_background"
+            android:text="نمایش کارها"
+            android:textColor="#1976D2"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
