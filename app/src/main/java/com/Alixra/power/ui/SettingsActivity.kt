@@ -100,13 +100,12 @@ class SettingsActivity : BaseActivity() {
         // پاک کردن تمام Activity ها و شروع مجدد از MainActivity
         val intent = Intent(this, com.Alixra.power.MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        
+        // شروع MainActivity جدید
         startActivity(intent)
         
-        // خروج از Activity جاری
-        finishAffinity()
-        
-        // خروج از process برای اعمال کامل تغییرات
-        android.os.Process.killProcess(android.os.Process.myPid())
+        // بستن این Activity
+        finish()
     }
     
 }

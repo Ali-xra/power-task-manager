@@ -127,13 +127,12 @@ class LoginActivity : BaseActivity() {
         // پاک کردن تمام Activity ها و شروع مجدد از LoginActivity
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        
+        // شروع LoginActivity جدید  
         startActivity(intent)
         
-        // خروج از Activity جاری
-        finishAffinity()
-        
-        // خروج از process برای اعمال کامل تغییرات
-        android.os.Process.killProcess(android.os.Process.myPid())
+        // بستن این Activity
+        finish()
     }
     
     private fun showError(message: String) {
