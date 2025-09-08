@@ -147,10 +147,10 @@ class BackupActivity : AppCompatActivity() {
         }
         
         AlertDialog.Builder(this)
-            .setTitle("نام فایل پشتیبان")
-            .setMessage("لطفاً نام مورد نظر برای فایل پشتیبان خود انتخاب کنید:")
+            .setTitle(getString(R.string.backup_filename_title))
+            .setMessage(getString(R.string.backup_filename_message))
             .setView(editText)
-            .setPositiveButton("ایجاد فایل") { _, _ ->
+            .setPositiveButton(getString(R.string.create_file)) { _, _ ->
                 val customName = editText.text.toString().trim()
                 val finalFileName = if (customName.isNotEmpty()) {
                     if (customName.endsWith(".json")) customName else "$customName.json"
@@ -159,8 +159,8 @@ class BackupActivity : AppCompatActivity() {
                 }
                 createBackupWithName(finalFileName)
             }
-            .setNegativeButton("لغو", null)
-            .setNeutralButton("نام پیش‌فرض") { _, _ ->
+            .setNegativeButton(getString(R.string.cancel), null)
+            .setNeutralButton(getString(R.string.default_name)) { _, _ ->
                 createBackupWithName(defaultFileName)
             }
             .show()

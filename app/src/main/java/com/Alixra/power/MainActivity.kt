@@ -12,8 +12,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import android.content.res.Configuration
 import android.widget.TextView
 import com.Alixra.power.data.PreferencesManager
+import java.util.*
 import com.Alixra.power.ui.AlarmActivity
 import com.Alixra.power.ui.AlarmsActivity
 import com.Alixra.power.ui.BackupActivity
@@ -69,6 +71,9 @@ class MainActivity : AppCompatActivity() {
         
         preferencesManager = PreferencesManager(this)
         
+        // تنظیم زبان برنامه
+        setAppLanguage(preferencesManager.getLanguage())
+        
         // بررسی وضعیت ورود کاربر
         if (!preferencesManager.isUserLoggedIn()) {
             goToLoginActivity()
@@ -81,6 +86,16 @@ class MainActivity : AppCompatActivity() {
         setupUserHeader()
         checkAllPermissions()
         setupClickListeners()
+    }
+    
+    private fun setAppLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        
+        val config = Configuration()
+        config.setLocale(locale)
+        
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
     }
     
     private fun goToLoginActivity() {
@@ -99,10 +114,9 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun setupUserHeader() {
-        val userEmail = preferencesManager.getUserEmail()
         val userName = preferencesManager.getUserDisplayName()
         
-        userEmailHeader.text = "👋 سلام $userName"
+        userEmailHeader.text = getString(R.string.hello_user, userName)
         
         // اضافه کردن قابلیت کلیک برای نمایش منو کاربر
         userEmailHeader.setOnClickListener {
@@ -115,19 +129,19 @@ class MainActivity : AppCompatActivity() {
         
         val options = arrayOf(
             "👤 $userEmail",
-            "🔄 تغییر کاربر", 
-            "🚪 خروج از حساب"
+            getString(R.string.change_user), 
+            getString(R.string.logout)
         )
         
         AlertDialog.Builder(this)
-            .setTitle("منوی کاربر")
+            .setTitle(getString(R.string.user_menu_title))
             .setItems(options) { _, which ->
                 when (which) {
                     1 -> changeUser() // تغییر کاربر
                     2 -> logoutUser() // خروج
                 }
             }
-            .setNegativeButton("بستن", null)
+            .setNegativeButton(getString(R.string.close), null)
             .show()
     }
     
@@ -138,13 +152,13 @@ class MainActivity : AppCompatActivity() {
     
     private fun logoutUser() {
         AlertDialog.Builder(this)
-            .setTitle("خروج از حساب")
-            .setMessage("آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟")
-            .setPositiveButton("بله، خروج") { _, _ ->
+            .setTitle(getString(R.string.logout_title))
+            .setMessage(getString(R.string.logout_message))
+            .setPositiveButton(getString(R.string.yes_logout)) { _, _ ->
                 preferencesManager.logoutUser()
                 goToLoginActivity()
             }
-            .setNegativeButton("لغو", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 

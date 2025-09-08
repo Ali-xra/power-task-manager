@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Alixra Power"
+            android:text="@string/app_name"
             android:textColor="?colorOnPrimary"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="آلارم هوشمند و مدیریت کارها"
+            android:text="@string/app_subtitle"
             android:textColor="?colorOnPrimary"
             android:alpha="0.8"
             android:textSize="16sp" />
@@ -105,7 +105,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="تنظیم زنگ‌ها"
+                        android:text="@string/alarms_title"
                         android:textColor="?colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -113,8 +113,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="مدیریت آلارم صبحگاهی و شبانه"
-                        android:textColor="?colorOnSurfaceVariant"
+                        android:text="@string/alarms_subtitle"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -173,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="سلامتی، کار، آموزش و سایر بخش‌های زندگی"
-                        android:textColor="?colorOnSurfaceVariant"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -232,7 +232,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="امروز، این هفته، امسال و دوره‌های زمانی"
-                        android:textColor="?colorOnSurfaceVariant"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -291,7 +291,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="مشاهده عملکرد و پیشرفت کارها"
-                        android:textColor="?colorOnSurfaceVariant"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -316,7 +316,8 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="?colorSecondary">
+            app:rippleColor="#4CAF50"
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -341,8 +342,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="پشتیبان‌گیری"
-                        android:textColor="?colorOnSurface"
+                        android:text="@string/backup_title"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -350,8 +351,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="ذخیره و بازیابی داده‌ها"
-                        android:textColor="?colorOnSurfaceVariant"
+                        android:text="@string/backup_subtitle"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -379,7 +380,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="نسخه 1.0"
+            android:text="@string/version"
             android:textColor="?colorOnPrimary"
             android:alpha="0.8"
             android:textSize="12sp" />
@@ -388,7 +389,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="ساخته شده با ❤️ برای بهتر زندگی کردن"
+            android:text="@string/footer_message"
             android:textColor="?colorOnPrimary"
             android:alpha="0.8"
             android:textSize="12sp" />

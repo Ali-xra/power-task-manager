@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Power Task Manager"
+            android:text="@string/app_name"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="مدیریت قدرتمند کارها و اهداف"
+            android:text="@string/app_subtitle"
             android:textColor="#FFFFFF"
             android:alpha="0.8"
             android:textSize="16sp" />
@@ -68,18 +68,63 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ورود به برنامه"
+                android:text="@string/login_title"
                 android:textColor="#1E293B"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_marginBottom="24dp" />
+                android:layout_marginBottom="16dp" />
+
+            <!-- انتخاب زبان -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/language_label"
+                android:textColor="#64748B"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/persianButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/language_persian"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="#1E3A8A"
+                    android:strokeColor="#1E3A8A"
+                    android:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/englishButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/language_english"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="#1E3A8A"
+                    android:strokeColor="#1E3A8A"
+                    android:strokeWidth="1dp" />
+
+            </LinearLayout>
 
             <!-- راهنمای ایمیل -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📧 آدرس ایمیل خود را وارد کنید:"
+                android:text="@string/email_label"
                 android:textColor="#64748B"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp" />
@@ -90,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/modern_edittext_background"
-                android:hint="example@gmail.com"
+                android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="16dp"
@@ -106,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:backgroundTint="#1E3A8A"
-                android:text="ورود به برنامه"
+                android:text="@string/login_button"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -137,7 +182,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ایمیل شما فقط روی دستگاه ذخیره می‌شود و هیچ‌جا ارسال نخواهد شد"
+            android:text="@string/security_message"
             android:textColor="#475569"
             android:textSize="12sp" />
 

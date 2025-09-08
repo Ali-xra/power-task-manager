@@ -1,138 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Alixra Power</string>
-
-    <!-- رشته‌های مربوط به مجوزها -->
-    <string name="permission_overlay_title">مجوز نمایش روی برنامه‌ها</string>
-    <string name="permission_overlay_message">برای نمایش آلارم وقتی برنامه بسته است، این مجوز لازم است.</string>
-    <string name="permission_fullscreen_title">مجوز نمایش تمام صفحه</string>
-    <string name="permission_fullscreen_message">برای نمایش آلارم در حالت تمام صفحه، این مجوز ضروری است.</string>
-    <string name="permission_notification_title">مجوز نوتیفیکیشن</string>
-    <string name="permission_notification_message">برای نمایش یادآور شبانه و عملکرد صحیح سرویس زنگ، به این مجوز نیاز داریم.</string>
-    <string name="permission_exact_alarm_title">مجوز زنگ دقیق</string>
-    <string name="permission_exact_alarm_message">برای اینکه زنگ‌ها دقیقا سر وقت به صدا درآیند، به این مجوز ویژه نیاز داریم.</string>
-    <string name="permission_battery_title">بهینه‌سازی باتری</string>
-    <string name="permission_battery_message">برای جلوگیری از توقف برنامه توسط سیستم، لطفاً آن را از لیست بهینه‌سازی باتری خارج کنید.</string>
-
-    <!-- دکمه‌ها -->
-    <string name="ok_go_settings">باشه، برو به تنظیمات</string>
-    <string name="not_now">فعلا نه</string>
-    <string name="settings">تنظیمات</string>
-    <string name="later">بعداً</string>
+    <!-- App Info -->
+    <string name="app_name">Power Task Manager</string>
+    <string name="app_subtitle">آلارم هوشمند و مدیریت کارها</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">ورود به برنامه</string>
+    <string name="email_label">📧 آدرس ایمیل خود را وارد کنید:</string>
+    <string name="email_hint">example@gmail.com</string>
+    <string name="login_button">ورود به برنامه</string>
+    <string name="language_label">🌐 زبان برنامه:</string>
+    <string name="language_persian">فارسی</string>
+    <string name="language_english">English</string>
+    <string name="security_message">ایمیل شما فقط روی دستگاه ذخیره می‌شود و هیچ‌جا ارسال نخواهد شد</string>
+    <string name="welcome_message">🎉 خوش آمدید!</string>
+    <string name="email_error">لطفاً یک آدرس ایمیل معتبر وارد کنید</string>
+    
+    <!-- Main Menu -->
+    <string name="alarms_title">تنظیم زنگ‌ها</string>
+    <string name="alarms_subtitle">زنگ صبح و شب</string>
+    <string name="goals_title">مدیریت اهداف</string>
+    <string name="goals_subtitle">ایجاد و مدیریت اهداف</string>
+    <string name="tasks_title">مدیریت کارها</string>
+    <string name="tasks_subtitle">کارهای روزانه و برنامه‌ریزی</string>
+    <string name="reports_title">آمار و گزارش</string>
+    <string name="reports_subtitle">مشاهده پیشرفت</string>
+    <string name="backup_title">پشتیبان‌گیری</string>
+    <string name="backup_subtitle">ذخیره و بازیابی داده‌ها</string>
+    
+    <!-- User Menu -->
+    <string name="user_menu_title">منوی کاربر</string>
+    <string name="change_user">🔄 تغییر کاربر</string>
+    <string name="logout">🚪 خروج از حساب</string>
+    <string name="logout_title">خروج از حساب</string>
+    <string name="logout_message">آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟</string>
+    <string name="yes_logout">بله، خروج</string>
     <string name="cancel">لغو</string>
-    <string name="save">ذخیره</string>
-    <string name="delete">حذف</string>
-    <string name="edit">ویرایش</string>
-    <string name="add">افزودن</string>
-    <string name="create">ایجاد</string>
-    <string name="ok">باشه</string>
-    <string name="back">بازگشت</string>
-
-    <!-- پیام‌های عمومی -->
-    <string name="permission_required">مجوز مورد نیاز</string>
-    <string name="app_needs_permission">برای عملکرد صحیح Alixra Power، این مجوز ضروری است.</string>
-
-    <!-- رشته‌های صفحه اصلی -->
-    <string name="main_title">Alixra Power</string>
-    <string name="main_subtitle">آلارم هوشمند و مدیریت کارها</string>
-    <string name="main_alarms_title">تنظیم زنگ‌ها</string>
-    <string name="main_alarms_desc">مدیریت آلارم صبحگاهی و شبانه</string>
-    <string name="main_goals_title">مدیریت اهداف</string>
-    <string name="main_goals_desc">سلامتی، کار، آموزش و سایر بخش‌های زندگی</string>
-    <string name="main_tasks_title">مدیریت کارها</string>
-    <string name="main_tasks_desc">امروز، این هفته، امسال و دوره‌های زمانی</string>
-    <string name="main_reports_title">گزارشات و آمار</string>
-    <string name="main_reports_desc">مشاهده عملکرد و پیشرفت کارها</string>
-    <string name="main_version">نسخه 1.0</string>
-    <string name="main_footer">ساخته شده با ❤️ برای بهتر زندگی کردن</string>
-
-    <!-- رشته‌های مدیریت اهداف -->
-    <string name="goals_title">🎯 مدیریت اهداف</string>
-    <string name="goals_description">📋 اهداف و بخش‌های مختلف زندگی</string>
-    <string name="goals_description_detail">در این صفحه می‌توانید اهداف مختلف زندگی خود را مدیریت کنید و آمار هر بخش را مشاهده کنید.</string>
-    <string name="goals_your_goals">🏆 اهداف شما</string>
-    <string name="goals_count">%d هدف</string>
-    <string name="goals_add_new">افزودن هدف جدید</string>
-    <string name="goals_add_hint">نام هدف جدید</string>
-    <string name="goals_edit">ویرایش هدف</string>
-    <string name="goals_edit_hint">نام هدف</string>
-    <string name="goals_delete">حذف هدف</string>
-    <string name="goals_delete_message">آیا مطمئن هستید که می‌خواهید این هدف و تمام کارهای مرتبط با آن را حذف کنید؟</string>
-    <string name="goals_stats_title">آمار هدف</string>
-    <string name="goals_added">هدف جدید اضافه شد!</string>
-    <string name="goals_updated">هدف ویرایش شد!</string>
-    <string name="goals_deleted">هدف حذف شد!</string>
-    <string name="goals_empty_title">هنوز هدفی تعریف نکرده‌اید</string>
-    <string name="goals_empty_desc">برای شروع، روی دکمه + کلیک کنید</string>
-    <string name="goals_name_required">لطفاً نام هدف را وارد کنید!</string>
-
-    <!-- رشته‌های مدیریت کارها بر اساس زمان -->
-    <string name="tasks_title">📅 مدیریت کارها بر اساس زمان</string>
-    <string name="tasks_select_period">⏰ انتخاب بازه زمانی</string>
-    <string name="tasks_select_period_desc">کارهای خود را بر اساس دوره‌های زمانی مختلف مدیریت کنید</string>
-    <string name="tasks_today">امروز</string>
-    <string name="tasks_this_week">این هفته</string>
-    <string name="tasks_this_month">این ماه</string>
-    <string name="tasks_this_season">این فصل</string>
-    <string name="tasks_this_year">امسال</string>
-    <string name="tasks_count">%d کار</string>
-    <string name="tasks_completed_count">(%d انجام شده)</string>
-    <string name="tasks_for_period">کارهای %s</string>
-    <string name="tasks_add_new">+ افزودن</string>
-    <string name="tasks_add_dialog_title">افزودن کار جدید</string>
-    <string name="tasks_title_hint">عنوان کار</string>
-    <string name="tasks_description_hint">توضیحات (اختیاری)</string>
-    <string name="tasks_category">بخش</string>
-    <string name="tasks_priority">اولویت</string>
-    <string name="tasks_priority_normal">عادی</string>
-    <string name="tasks_priority_high">مهم</string>
-    <string name="tasks_priority_urgent">خیلی مهم</string>
-    <string name="tasks_edit">ویرایش کار</string>
-    <string name="tasks_delete">حذف کار</string>
-    <string name="tasks_delete_message">آیا مطمئن هستید که می‌خواهید این کار را حذف کنید؟</string>
-    <string name="tasks_details_title">جزئیات کار</string>
-    <string name="tasks_added">کار جدید اضافه شد!</string>
-    <string name="tasks_updated">کار ویرایش شد!</string>
-    <string name="tasks_deleted">کار حذف شد!</string>
-    <string name="tasks_completed">کار انجام شد! 🎉</string>
-    <string name="tasks_uncompleted">کار به حالت در انتظار برگشت</string>
-    <string name="tasks_empty_title">هنوز کاری برای این دوره تعریف نکرده‌اید</string>
-    <string name="tasks_empty_desc">برای شروع، روی دکمه + افزودن کلیک کنید</string>
-    <string name="tasks_title_required">لطفاً عنوان کار را وارد کنید!</string>
-
-    <!-- رشته‌های دوره‌های زمانی -->
-    <string name="period_today">امروز</string>
-    <string name="period_this_week">این هفته</string>
-    <string name="period_this_month">این ماه</string>
-    <string name="period_this_season">این فصل</string>
-    <string name="period_this_year">امسال</string>
-
-    <!-- رشته‌های آمار -->
-    <string name="stats_today">📅 امروز: %d از %d کار</string>
-    <string name="stats_week">🗓️ این هفته: %d از %d کار</string>
-    <string name="stats_month">📆 این ماه: %d از %d کار</string>
-    <string name="stats_year">📅 امسال: %d از %d کار</string>
-    <string name="stats_progress">📈 پیشرفت کلی: %%%d</string>
-
-    <!-- رشته‌های بخش‌های پیش‌فرض -->
-    <string name="category_health">🏃 سلامتی</string>
-    <string name="category_work">💼 کار</string>
-    <string name="category_education">📚 آموزش</string>
-    <string name="category_ideas">💡 ایده</string>
-    <string name="category_family">👨‍👩‍👧‍👦 خانواده</string>
-    <string name="category_finance">💰 مالی</string>
-    <string name="category_general">📝 عمومی</string>
-
-    <!-- رشته‌های تاریخ -->
-    <string name="date_format">yyyy/MM/dd HH:mm</string>
-    <string name="date_created">📅 تاریخ ایجاد: %s</string>
-    <string name="date_completed">✅ تاریخ انجام: %s</string>
-
-    <!-- رشته‌های عمومی جزئیات -->
-    <string name="details_title">📝 %s</string>
-    <string name="details_description">📋 توضیحات:</string>
-    <string name="details_category">📂 بخش: %s</string>
-    <string name="details_period">⏰ دوره زمانی: %s</string>
-    <string name="details_priority">🏷️ اولویت: %s</string>
-    <string name="details_unknown">نامشخص</string>
-
+    <string name="close">بستن</string>
+    
+    <!-- Backup -->
+    <string name="backup_filename_title">نام فایل پشتیبان</string>
+    <string name="backup_filename_message">لطفاً نام مورد نظر برای فایل پشتیبان خود انتخاب کنید:</string>
+    <string name="create_file">ایجاد فایل</string>
+    <string name="default_name">نام پیش‌فرض</string>
+    
+    <!-- Footer -->
+    <string name="version">نسخه 1.0</string>
+    <string name="footer_message">ساخته شده با ❤️ برای بهتر زندگی کردن</string>
+    
+    <!-- User Greeting -->
+    <string name="hello_user">👋 سلام %1$s</string>
+    <string name="default_user">کاربر</string>
 </resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Info -->
+    <string name="app_name">Power Task Manager</string>
+    <string name="app_subtitle">Smart Alarm &amp; Task Management</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">Login to App</string>
+    <string name="email_label">📧 Enter your email address:</string>
+    <string name="email_hint">example@gmail.com</string>
+    <string name="login_button">Login to App</string>
+    <string name="language_label">🌐 App Language:</string>
+    <string name="language_persian">فارسی</string>
+    <string name="language_english">English</string>
+    <string name="security_message">Your email is only stored on your device and will never be sent anywhere</string>
+    <string name="welcome_message">🎉 Welcome!</string>
+    <string name="email_error">Please enter a valid email address</string>
+    
+    <!-- Main Menu -->
+    <string name="alarms_title">Alarm Settings</string>
+    <string name="alarms_subtitle">Morning &amp; Evening Alarms</string>
+    <string name="goals_title">Goals Management</string>
+    <string name="goals_subtitle">Create &amp; Manage Goals</string>
+    <string name="tasks_title">Task Management</string>
+    <string name="tasks_subtitle">Daily Tasks &amp; Planning</string>
+    <string name="reports_title">Stats &amp; Reports</string>
+    <string name="reports_subtitle">View Progress</string>
+    <string name="backup_title">Backup &amp; Restore</string>
+    <string name="backup_subtitle">Save &amp; Restore Data</string>
+    
+    <!-- User Menu -->
+    <string name="user_menu_title">User Menu</string>
+    <string name="change_user">🔄 Change User</string>
+    <string name="logout">🚪 Logout</string>
+    <string name="logout_title">Logout</string>
+    <string name="logout_message">Are you sure you want to logout from your account?</string>
+    <string name="yes_logout">Yes, Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    
+    <!-- Backup -->
+    <string name="backup_filename_title">Backup File Name</string>
+    <string name="backup_filename_message">Please choose a name for your backup file:</string>
+    <string name="create_file">Create File</string>
+    <string name="default_name">Default Name</string>
+    
+    <!-- Footer -->
+    <string name="version">Version 1.0</string>
+    <string name="footer_message">Made with ❤️ for better living</string>
+    
+    <!-- User Greeting -->
+    <string name="hello_user">👋 Hello %1$s</string>
+    <string name="default_user">User</string>
+</resources>

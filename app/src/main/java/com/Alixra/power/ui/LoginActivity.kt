@@ -1,6 +1,7 @@
 package com.Alixra.power.ui
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.Alixra.power.MainActivity
 import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
+import com.google.android.material.button.MaterialButton
+import java.util.*
 
 /**
  * صفحه ورود به برنامه
@@ -17,12 +20,20 @@ class LoginActivity : AppCompatActivity() {
     
     private lateinit var emailEditText: EditText
     private lateinit var loginButton: Button
+    private lateinit var persianButton: MaterialButton
+    private lateinit var englishButton: MaterialButton
     private lateinit var preferencesManager: PreferencesManager
+    
+    private var selectedLanguage = "fa" // default Persian
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
         preferencesManager = PreferencesManager(this)
+        
+        // تنظیم زبان ذخیره شده
+        selectedLanguage = preferencesManager.getLanguage()
+        setAppLanguage(selectedLanguage)
         
         // بررسی اینکه آیا کاربر قبلاً وارد شده یا نه
         if (preferencesManager.isUserLoggedIn()) {
@@ -33,12 +44,62 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         
         initViews()
+        setupLanguageButtons()
         setupClickListeners()
     }
     
     private fun initViews() {
         emailEditText = findViewById(R.id.emailEditText)
         loginButton = findViewById(R.id.loginButton)
+        persianButton = findViewById(R.id.persianButton)
+        englishButton = findViewById(R.id.englishButton)
+    }
+    
+    private fun setupLanguageButtons() {
+        // تنظیم وضعیت اولیه دکمه‌ها
+        updateLanguageButtons()
+        
+        persianButton.setOnClickListener {
+            if (selectedLanguage != "fa") {
+                selectedLanguage = "fa"
+                preferencesManager.setLanguage(selectedLanguage)
+                setAppLanguage(selectedLanguage)
+                recreate() // راه‌اندازی مجدد برای اعمال تغییرات
+            }
+        }
+        
+        englishButton.setOnClickListener {
+            if (selectedLanguage != "en") {
+                selectedLanguage = "en"
+                preferencesManager.setLanguage(selectedLanguage)
+                setAppLanguage(selectedLanguage)
+                recreate() // راه‌اندازی مجدد برای اعمال تغییرات
+            }
+        }
+    }
+    
+    private fun updateLanguageButtons() {
+        if (selectedLanguage == "fa") {
+            persianButton.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
+            persianButton.setTextColor(getColor(android.R.color.white))
+            englishButton.backgroundTintList = getColorStateList(android.R.color.transparent)
+            englishButton.setTextColor(getColor(android.R.color.holo_blue_light))
+        } else {
+            englishButton.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
+            englishButton.setTextColor(getColor(android.R.color.white))
+            persianButton.backgroundTintList = getColorStateList(android.R.color.transparent)
+            persianButton.setTextColor(getColor(android.R.color.holo_blue_light))
+        }
+    }
+    
+    private fun setAppLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        
+        val config = Configuration()
+        config.setLocale(locale)
+        
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
     }
     
     private fun setupClickListeners() {
@@ -48,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
             if (validateEmail(email)) {
                 loginUser(email)
             } else {
-                showError("لطفاً یک آدرس ایمیل معتبر وارد کنید")
+                showError(getString(R.string.email_error))
             }
         }
     }
@@ -62,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
         preferencesManager.saveUserEmail(email)
         preferencesManager.setUserLoggedIn(true)
         
-        Toast.makeText(this, "🎉 خوش آمدید!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.welcome_message), Toast.LENGTH_SHORT).show()
         
         goToMainActivity()
     }
