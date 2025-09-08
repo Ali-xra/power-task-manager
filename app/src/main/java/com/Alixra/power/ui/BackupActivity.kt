@@ -10,7 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.Alixra.power.R
 import com.Alixra.power.data.BackupManager
-import com.Alixra.power.databinding.ActivityBackupBinding
+import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,8 +20,19 @@ import java.util.*
  */
 class BackupActivity : AppCompatActivity() {
     
-    private lateinit var binding: ActivityBackupBinding
     private lateinit var backupManager: BackupManager
+    
+    // Views
+    private lateinit var backButton: TextView
+    private lateinit var pageTitle: TextView
+    private lateinit var createBackupButton: MaterialButton
+    private lateinit var restoreBackupButton: MaterialButton
+    private lateinit var viewCurrentDataButton: MaterialButton
+    private lateinit var autoBackupSettingsButton: MaterialButton
+    private lateinit var currentTasksCount: TextView
+    private lateinit var currentCategoriesCount: TextView
+    private lateinit var currentSettingsCount: TextView
+    private lateinit var lastBackupDate: TextView
     
     // launcher برای انتخاب محل ذخیره backup
     private val saveBackupLauncher = registerForActivityResult(
@@ -46,18 +58,31 @@ class BackupActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBackupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_backup)
         
         backupManager = BackupManager(this)
         
+        initViews()
         setupUI()
         setupClickListeners()
     }
     
+    private fun initViews() {
+        backButton = findViewById(R.id.backButton)
+        pageTitle = findViewById(R.id.pageTitle)
+        createBackupButton = findViewById(R.id.createBackupButton)
+        restoreBackupButton = findViewById(R.id.restoreBackupButton)
+        viewCurrentDataButton = findViewById(R.id.viewCurrentDataButton)
+        autoBackupSettingsButton = findViewById(R.id.autoBackupSettingsButton)
+        currentTasksCount = findViewById(R.id.currentTasksCount)
+        currentCategoriesCount = findViewById(R.id.currentCategoriesCount)
+        currentSettingsCount = findViewById(R.id.currentSettingsCount)
+        lastBackupDate = findViewById(R.id.lastBackupDate)
+    }
+    
     private fun setupUI() {
         // تنظیم عنوان
-        binding.pageTitle.text = "پشتیبان‌گیری و بازیابی"
+        pageTitle.text = "پشتیبان‌گیری و بازیابی"
         
         // نمایش آخرین backup
         updateLastBackupInfo()
@@ -68,43 +93,43 @@ class BackupActivity : AppCompatActivity() {
     
     private fun setupClickListeners() {
         // دکمه بازگشت
-        binding.backButton.setOnClickListener {
+        backButton.setOnClickListener {
             finish()
         }
         
         // دکمه تهیه backup
-        binding.createBackupButton.setOnClickListener {
+        createBackupButton.setOnClickListener {
             createBackup()
         }
         
         // دکمه بازیابی
-        binding.restoreBackupButton.setOnClickListener {
+        restoreBackupButton.setOnClickListener {
             restoreBackup()
         }
         
         // دکمه مشاهده جزئیات backup فعلی
-        binding.viewCurrentDataButton.setOnClickListener {
+        viewCurrentDataButton.setOnClickListener {
             showCurrentDataDialog()
         }
         
         // دکمه تنظیمات خودکار
-        binding.autoBackupSettingsButton.setOnClickListener {
+        autoBackupSettingsButton.setOnClickListener {
             showAutoBackupSettings()
         }
     }
     
     private fun updateLastBackupInfo() {
         // اینجا می‌تونیم آخرین تاریخ backup رو از preferences بخونیم
-        val lastBackupDate = "هنوز پشتیبان‌گیری نشده"
-        binding.lastBackupDate.text = lastBackupDate
+        val lastBackupDateText = "هنوز پشتیبان‌گیری نشده"
+        lastBackupDate.text = lastBackupDateText
     }
     
     private fun updateCurrentStats() {
         val backupData = backupManager.createBackup()
         
-        binding.currentTasksCount.text = "${backupData.tasks.size} کار"
-        binding.currentCategoriesCount.text = "${backupData.categories.size} هدف"
-        binding.currentSettingsCount.text = "تنظیمات کامل"
+        currentTasksCount.text = "${backupData.tasks.size} کار"
+        currentCategoriesCount.text = "${backupData.categories.size} هدف"
+        currentSettingsCount.text = "تنظیمات کامل"
     }
     
     private fun createBackup() {
@@ -120,8 +145,8 @@ class BackupActivity : AppCompatActivity() {
     }
     
     private fun performBackup(uri: Uri) {
-        binding.createBackupButton.isEnabled = false
-        binding.createBackupButton.text = "در حال تهیه..."
+        createBackupButton.isEnabled = false
+        createBackupButton.text = "در حال تهیه..."
         
         when (val result = backupManager.exportBackupToFile(uri)) {
             is BackupManager.BackupResult.Success -> {
@@ -136,8 +161,8 @@ class BackupActivity : AppCompatActivity() {
             }
         }
         
-        binding.createBackupButton.isEnabled = true
-        binding.createBackupButton.text = "تهیه پشتیبان"
+        createBackupButton.isEnabled = true
+        createBackupButton.text = "تهیه پشتیبان"
     }
     
     private fun restoreBackup() {
@@ -182,8 +207,8 @@ class BackupActivity : AppCompatActivity() {
     }
     
     private fun performRestore(uri: Uri) {
-        binding.restoreBackupButton.isEnabled = false
-        binding.restoreBackupButton.text = "در حال بازیابی..."
+        restoreBackupButton.isEnabled = false
+        restoreBackupButton.text = "در حال بازیابی..."
         
         when (val result = backupManager.importBackupFromFile(uri)) {
             is BackupManager.BackupResult.Success -> {
@@ -198,8 +223,8 @@ class BackupActivity : AppCompatActivity() {
             }
         }
         
-        binding.restoreBackupButton.isEnabled = true
-        binding.restoreBackupButton.text = "بازیابی از فایل"
+        restoreBackupButton.isEnabled = true
+        restoreBackupButton.text = "بازیابی از فایل"
     }
     
     private fun showCurrentDataDialog() {

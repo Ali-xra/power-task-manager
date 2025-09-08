@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorBackground"
+    android:background="#F8FAFC"
     android:fillViewport="true">
 
     <LinearLayout
@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?colorPrimary"
+            android:background="#1E3A8A"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="20dp">
@@ -26,11 +26,11 @@
                 android:id="@+id/backButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="?selectableItemBackgroundBorderless"
+                android:background="@android:color/transparent"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="◄"
-                android:textColor="?colorOnPrimary"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:gravity="center" />
 
@@ -42,7 +42,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:text="پشتیبان‌گیری و بازیابی"
-                android:textColor="?colorOnPrimary"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="?colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="3dp">
 
@@ -98,7 +98,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="وضعیت فعلی داده‌ها"
-                            android:textColor="?colorOnSurface"
+                            android:textColor="#1E293B"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📝 کارها:"
-                                android:textColor="?colorOnSurfaceVariant"
+                                android:textColor="#64748B"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -141,7 +141,7 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
                                 android:text="0 کار"
-                                android:textColor="?colorOnSurface"
+                                android:textColor="#1E293B"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 tools:text="25 کار" />
@@ -160,7 +160,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="🎯 اهداف:"
-                                android:textColor="?colorOnSurfaceVariant"
+                                android:textColor="#64748B"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -170,7 +170,7 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
                                 android:text="0 هدف"
-                                android:textColor="?colorOnSurface"
+                                android:textColor="#1E293B"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 tools:text="5 هدف" />
@@ -188,7 +188,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚙️ تنظیمات:"
-                                android:textColor="?colorOnSurfaceVariant"
+                                android:textColor="#64748B"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -198,7 +198,7 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
                                 android:text="تنظیمات کامل"
-                                android:textColor="?colorOnSurface"
+                                android:textColor="#1E293B"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
@@ -215,7 +215,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="?colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="3dp">
 
@@ -245,7 +245,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="پشتیبان‌گیری"
-                            android:textColor="?colorOnSurface"
+                            android:textColor="#1E293B"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -282,7 +282,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="هنوز انجام نشده"
-                            android:textColor="?colorOnSurface"
+                            android:textColor="#1E293B"
                             android:textSize="14sp"
                             tools:text="1403/08/15 14:30" />
 
@@ -297,7 +297,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="?colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="3dp">
 
@@ -327,7 +327,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="بازیابی"
-                            android:textColor="?colorOnSurface"
+                            android:textColor="#1E293B"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -348,7 +348,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/modern_edittext_background"
-                        android:backgroundTint="?colorSecondaryContainer"
+                        android:backgroundTint="#F1F5F9"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="12dp">
@@ -365,7 +365,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="بازیابی تمام داده‌های فعلی را جایگزین می‌کند"
-                            android:textColor="?colorOnSecondaryContainer"
+                            android:textColor="#475569"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -378,7 +378,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="?colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="3dp">
 
@@ -408,7 +408,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="تنظیمات پیشرفته"
-                            android:textColor="?colorOnSurface"
+                            android:textColor="#1E293B"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
