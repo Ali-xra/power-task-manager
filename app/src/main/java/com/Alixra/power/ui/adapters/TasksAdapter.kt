@@ -50,11 +50,11 @@ class TasksAdapter(
             taskDescription.text = task.description
             taskCheckBox.isChecked = task.isCompleted
 
-            // تنظیم رنگ اولویت
+            // تنظیم رنگ اولویت با پالت جدید
             val priorityColor = when (task.priority) {
-                TaskPriority.NORMAL -> Color.parseColor("#2196F3")
-                TaskPriority.HIGH -> Color.parseColor("#FF9800")
-                TaskPriority.URGENT -> Color.parseColor("#F44336")
+                TaskPriority.NORMAL -> Color.parseColor("#3B82F6")  // priority_normal
+                TaskPriority.HIGH -> Color.parseColor("#F59E0B")     // priority_high  
+                TaskPriority.URGENT -> Color.parseColor("#EF4444")   // priority_urgent
             }
             priorityIndicator.setBackgroundColor(priorityColor)
 

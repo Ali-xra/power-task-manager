@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/alarm_background_gradient"
+    android:background="@drawable/modern_primary_gradient"
     android:orientation="vertical"
     android:padding="24dp"
     tools:context=".MainActivity">
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Alixra Power"
-            android:textColor="#FFFFFF"
+            android:textColor="?colorOnPrimary"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="آلارم هوشمند و مدیریت کارها"
-            android:textColor="#E3F2FD"
+            android:textColor="?colorOnPrimary"
+            android:alpha="0.8"
             android:textSize="16sp" />
 
     </LinearLayout>

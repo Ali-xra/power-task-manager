@@ -86,14 +86,14 @@ class GoalsActivity : AppCompatActivity() {
     private fun loadDefaultCategories() {
         val savedCategories = prefsManager.getTaskCategories()
         if (savedCategories.isEmpty()) {
-            // بخش‌های پیش‌فرض
+            // بخش‌های پیش‌فرض با رنگ‌های مدرن
             val defaultCategories = listOf(
-                TaskCategory("health", "🏃 سلامتی", "#4CAF50"),
-                TaskCategory("work", "💼 کار", "#2196F3"),
-                TaskCategory("education", "📚 آموزش", "#FF9800"),
-                TaskCategory("ideas", "💡 ایده", "#9C27B0"),
-                TaskCategory("family", "👨‍👩‍👧‍👦 خانواده", "#E91E63"),
-                TaskCategory("finance", "💰 مالی", "#607D8B")
+                TaskCategory("health", "🏃 سلامتی", "#10B981"),     // Green
+                TaskCategory("work", "💼 کار", "#3B82F6"),         // Blue
+                TaskCategory("education", "📚 آموزش", "#F59E0B"),  // Orange
+                TaskCategory("ideas", "💡 ایده", "#8B5CF6"),       // Purple
+                TaskCategory("family", "👨‍👩‍👧‍👦 خانواده", "#06B6D4"), // Cyan
+                TaskCategory("finance", "💰 مالی", "#475569")      // Gray
             )
             for (category in defaultCategories) {
                 prefsManager.saveTaskCategory(category)
@@ -330,12 +330,17 @@ class GoalsActivity : AppCompatActivity() {
     }
 
     private fun getRandomColor(): String {
-        val colors = arrayOf(
-            "#4CAF50", "#2196F3", "#FF9800", "#9C27B0",
-            "#E91E63", "#607D8B", "#795548", "#009688",
-            "#FF5722", "#3F51B5", "#CDDC39", "#FFC107"
+        val modernColors = arrayOf(
+            "#3B82F6", // Blue
+            "#10B981", // Green  
+            "#F59E0B", // Orange
+            "#EF4444", // Red
+            "#8B5CF6", // Purple
+            "#06B6D4", // Cyan
+            "#84CC16", // Lime
+            "#F97316"  // Orange-500
         )
-        return colors.random()
+        return modernColors.random()
     }
 
     private fun getEmojiForCategory(categoryName: String): String {
