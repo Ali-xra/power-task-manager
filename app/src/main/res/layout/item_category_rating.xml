@@ -40,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="نام بخش"
+                android:text="@string/category_name_sample"
                 android:textColor="#333333"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:text="از این بخش چقدر انجام دادی؟"
+            android:text="@string/category_completion_question"
             android:textColor="#666666"
             android:textSize="14sp" />
 
@@ -123,7 +123,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="امتیاز: "
+                android:text="@string/score_display_prefix"
                 android:textColor="#666666"
                 android:textSize="14sp" />
 
@@ -140,7 +140,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" از 10"
+                android:text="@string/score_display_suffix"
                 android:textColor="#666666"
                 android:textSize="14sp" />
 

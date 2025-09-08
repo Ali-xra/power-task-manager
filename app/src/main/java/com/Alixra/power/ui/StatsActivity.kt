@@ -47,9 +47,9 @@ class StatsActivity : BaseActivity() {
         val allRatings = prefsManager.getAllRatings()
 
         if (allRatings.isEmpty()) {
-            binding.averageRatingText.text = "هنوز امتیازی ثبت نشده"
+            binding.averageRatingText.text = getString(R.string.no_rating_recorded)
             binding.totalDaysText.text = "0 روز"
-            binding.lastWeekAverageText.text = "داده‌ای موجود نیست"
+            binding.lastWeekAverageText.text = getString(R.string.no_data_available)
         } else {
             // محاسبه میانگین کل
             val averageRating = allRatings.values.average()
@@ -63,7 +63,7 @@ class StatsActivity : BaseActivity() {
             binding.lastWeekAverageText.text = if (lastWeekAverage > 0) {
                 String.format("%.1f از 10", lastWeekAverage)
             } else {
-                "داده کافی موجود نیست"
+                getString(R.string.insufficient_data)
             }
         }
     }
@@ -157,7 +157,7 @@ class StatsActivity : BaseActivity() {
         val allRatings = prefsManager.getAllRatings()
 
         if (allRatings.size < 3) {
-            binding.trendText.text = "برای تحلیل روند، حداقل 3 روز امتیاز نیاز است"
+            binding.trendText.text = getString(R.string.insufficient_trend_data)
             return
         }
 
@@ -205,41 +205,41 @@ class StatsActivity : BaseActivity() {
 
         binding.clearDataButton.setOnClickListener {
             AlertDialog.Builder(this)
-                .setTitle("پاک کردن داده‌ها")
-                .setMessage("کدام داده‌ها را می‌خواهید پاک کنید؟")
-                .setPositiveButton("همه داده‌ها") { _, _ ->
+                .setTitle(getString(R.string.clear_data_title))
+                .setMessage(getString(R.string.clear_data_message))
+                .setPositiveButton(getString(R.string.all_data_option)) { _, _ ->
                     clearAllData()
                 }
-                .setNeutralButton("فقط کارها") { _, _ ->
+                .setNeutralButton(getString(R.string.tasks_only_option)) { _, _ ->
                     clearTaskData()
                 }
-                .setNegativeButton("لغو", null)
+                .setNegativeButton(getString(R.string.cancel_option), null)
                 .show()
         }
     }
 
     private fun clearAllData() {
         AlertDialog.Builder(this)
-            .setTitle("تأیید نهایی")
-            .setMessage("آیا مطمئن هستید؟ این عمل قابل بازگشت نیست.")
-            .setPositiveButton("بله، پاک کن") { _, _ ->
+            .setTitle(getString(R.string.final_confirmation_title))
+            .setMessage(getString(R.string.final_confirmation_message))
+            .setPositiveButton(getString(R.string.yes_delete_button)) { _, _ ->
                 prefsManager.clearAllData()
                 loadAndDisplayStats()
                 displayRecentRatings()
             }
-            .setNegativeButton("خیر", null)
+            .setNegativeButton(getString(R.string.no_button), null)
             .show()
     }
 
     private fun clearTaskData() {
         AlertDialog.Builder(this)
-            .setTitle("پاک کردن کارها")
-            .setMessage("آیا مطمئن هستید که می‌خواهید تمام کارها و بخش‌ها را پاک کنید؟")
-            .setPositiveButton("بله، پاک کن") { _, _ ->
+            .setTitle(getString(R.string.clear_tasks_title))
+            .setMessage(getString(R.string.clear_tasks_message))
+            .setPositiveButton(getString(R.string.yes_delete_button)) { _, _ ->
                 prefsManager.clearTaskData()
                 loadAndDisplayStats()
             }
-            .setNegativeButton("خیر", null)
+            .setNegativeButton(getString(R.string.no_button), null)
             .show()
     }
 

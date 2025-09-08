@@ -134,7 +134,7 @@
                             android:id="@+id/todayTasksCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 کار"
+                            android:text="@string/zero_tasks_count"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -142,7 +142,7 @@
                             android:id="@+id/todayCompletedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="(0 انجام شده)"
+                            android:text="@string/zero_completed_format"
                             android:textColor="#4CAF50"
                             android:textSize="12sp" />
 
@@ -193,7 +193,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="این هفته"
+                            android:text="@string/this_week_tasks_label"
                             android:textColor="#333333"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -202,7 +202,7 @@
                             android:id="@+id/thisWeekTasksCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 کار"
+                            android:text="@string/zero_tasks_count"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -210,7 +210,7 @@
                             android:id="@+id/thisWeekCompletedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="(0 انجام شده)"
+                            android:text="@string/zero_completed_format"
                             android:textColor="#4CAF50"
                             android:textSize="12sp" />
 
@@ -261,7 +261,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="این ماه"
+                            android:text="@string/this_month_tasks_label"
                             android:textColor="#333333"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -270,7 +270,7 @@
                             android:id="@+id/thisMonthTasksCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 کار"
+                            android:text="@string/zero_tasks_count"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -278,7 +278,7 @@
                             android:id="@+id/thisMonthCompletedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="(0 انجام شده)"
+                            android:text="@string/zero_completed_format"
                             android:textColor="#4CAF50"
                             android:textSize="12sp" />
 
@@ -329,7 +329,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="این فصل"
+                            android:text="@string/this_season_tasks_label"
                             android:textColor="#333333"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -338,7 +338,7 @@
                             android:id="@+id/thisSeasonTasksCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 کار"
+                            android:text="@string/zero_tasks_count"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -346,7 +346,7 @@
                             android:id="@+id/thisSeasonCompletedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="(0 انجام شده)"
+                            android:text="@string/zero_completed_format"
                             android:textColor="#4CAF50"
                             android:textSize="12sp" />
 
@@ -397,7 +397,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="امسال"
+                            android:text="@string/this_year_tasks_label"
                             android:textColor="#333333"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -406,7 +406,7 @@
                             android:id="@+id/thisYearTasksCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 کار"
+                            android:text="@string/zero_tasks_count"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -414,7 +414,7 @@
                             android:id="@+id/thisYearCompletedCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="(0 انجام شده)"
+                            android:text="@string/zero_completed_format"
                             android:textColor="#4CAF50"
                             android:textSize="12sp" />
 
@@ -452,7 +452,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="کارهای امروز"
+                    android:text="@string/todays_tasks_section_title"
                     android:textColor="#333333"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -462,7 +462,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:background="@drawable/edittext_background"
-                    android:text="+ افزودن"
+                    android:text="@string/add_task_section_button"
                     android:textColor="#1976D2"
                     android:textSize="14sp" />
 
@@ -496,7 +496,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="هنوز کاری برای این دوره تعریف نکرده‌اید"
+                    android:text="@string/no_tasks_for_period_message"
                     android:textColor="#666666"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -505,7 +505,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="برای شروع، روی دکمه + افزودن کلیک کنید"
+                    android:text="@string/add_task_instruction_text"
                     android:textColor="#999999"
                     android:textSize="14sp" />
 

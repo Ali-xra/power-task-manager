@@ -33,7 +33,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="تقویم این هفته"
+            android:text="@string/calendar_week_header"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="تقویم در حال بارگذاری..."
+                android:text="@string/calendar_loading_status"
                 android:textColor="#666666"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -182,7 +182,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="💡 روی هر روز کلیک کنید"
+            android:text="@string/calendar_usage_hint"
             android:textColor="#666666"
             android:textSize="10sp" />
 

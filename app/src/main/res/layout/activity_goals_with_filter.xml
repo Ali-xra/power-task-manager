@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="🎯 مدیریت اهداف"
+            android:text="@string/goals_activity_title"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="بازه زمانی:"
+            android:text="@string/time_range_header"
             android:textColor="#333333"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="هدف"
+                android:text="@string/goal_unit"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 
@@ -142,7 +142,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="کار"
+                android:text="@string/task_unit"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 
@@ -168,7 +168,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="انجام شده"
+                android:text="@string/completed_unit"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 
@@ -194,7 +194,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="پیشرفت"
+                android:text="@string/progress_unit"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 
@@ -235,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="هنوز هدفی تعریف نکرده‌اید"
+                android:text="@string/no_goals_message"
                 android:textColor="#666666"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -244,7 +244,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="برای شروع، روی دکمه + کلیک کنید"
+                android:text="@string/no_goals_instruction_text"
                 android:textColor="#999999"
                 android:textSize="14sp" />
 

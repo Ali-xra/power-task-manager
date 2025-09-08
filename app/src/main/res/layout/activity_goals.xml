@@ -107,7 +107,7 @@
                 android:backgroundTint="#E8F5E8"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
-                android:text="6 هدف"
+                android:text="@string/goals_count_sample"
                 android:textColor="#4CAF50"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="برای شروع، روی دکمه + کلیک کنید"
+                android:text="@string/no_goals_instruction_text"
                 android:textColor="#999999"
                 android:textSize="14sp" />
 

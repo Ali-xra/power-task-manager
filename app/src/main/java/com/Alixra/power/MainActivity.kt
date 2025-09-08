@@ -40,8 +40,8 @@ class MainActivity : BaseActivity() {
     ) { isGranted: Boolean ->
         if (!isGranted) {
             showPermissionRationaleDialog(
-                "مجوز نوتیفیکیشن",
-                "برای نمایش یادآور شبانه و عملکرد صحیح سرویس زنگ، به این مجوز نیاز داریم."
+                getString(R.string.notification_permission_title),
+                getString(R.string.notification_permission_message)
             ) {
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 val uri = Uri.fromParts("package", packageName, null)
@@ -55,10 +55,10 @@ class MainActivity : BaseActivity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("باشه، برو به تنظیمات") { _, _ ->
+            .setPositiveButton(getString(R.string.ok_goto_settings)) { _, _ ->
                 onPositive()
             }
-            .setNegativeButton("فعلا نه") { dialog, _ ->
+            .setNegativeButton(getString(R.string.not_now)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setCancelable(false)
@@ -203,8 +203,8 @@ class MainActivity : BaseActivity() {
             val alarmManager = getSystemService(Context.ALARM_SERVICE) as android.app.AlarmManager
             if (!alarmManager.canScheduleExactAlarms()) {
                 showPermissionRationaleDialog(
-                    "مجوز زنگ دقیق",
-                    "برای اینکه زنگ‌ها دقیقا سر وقت به صدا درآیند، به این مجوز ویژه نیاز داریم."
+                    getString(R.string.exact_alarm_permission_title),
+                    getString(R.string.exact_alarm_permission_message)
                 ) {
                     val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
                     startActivity(intent)
@@ -218,8 +218,8 @@ class MainActivity : BaseActivity() {
             val pm = getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
             if (!pm.isIgnoringBatteryOptimizations(packageName)) {
                 showPermissionRationaleDialog(
-                    "بهینه‌سازی باتری",
-                    "برای جلوگیری از توقف برنامه توسط سیستم، لطفاً آن را از لیست بهینه‌سازی باتری خارج کنید."
+                    getString(R.string.battery_optimization_title),
+                    getString(R.string.battery_optimization_message)
                 ) {
                     val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
                     intent.data = Uri.parse("package:$packageName")

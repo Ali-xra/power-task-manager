@@ -162,4 +162,144 @@
     <string name="language_selection_title">انتخاب زبان</string>
     <string name="language_selection_subtitle">تغییر زبان رابط کاربری</string>
     <string name="language_changed_message">زبان تغییر کرد</string>
+    
+    <!-- Task Activity Extended -->
+    <string name="this_week_tasks_label">این هفته</string>
+    <string name="this_month_tasks_label">این ماه</string>
+    <string name="this_season_tasks_label">این فصل</string>
+    <string name="this_year_tasks_label">امسال</string>
+    <string name="zero_tasks_count">0 کار</string>
+    <string name="zero_completed_format">(0 انجام شده)</string>
+    <string name="todays_tasks_section_title">کارهای امروز</string>
+    <string name="add_task_section_button">+ افزودن</string>
+    <string name="no_tasks_for_period_message">هنوز کاری برای این دوره تعریف نکرده‌اید</string>
+    <string name="add_task_instruction_text">برای شروع، روی دکمه + افزودن کلیک کنید</string>
+    
+    <!-- Goals Extended -->
+    <string name="goals_count_sample">6 هدف</string>
+    <string name="no_goals_instruction_text">برای شروع، روی دکمه + کلیک کنید</string>
+    
+    <!-- Backup Extended -->
+    <string name="zero_tasks_status">0 کار</string>
+    <string name="zero_goals_status">0 هدف</string>
+    <string name="settings_status_label">⚙️ تنظیمات:</string>
+    <string name="settings_complete_text">تنظیمات کامل</string>
+    <string name="backup_section_title">پشتیبان‌گیری</string>
+    <string name="create_backup_text">تهیه پشتیبان</string>
+    <string name="last_backup_info">📅 آخرین پشتیبان:</string>
+    <string name="never_backed_up_text">هنوز انجام نشده</string>
+    <string name="restore_section_title">بازیابی</string>
+    <string name="restore_from_file_text">بازیابی از فایل</string>
+    <string name="restore_warning_message">بازیابی تمام داده‌های فعلی را جایگزین می‌کند</string>
+    <string name="advanced_settings_text">تنظیمات پیشرفته</string>
+    <string name="auto_backup_text">پشتیبان‌گیری خودکار</string>
+    
+    <!-- Templates -->
+    <string name="hello_default_user_template">👋 سلام کاربر</string>
+    <string name="category_name_placeholder">🎯 نام بخش</string>
+    <string name="task_title_placeholder">عنوان کار</string>
+    <string name="task_description_placeholder">توضیحات کار</string>
+    <string name="task_goal_placeholder">هدف</string>
+    <string name="health_category_sample">سلامتی</string>
+    
+    <!-- Calendar Extended -->
+    <string name="calendar_week_header">تقویم این هفته</string>
+    <string name="calendar_loading_status">تقویم در حال بارگذاری...</string>
+    <string name="calendar_usage_hint">💡 روی هر روز کلیک کنید</string>
+    
+    <!-- Time Periods -->
+    <string name="today_period">امروز</string>
+    <string name="this_week_period">این هفته</string>
+    <string name="this_month_period">این ماه</string>
+    <string name="this_year_period">امسال</string>
+    <string name="time_range_header">بازه زمانی:</string>
+    <string name="goal_unit">هدف</string>
+    <string name="task_unit">کار</string>
+    <string name="completed_unit">انجام شده</string>
+    <string name="progress_unit">پیشرفت</string>
+    
+    <!-- Category with Tasks Extended -->
+    <string name="goal_name_placeholder">🎯 نام هدف</string>
+    <string name="zero_completed_text">0 انجام شده</string>
+    <string name="show_tasks_action">نمایش کارها</string>
+    
+    <!-- Task Example -->
+    <string name="shopping_task_example">خرید</string>
+    
+    <!-- Dialog Labels -->
+    <string name="category_field_label">بخش:</string>
+    <string name="priority_field_label">اولویت:</string>
+    
+    <!-- Evening Activity Extended -->
+    <string name="good_night_greeting">شب بخیر!</string>
+    <string name="satisfaction_daily_question">امروز چقدر از خودتان راضی بودید؟</string>
+    <string name="rating_display_prefix">امتیاز: </string>
+    <string name="rating_display_suffix"> از 10</string>
+    <string name="category_rating_header">امتیازدهی بخش‌ها:</string>
+    <string name="category_progress_prompt">در هر بخش چقدر پیشرفت کردید؟</string>
+    <string name="todays_tasks_evening_header">کارهای امروز:</string>
+    <string name="task_completion_prompt">کدام کارها انجام شدند؟</string>
+    <string name="transfer_warning_sample">2 کار انجام نشده به فردا منتقل می‌شود</string>
+    <string name="previous_action">⬅ قبلی</string>
+    <string name="skip_action">رد کردن</string>
+    <string name="save_rating_action">ثبت امتیاز</string>
+    <string name="next_step_action">▶ مرحله بعد</string>
+    
+    <!-- Alarm Challenge -->
+    <string name="sample_date_text">جمعه، 18 اوت 2025</string>
+    <string name="morning_challenge_header">چالش صبحگاهی!</string>
+    <string name="typing_challenge_prompt">برای خاموش کردن زنگ، این جمله را دقیقاً تایپ کنید:</string>
+    <string name="sample_motivational_quote">امروز اولین روز از بقیه عمر توست</string>
+    <string name="cancel_alarm_action">❌ لغو</string>
+    <string name="confirm_alarm_action">✅ تأیید</string>
+    <string name="typing_accuracy_note">💡 نکته: تایپ باید دقیقاً مطابق متن بالا باشد</string>
+    
+    <!-- Category Rating Extended -->
+    <string name="category_name_sample">نام بخش</string>
+    <string name="category_completion_question">از این بخش چقدر انجام دادی؟</string>
+    <string name="score_display_prefix">امتیاز: </string>
+    <string name="score_display_suffix"> از 10</string>
+    
+    <!-- Stats Activity Extended -->
+    <string name="back_navigation">بازگشت</string>
+    <string name="stats_main_header">📊 آمار و گزارش</string>
+    <string name="overall_average_stat">میانگین کل</string>
+    <string name="sample_overall_rating">7.5 از 10</string>
+    <string name="recorded_days_stat">روزهای ثبت شده</string>
+    <string name="sample_days_count">15 روز</string>
+    <string name="alarm_success_stat">موفقیت آلارم</string>
+    <string name="sample_alarm_count">12 بار</string>
+    <string name="weekly_average_stat">میانگین هفته</string>
+    <string name="sample_weekly_rating">8.2 از 10</string>
+    <string name="trend_analysis_header">تحلیل روند</string>
+    <string name="positive_trend_message">📈 روند رو به بهبود!</string>
+    <string name="recent_ratings_header">آخرین امتیازات</string>
+    <string name="clear_all_data_action">🗑️ پاک کردن همه داده‌ها</string>
+    
+    <!-- Kotlin Code Messages -->
+    <string name="no_rating_recorded">هنوز امتیازی ثبت نشده</string>
+    <string name="no_data_available">داده‌ای موجود نیست</string>
+    <string name="insufficient_data">داده کافی موجود نیست</string>
+    <string name="insufficient_trend_data">برای تحلیل روند، حداقل 3 روز امتیاز نیاز است</string>
+    <string name="clear_data_title">پاک کردن داده‌ها</string>
+    <string name="clear_data_message">کدام داده‌ها را می‌خواهید پاک کنید؟</string>
+    <string name="all_data_option">همه داده‌ها</string>
+    <string name="tasks_only_option">فقط کارها</string>
+    <string name="cancel_option">لغو</string>
+    <string name="final_confirmation_title">تأیید نهایی</string>
+    <string name="final_confirmation_message">آیا مطمئن هستید؟ این عمل قابل بازگشت نیست.</string>
+    <string name="yes_delete_button">بله، پاک کن</string>
+    <string name="no_button">خیر</string>
+    <string name="clear_tasks_title">پاک کردن کارها</string>
+    <string name="clear_tasks_message">آیا مطمئن هستید که می‌خواهید تمام کارها و بخش‌ها را پاک کنید؟</string>
+    
+    <!-- MainActivity Permission Messages -->
+    <string name="notification_permission_title">مجوز نوتیفیکیشن</string>
+    <string name="notification_permission_message">برای نمایش یادآور شبانه و عملکرد صحیح سرویس زنگ، به این مجوز نیاز داریم.</string>
+    <string name="ok_goto_settings">باشه، برو به تنظیمات</string>
+    <string name="not_now">فعلا نه</string>
+    <string name="exact_alarm_permission_title">مجوز زنگ دقیق</string>
+    <string name="exact_alarm_permission_message">برای اینکه زنگ‌ها دقیقا سر وقت به صدا درآیند، به این مجوز ویژه نیاز داریم.</string>
+    <string name="battery_optimization_title">بهینه‌سازی باتری</string>
+    <string name="battery_optimization_message">برای جلوگیری از توقف برنامه توسط سیستم، لطفاً آن را از لیست بهینه‌سازی باتری خارج کنید.</string>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="جمعه، 18 اوت 2025"
+        android:text="@string/sample_date_text"
         android:textColor="#E8EAF6"
         android:textSize="16sp" />
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="چالش صبحگاهی!"
+        android:text="@string/morning_challenge_header"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         android:textStyle="bold" />
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="برای خاموش کردن زنگ، این جمله را دقیقاً تایپ کنید:"
+                android:text="@string/typing_challenge_prompt"
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
@@ -72,7 +72,7 @@
                 android:gravity="center"
                 android:minHeight="60dp"
                 android:padding="16dp"
-                android:text="امروز اولین روز از بقیه عمر توست"
+                android:text="@string/sample_motivational_quote"
                 android:textColor="#1976D2"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -118,7 +118,7 @@
             android:layout_height="55dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="❌ لغو"
+            android:text="@string/cancel_alarm_action"
             android:textColor="#FFFFFF"
             app:strokeColor="#FFFFFF" />
 
@@ -129,7 +129,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1.5"
             android:backgroundTint="#4CAF50"
-            android:text="✅ تأیید"
+            android:text="@string/confirm_alarm_action"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -142,7 +142,7 @@
         android:layout_marginTop="20dp"
         android:alpha="0.7"
         android:gravity="center"
-        android:text="💡 نکته: تایپ باید دقیقاً مطابق متن بالا باشد"
+        android:text="@string/typing_accuracy_note"
         android:textColor="#E8EAF6"
         android:textSize="14sp" />
 
