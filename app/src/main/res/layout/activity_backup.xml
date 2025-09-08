@@ -22,14 +22,17 @@
             android:padding="20dp">
 
             <!-- دکمه بازگشت -->
-            <ImageButton
+            <TextView
                 android:id="@+id/backButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="بازگشت"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="?colorOnPrimary" />
+                android:clickable="true"
+                android:focusable="true"
+                android:text="◄"
+                android:textColor="?colorOnPrimary"
+                android:textSize="20sp"
+                android:gravity="center" />
 
             <!-- عنوان صفحه -->
             <TextView
@@ -106,8 +109,7 @@
                             android:minWidth="0dp"
                             android:text="جزئیات"
                             android:textSize="12sp"
-                            app:cornerRadius="18dp"
-                            style="@style/Widget.Material3.Button.OutlinedButton" />
+                        app:cornerRadius="18dp" />
 
                     </LinearLayout>
 
@@ -257,10 +259,7 @@
                         android:layout_marginBottom="16dp"
                         android:text="تهیه پشتیبان"
                         android:textSize="16sp"
-                        app:cornerRadius="16dp"
-                        app:icon="@drawable/ic_backup"
-                        app:iconGravity="textStart"
-                        style="@style/Widget.Material3.Button" />
+                        app:cornerRadius="16dp" />
 
                     <!-- آخرین backup -->
                     <LinearLayout
@@ -342,17 +341,14 @@
                         android:layout_marginBottom="12dp"
                         android:text="بازیابی از فایل"
                         android:textSize="16sp"
-                        app:cornerRadius="16dp"
-                        app:icon="@drawable/ic_restore"
-                        app:iconGravity="textStart"
-                        style="@style/Widget.Material3.Button.OutlinedButton" />
+                        app:cornerRadius="16dp" />
 
                     <!-- هشدار -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/modern_edittext_background"
-                        android:backgroundTint="?colorWarningContainer"
+                        android:backgroundTint="?colorSecondaryContainer"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="12dp">
@@ -369,7 +365,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="بازیابی تمام داده‌های فعلی را جایگزین می‌کند"
-                            android:textColor="?colorOnWarningContainer"
+                            android:textColor="?colorOnSecondaryContainer"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -425,10 +421,7 @@
                         android:layout_height="48dp"
                         android:text="پشتیبان‌گیری خودکار"
                         android:textSize="14sp"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_auto_backup"
-                        app:iconGravity="textStart"
-                        style="@style/Widget.Material3.Button.TextButton" />
+                        app:cornerRadius="12dp" />
 
                 </LinearLayout>
 
