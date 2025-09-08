@@ -161,6 +161,5 @@
     <string name="settings_subtitle">App Configuration</string>
     <string name="language_selection_title">Language Selection</string>
     <string name="language_selection_subtitle">Change interface language</string>
-    <string name="quick_language_change">Quick Language Change</string>
     <string name="language_changed_message">Language changed</string>
 </resources>

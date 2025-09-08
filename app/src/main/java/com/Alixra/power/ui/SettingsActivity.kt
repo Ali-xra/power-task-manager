@@ -23,9 +23,6 @@ class SettingsActivity : BaseActivity() {
     private lateinit var titleTextView: TextView
     private lateinit var backupCard: MaterialCardView
     private lateinit var languageCard: MaterialCardView
-    private lateinit var persianButton: MaterialButton
-    private lateinit var englishButton: MaterialButton
-    
     private var selectedLanguage: String = "fa"
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +34,6 @@ class SettingsActivity : BaseActivity() {
         
         initViews()
         setupClickListeners()
-        updateLanguageButtons()
     }
     
     private fun initViews() {
@@ -45,8 +41,6 @@ class SettingsActivity : BaseActivity() {
         titleTextView = findViewById(R.id.titleTextView)
         backupCard = findViewById(R.id.backupCard)
         languageCard = findViewById(R.id.languageCard)
-        persianButton = findViewById(R.id.persianButton)
-        englishButton = findViewById(R.id.englishButton)
     }
     
     private fun setupClickListeners() {
@@ -61,14 +55,6 @@ class SettingsActivity : BaseActivity() {
         
         languageCard.setOnClickListener {
             showLanguageDialog()
-        }
-        
-        persianButton.setOnClickListener {
-            changeLanguage("fa")
-        }
-        
-        englishButton.setOnClickListener {
-            changeLanguage("en")
         }
     }
     
@@ -107,17 +93,4 @@ class SettingsActivity : BaseActivity() {
         }
     }
     
-    private fun updateLanguageButtons() {
-        if (selectedLanguage == "fa") {
-            persianButton.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
-            persianButton.setTextColor(getColor(android.R.color.white))
-            englishButton.backgroundTintList = getColorStateList(android.R.color.transparent)
-            englishButton.setTextColor(getColor(android.R.color.holo_blue_light))
-        } else {
-            englishButton.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
-            englishButton.setTextColor(getColor(android.R.color.white))
-            persianButton.backgroundTintList = getColorStateList(android.R.color.transparent)
-            persianButton.setTextColor(getColor(android.R.color.holo_blue_light))
-        }
-    }
 }

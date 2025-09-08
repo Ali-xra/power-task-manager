@@ -177,65 +177,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Quick Language Buttons -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="#FFFFFF">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/quick_language_change"
-                    android:textColor="#1E293B"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/persianButton"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/language_persian"
-                        android:textSize="14sp"
-                        app:cornerRadius="12dp"
-                        android:backgroundTint="#FFFFFF"
-                        android:textColor="#1E3A8A" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/englishButton"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        android:text="@string/language_english"
-                        android:textSize="14sp"
-                        app:cornerRadius="12dp"
-                        android:backgroundTint="#FFFFFF"
-                        android:textColor="#1E3A8A" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
