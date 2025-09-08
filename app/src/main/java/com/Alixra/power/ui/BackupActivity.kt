@@ -19,7 +19,7 @@ import java.util.*
 /**
  * صفحه مدیریت backup و restore
  */
-class BackupActivity : AppCompatActivity() {
+class BackupActivity : BaseActivity() {
     
     private lateinit var backupManager: BackupManager
     

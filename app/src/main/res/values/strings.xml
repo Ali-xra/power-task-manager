@@ -51,4 +51,108 @@
     <!-- User Greeting -->
     <string name="hello_user">👋 سلام %1$s</string>
     <string name="default_user">کاربر</string>
+    
+    <!-- Common UI -->
+    <string name="back_button">←</string>
+    <string name="add_button">+</string>
+    <string name="edit_button">✏️</string>
+    <string name="delete_button">🗑️</string>
+    <string name="arrow_right">></string>
+    
+    <!-- Alarms Activity -->
+    <string name="alarms_activity_title">⏰ تنظیم زنگ‌ها</string>
+    <string name="morning_alarm_title">⏰ زنگ صبحگاهی</string>
+    <string name="morning_alarm_subtitle">تنظیم زنگ صبح</string>
+    <string name="evening_reminder_title">🌙 یادآور شبانه</string>
+    <string name="evening_reminder_subtitle">تنظیم یادآور شب</string>
+    <string name="manage_quotes_title">💬 مدیریت جملات انگیزشی</string>
+    <string name="add_quote_button">➕ اضافه کردن جمله</string>
+    <string name="quotes_instruction">جملات ذخیره شده (برای حذف، طولانی کلیک کنید):</string>
+    
+    <!-- Goals Activity -->
+    <string name="goals_activity_title">🎯 مدیریت اهداف</string>
+    <string name="goals_description">📋 اهداف و بخش‌های مختلف زندگی</string>
+    <string name="goals_subtitle_text">در این صفحه می‌توانید اهداف مختلف زندگی خود را مدیریت کنید و آمار هر بخش را مشاهده کنید.</string>
+    <string name="your_goals_title">🏆 اهداف شما</string>
+    <string name="goals_count_format">%d هدف</string>
+    <string name="no_goals_title">📝</string>
+    <string name="no_goals_message">هنوز هدفی تعریف نکرده‌اید</string>
+    <string name="no_goals_instruction">برای شروع، روی دکمه + کلیک کنید</string>
+    
+    <!-- Tasks Activity -->
+    <string name="tasks_activity_title">📅 مدیریت کارها بر اساس زمان</string>
+    <string name="tasks_menu">⋮</string>
+    <string name="time_period_title">⏰ انتخاب بازه زمانی</string>
+    <string name="time_period_subtitle">کارهای خود را بر اساس دوره‌های زمانی مختلف مدیریت کنید</string>
+    <string name="today_tasks">امروز</string>
+    <string name="this_week_tasks">این هفته</string>
+    <string name="this_month_tasks">این ماه</string>
+    <string name="this_season_tasks">این فصل</string>
+    <string name="this_year_tasks">امسال</string>
+    <string name="task_count_format">%d کار</string>
+    <string name="completed_count_format">(%d انجام شده)</string>
+    <string name="todays_tasks_title">کارهای امروز</string>
+    <string name="add_task_button">+ افزودن</string>
+    <string name="no_tasks_title">📝</string>
+    <string name="no_tasks_message">هنوز کاری برای این دوره تعریف نکرده‌اید</string>
+    <string name="no_tasks_instruction">برای شروع، روی دکمه + افزودن کلیک کنید</string>
+    
+    <!-- Backup Activity -->
+    <string name="backup_activity_title">پشتیبان‌گیری و بازیابی</string>
+    <string name="current_data_status">وضعیت فعلی داده‌ها</string>
+    <string name="details_button">جزئیات</string>
+    <string name="tasks_count">📝 کارها:</string>
+    <string name="goals_count">🎯 اهداف:</string>
+    <string name="settings_status">⚙️ تنظیمات:</string>
+    <string name="settings_complete">تنظیمات کامل</string>
+    <string name="create_backup_title">پشتیبان‌گیری</string>
+    <string name="create_backup_button">تهیه پشتیبان</string>
+    <string name="last_backup_label">📅 آخرین پشتیبان:</string>
+    <string name="never_backed_up">هنوز انجام نشده</string>
+    <string name="restore_title">بازیابی</string>
+    <string name="restore_button">بازیابی از فایل</string>
+    <string name="restore_warning">⚠️</string>
+    <string name="restore_warning_message">بازیابی تمام داده‌های فعلی را جایگزین می‌کند</string>
+    <string name="advanced_settings_title">تنظیمات پیشرفته</string>
+    <string name="auto_backup_title">پشتیبان‌گیری خودکار</string>
+    
+    <!-- Calendar Activity -->
+    <string name="calendar_title">تقویم این هفته</string>
+    <string name="calendar_loading">📅 تقویم در حال بارگذاری...</string>
+    <string name="calendar_instruction">💡 روی هر روز کلیک کنید</string>
+    <string name="saturday_short">ش</string>
+    <string name="sunday_short">ی</string>
+    <string name="monday_short">د</string>
+    <string name="tuesday_short">س</string>
+    <string name="wednesday_short">چ</string>
+    <string name="thursday_short">پ</string>
+    <string name="friday_short">ج</string>
+    
+    <!-- Stats Activity -->
+    <string name="stats_activity_title">📊 آمار و گزارش</string>
+    <string name="overall_average">میانگین کل</string>
+    <string name="recorded_days">روزهای ثبت شده</string>
+    <string name="rating_format">%.1f از 10</string>
+    
+    <!-- Evening Activity -->
+    <string name="good_night">شب بخیر!</string>
+    <string name="satisfaction_question">امروز چقدر از خودتان راضی بودید؟</string>
+    <string name="rating_label">امتیاز:</string>
+    <string name="rating_out_of"> از 10</string>
+    <string name="category_rating_title">امتیازدهی بخش‌ها:</string>
+    <string name="category_rating_subtitle">در هر بخش چقدر پیشرفت کردید؟</string>
+    <string name="todays_tasks_title_evening">کارهای امروز:</string>
+    <string name="tasks_completion_subtitle">کدام کارها انجام شدند؟</string>
+    <string name="transfer_warning_format">%d کار انجام نشده به فردا منتقل می‌شود</string>
+    <string name="previous_step">⬅ قبلی</string>
+    <string name="skip_step">رد کردن</string>
+    <string name="save_rating">ثبت امتیاز</string>
+    <string name="next_step">▶ مرحله بعد</string>
+    
+    <!-- Alarm Activity -->
+    <string name="morning_challenge_title">چالش صبحگاهی!</string>
+    <string name="typing_instruction">برای خاموش کردن زنگ، این جمله را دقیقاً تایپ کنید:</string>
+    <string name="cancel_button">❌ لغو</string>
+    <string name="confirm_button">✅ تأیید</string>
+    <string name="typing_hint">💡 نکته: تایپ باید دقیقاً مطابق متن بالا باشد</string>
 </resources>

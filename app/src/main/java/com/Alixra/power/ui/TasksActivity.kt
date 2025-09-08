@@ -19,7 +19,7 @@ import com.google.android.material.card.MaterialCardView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TasksActivity : AppCompatActivity() {
+class TasksActivity : BaseActivity() {
 
     // Views
     private lateinit var backButton: Button

@@ -51,4 +51,108 @@
     <!-- User Greeting -->
     <string name="hello_user">👋 Hello %1$s</string>
     <string name="default_user">User</string>
+    
+    <!-- Common UI -->
+    <string name="back_button">←</string>
+    <string name="add_button">+</string>
+    <string name="edit_button">✏️</string>
+    <string name="delete_button">🗑️</string>
+    <string name="arrow_right">></string>
+    
+    <!-- Alarms Activity -->
+    <string name="alarms_activity_title">⏰ Alarm Settings</string>
+    <string name="morning_alarm_title">⏰ Morning Alarm</string>
+    <string name="morning_alarm_subtitle">Set morning alarm</string>
+    <string name="evening_reminder_title">🌙 Evening Reminder</string>
+    <string name="evening_reminder_subtitle">Set evening reminder</string>
+    <string name="manage_quotes_title">💬 Manage Motivational Quotes</string>
+    <string name="add_quote_button">➕ Add Quote</string>
+    <string name="quotes_instruction">Saved quotes (long press to delete):</string>
+    
+    <!-- Goals Activity -->
+    <string name="goals_activity_title">🎯 Goals Management</string>
+    <string name="goals_description">📋 Goals and Life Categories</string>
+    <string name="goals_subtitle_text">On this page you can manage different life goals and view statistics for each category.</string>
+    <string name="your_goals_title">🏆 Your Goals</string>
+    <string name="goals_count_format">%d goals</string>
+    <string name="no_goals_title">📝</string>
+    <string name="no_goals_message">You haven\'t defined any goals yet</string>
+    <string name="no_goals_instruction">To get started, click the + button</string>
+    
+    <!-- Tasks Activity -->
+    <string name="tasks_activity_title">📅 Time-Based Task Management</string>
+    <string name="tasks_menu">⋮</string>
+    <string name="time_period_title">⏰ Select Time Period</string>
+    <string name="time_period_subtitle">Manage your tasks based on different time periods</string>
+    <string name="today_tasks">Today</string>
+    <string name="this_week_tasks">This Week</string>
+    <string name="this_month_tasks">This Month</string>
+    <string name="this_season_tasks">This Season</string>
+    <string name="this_year_tasks">This Year</string>
+    <string name="task_count_format">%d tasks</string>
+    <string name="completed_count_format">(%d completed)</string>
+    <string name="todays_tasks_title">Today\'s Tasks</string>
+    <string name="add_task_button">+ Add</string>
+    <string name="no_tasks_title">📝</string>
+    <string name="no_tasks_message">You haven\'t defined any tasks for this period yet</string>
+    <string name="no_tasks_instruction">To get started, click the + Add button</string>
+    
+    <!-- Backup Activity -->
+    <string name="backup_activity_title">Backup and Restore</string>
+    <string name="current_data_status">Current Data Status</string>
+    <string name="details_button">Details</string>
+    <string name="tasks_count">📝 Tasks:</string>
+    <string name="goals_count">🎯 Goals:</string>
+    <string name="settings_status">⚙️ Settings:</string>
+    <string name="settings_complete">Complete Settings</string>
+    <string name="create_backup_title">Backup</string>
+    <string name="create_backup_button">Create Backup</string>
+    <string name="last_backup_label">📅 Last Backup:</string>
+    <string name="never_backed_up">Never backed up</string>
+    <string name="restore_title">Restore</string>
+    <string name="restore_button">Restore from File</string>
+    <string name="restore_warning">⚠️</string>
+    <string name="restore_warning_message">Restore will replace all current data</string>
+    <string name="advanced_settings_title">Advanced Settings</string>
+    <string name="auto_backup_title">Automatic Backup</string>
+    
+    <!-- Calendar Activity -->
+    <string name="calendar_title">This Week\'s Calendar</string>
+    <string name="calendar_loading">📅 Calendar loading...</string>
+    <string name="calendar_instruction">💡 Click on any day</string>
+    <string name="saturday_short">S</string>
+    <string name="sunday_short">S</string>
+    <string name="monday_short">M</string>
+    <string name="tuesday_short">T</string>
+    <string name="wednesday_short">W</string>
+    <string name="thursday_short">T</string>
+    <string name="friday_short">F</string>
+    
+    <!-- Stats Activity -->
+    <string name="stats_activity_title">📊 Stats and Reports</string>
+    <string name="overall_average">Overall Average</string>
+    <string name="recorded_days">Recorded Days</string>
+    <string name="rating_format">%.1f out of 10</string>
+    
+    <!-- Evening Activity -->
+    <string name="good_night">Good Night!</string>
+    <string name="satisfaction_question">How satisfied were you with yourself today?</string>
+    <string name="rating_label">Rating:</string>
+    <string name="rating_out_of"> out of 10</string>
+    <string name="category_rating_title">Category Rating:</string>
+    <string name="category_rating_subtitle">How much progress did you make in each category?</string>
+    <string name="todays_tasks_title_evening">Today\'s Tasks:</string>
+    <string name="tasks_completion_subtitle">Which tasks were completed?</string>
+    <string name="transfer_warning_format">%d incomplete tasks will be transferred to tomorrow</string>
+    <string name="previous_step">⬅ Previous</string>
+    <string name="skip_step">Skip</string>
+    <string name="save_rating">Save Rating</string>
+    <string name="next_step">▶ Next Step</string>
+    
+    <!-- Alarm Activity -->
+    <string name="morning_challenge_title">Morning Challenge!</string>
+    <string name="typing_instruction">To turn off the alarm, type this sentence exactly:</string>
+    <string name="cancel_button">❌ Cancel</string>
+    <string name="confirm_button">✅ Confirm</string>
+    <string name="typing_hint">💡 Note: Typing must match the text above exactly</string>
 </resources>

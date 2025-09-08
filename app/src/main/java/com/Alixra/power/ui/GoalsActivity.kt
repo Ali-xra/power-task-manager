@@ -18,7 +18,7 @@ import com.Alixra.power.data.TimePeriod
 import com.Alixra.power.ui.adapters.CategoriesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class GoalsActivity : AppCompatActivity() {
+class GoalsActivity : BaseActivity() {
 
     private lateinit var backButton: Button
     private lateinit var addGoalButton: Button

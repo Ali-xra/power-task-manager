@@ -10,7 +10,7 @@ import com.Alixra.power.databinding.ActivityStatsBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class StatsActivity : AppCompatActivity() {
+class StatsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityStatsBinding
     private lateinit var prefsManager: PreferencesManager

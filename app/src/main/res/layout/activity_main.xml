@@ -321,7 +321,7 @@
             android:focusable="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            app:rippleColor="#4CAF50"
+            app:rippleColor="#10B981"
             app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout

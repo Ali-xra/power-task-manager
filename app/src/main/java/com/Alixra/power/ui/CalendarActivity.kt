@@ -19,7 +19,7 @@ import com.Alixra.power.ui.adapters.CalendarAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalendarActivity : AppCompatActivity() {
+class CalendarActivity : BaseActivity() {
 
     // Views
     private lateinit var backButton: Button

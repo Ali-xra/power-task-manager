@@ -21,7 +21,7 @@ import kotlin.random.Random
  * Activity چالش صبحگاهی - برای خاموش کردن زنگ باید جمله انگیزشی تایپ شود
  * بهبود: چک کردن real-time متن و خاموش شدن خودکار زنگ
  */
-class AlarmActivity : AppCompatActivity() {
+class AlarmActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAlarmBinding
     private lateinit var prefsManager: PreferencesManager

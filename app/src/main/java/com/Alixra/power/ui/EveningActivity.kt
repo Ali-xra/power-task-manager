@@ -20,7 +20,7 @@ import com.Alixra.power.ui.adapters.TodayTasksAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EveningActivity : AppCompatActivity() {
+class EveningActivity : BaseActivity() {
 
     private lateinit var binding: ActivityEveningBinding
     private lateinit var prefsManager: PreferencesManager

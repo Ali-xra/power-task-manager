@@ -13,7 +13,7 @@ import com.Alixra.power.data.PreferencesManager
 import com.Alixra.power.databinding.ActivityAlarmsBinding
 import com.Alixra.power.utils.AlarmUtils
 
-class AlarmsActivity : AppCompatActivity() {
+class AlarmsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAlarmsBinding
     private lateinit var prefsManager: PreferencesManager
