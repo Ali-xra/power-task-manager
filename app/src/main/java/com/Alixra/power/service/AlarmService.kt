@@ -26,6 +26,7 @@ class AlarmService : Service() {
     companion object {
         const val ALARM_SERVICE_CHANNEL_ID = "ALARM_SERVICE_CHANNEL"
         const val ALARM_SERVICE_NOTIFICATION_ID = 1003
+        private const val WAKE_LOCK_TIMEOUT_MS = 10 * 60 * 1000L // 10 minutes
     }
 
     private var mediaPlayer: MediaPlayer? = null
@@ -242,7 +243,7 @@ class AlarmService : Service() {
                 PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
                 "PowerApp:AlarmWakeLock"
             )
-            wakeLock?.acquire(10 * 60 * 1000L) // 10 دقیقه maximum
+            wakeLock?.acquire(WAKE_LOCK_TIMEOUT_MS)
         } catch (e: SecurityException) {
             android.util.Log.e("AlarmService", "SecurityException: Missing wake lock permission", e)
         } catch (e: Exception) {
