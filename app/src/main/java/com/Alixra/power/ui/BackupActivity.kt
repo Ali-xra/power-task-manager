@@ -83,7 +83,7 @@ class BackupActivity : BaseActivity() {
     
     private fun setupUI() {
         // تنظیم عنوان
-        pageTitle.text = "پشتیبان‌گیری و بازیابی"
+        pageTitle.text = getString(R.string.backup_restore_title)
         
         // نمایش آخرین backup
         updateLastBackupInfo()
@@ -121,16 +121,16 @@ class BackupActivity : BaseActivity() {
     
     private fun updateLastBackupInfo() {
         // اینجا می‌تونیم آخرین تاریخ backup رو از preferences بخونیم
-        val lastBackupDateText = "هنوز پشتیبان‌گیری نشده"
+        val lastBackupDateText = getString(R.string.never_backed_up_message)
         lastBackupDate.text = lastBackupDateText
     }
     
     private fun updateCurrentStats() {
         val backupData = backupManager.createBackup()
         
-        currentTasksCount.text = "${backupData.tasks.size} کار"
-        currentCategoriesCount.text = "${backupData.categories.size} هدف"
-        currentSettingsCount.text = "تنظیمات کامل"
+        currentTasksCount.text = getString(R.string.task_count_dynamic, backupData.tasks.size)
+        currentCategoriesCount.text = getString(R.string.goal_count_dynamic, backupData.categories.size)
+        currentSettingsCount.text = getString(R.string.complete_settings_message)
     }
     
     private fun createBackup() {
@@ -178,7 +178,7 @@ class BackupActivity : BaseActivity() {
     
     private fun performBackup(uri: Uri) {
         createBackupButton.isEnabled = false
-        createBackupButton.text = "در حال تهیه..."
+        createBackupButton.text = getString(R.string.preparing_backup_message)
         
         when (val result = backupManager.exportBackupToFile(uri)) {
             is BackupManager.BackupResult.Success -> {
@@ -194,7 +194,7 @@ class BackupActivity : BaseActivity() {
         }
         
         createBackupButton.isEnabled = true
-        createBackupButton.text = "تهیه پشتیبان"
+        createBackupButton.text = getString(R.string.create_backup_button)
     }
     
     private fun restoreBackup() {
@@ -229,9 +229,9 @@ class BackupActivity : BaseActivity() {
         }
         
         AlertDialog.Builder(this)
-            .setTitle("تأیید بازیابی")
+            .setTitle(getString(R.string.confirm_restore_title))
             .setMessage(message)
-            .setPositiveButton("بازیابی") { _, _ ->
+            .setPositiveButton(getString(R.string.restore_button)) { _, _ ->
                 performRestore(uri)
             }
             .setNegativeButton("لغو", null)
@@ -240,7 +240,7 @@ class BackupActivity : BaseActivity() {
     
     private fun performRestore(uri: Uri) {
         restoreBackupButton.isEnabled = false
-        restoreBackupButton.text = "در حال بازیابی..."
+        restoreBackupButton.text = getString(R.string.restoring_message)
         
         when (val result = backupManager.importBackupFromFile(uri)) {
             is BackupManager.BackupResult.Success -> {
@@ -256,7 +256,7 @@ class BackupActivity : BaseActivity() {
         }
         
         restoreBackupButton.isEnabled = true
-        restoreBackupButton.text = "بازیابی از فایل"
+        restoreBackupButton.text = getString(R.string.restore_from_file_button)
     }
     
     private fun showCurrentDataDialog() {
@@ -272,8 +272,8 @@ class BackupActivity : BaseActivity() {
             appendLine("🎯 اهداف: ${backupData.categories.size}")
             appendLine()
             appendLine("⏰ تنظیمات زنگ:")
-            appendLine("   - صبح: ${if (backupData.alarmSettings.isAlarmEnabled) "فعال" else "غیرفعال"}")
-            appendLine("   - شب: ${if (backupData.eveningSettings.isEveningEnabled) "فعال" else "غیرفعال"}")
+            appendLine("   - Morning: ${if (backupData.alarmSettings.isAlarmEnabled) getString(R.string.enabled_status) else getString(R.string.disabled_status)}")
+            appendLine("   - Evening: ${if (backupData.eveningSettings.isEveningEnabled) getString(R.string.enabled_status) else getString(R.string.disabled_status)}")
             appendLine()
             appendLine("📈 آمار:")
             appendLine("   - تعداد موفقیت: ${backupData.eveningSettings.successCount}")
@@ -282,7 +282,7 @@ class BackupActivity : BaseActivity() {
         }
         
         AlertDialog.Builder(this)
-            .setTitle("جزئیات داده‌های فعلی")
+            .setTitle(getString(R.string.current_data_details_title))
             .setMessage(message)
             .setPositiveButton("باشه", null)
             .show()
@@ -290,8 +290,8 @@ class BackupActivity : BaseActivity() {
     
     private fun showAutoBackupSettings() {
         val items = arrayOf(
-            "فعال‌سازی پشتیبان‌گیری خودکار",
-            "پشتیبان‌گیری روزانه",
+            getString(R.string.enable_auto_backup_message),
+            getString(R.string.daily_backup_message),
             "پشتیبان‌گیری هفتگی",
             "تنظیم محل ذخیره"
         )

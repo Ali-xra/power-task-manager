@@ -39,6 +39,7 @@ class PreferencesManager(context: Context) {
         private const val ALARM_HOUR_KEY = "ALARM_HOUR"
         private const val ALARM_MINUTE_KEY = "ALARM_MINUTE"
         private const val SELECTED_DAYS_KEY = "SELECTED_DAYS"
+        private const val EVENING_SELECTED_DAYS_KEY = "EVENING_SELECTED_DAYS"
         private const val VIBRATION_ENABLED_KEY = "VIBRATION_ENABLED"
         private const val ALARM_SOUND_URI_KEY = "ALARM_SOUND_URI"
         private const val MOTIVATIONAL_TEXTS_KEY = "MOTIVATIONAL_TEXTS"
@@ -48,6 +49,8 @@ class PreferencesManager(context: Context) {
         private const val LANGUAGE_KEY = "LANGUAGE"
         private const val NOTIFICATIONS_ENABLED_KEY = "NOTIFICATIONS_ENABLED"
         private const val AUTO_BACKUP_ENABLED_KEY = "AUTO_BACKUP_ENABLED"
+        private const val QUOTES_INITIALIZED_KEY = "QUOTES_INITIALIZED"
+        private const val CATEGORIES_INITIALIZED_KEY = "CATEGORIES_INITIALIZED"
         
         // کلیدهای مربوط به کاربر
         private const val USER_EMAIL_KEY = "USER_EMAIL"
@@ -58,6 +61,7 @@ class PreferencesManager(context: Context) {
     fun saveQuotes(quotes: List<String>) {
         val json = gson.toJson(quotes)
         editor.putString(QUOTES_LIST_KEY, json)
+        editor.putBoolean(QUOTES_INITIALIZED_KEY, true)
         editor.apply()
     }
 
@@ -69,6 +73,14 @@ class PreferencesManager(context: Context) {
         } else {
             emptyList()
         }
+    }
+
+    fun areQuotesInitialized(): Boolean {
+        return prefs.getBoolean(QUOTES_INITIALIZED_KEY, false)
+    }
+
+    fun areCategoriesInitialized(): Boolean {
+        return prefs.getBoolean(CATEGORIES_INITIALIZED_KEY, false)
     }
 
     // --- توابع مربوط به زمان زنگ‌ها (قدیمی) ---
@@ -159,6 +171,7 @@ class PreferencesManager(context: Context) {
 
         val json = gson.toJson(categories)
         editor.putString(TASK_CATEGORIES_KEY, json)
+        editor.putBoolean(CATEGORIES_INITIALIZED_KEY, true)
         editor.apply()
     }
 
@@ -178,6 +191,7 @@ class PreferencesManager(context: Context) {
 
         val json = gson.toJson(categories)
         editor.putString(TASK_CATEGORIES_KEY, json)
+        editor.putBoolean(CATEGORIES_INITIALIZED_KEY, true)
         editor.apply()
 
         // حذف تمام کارهای مربوط به این بخش
@@ -741,6 +755,23 @@ class PreferencesManager(context: Context) {
     fun setSelectedDays(days: List<Int>) {
         val json = gson.toJson(days)
         editor.putString(SELECTED_DAYS_KEY, json)
+        editor.apply()
+    }
+    
+    // --- روزهای انتخاب شده برای یادآور شب ---
+    fun getEveningSelectedDays(): List<Int> {
+        val json = prefs.getString(EVENING_SELECTED_DAYS_KEY, null)
+        return if (json != null) {
+            val type = object : TypeToken<List<Int>>() {}.type
+            gson.fromJson(json, type) ?: listOf(1, 2, 3, 4, 5, 6, 7)
+        } else {
+            listOf(1, 2, 3, 4, 5, 6, 7) // همه روزهای هفته
+        }
+    }
+    
+    fun setEveningSelectedDays(days: List<Int>) {
+        val json = gson.toJson(days)
+        editor.putString(EVENING_SELECTED_DAYS_KEY, json)
         editor.apply()
     }
     

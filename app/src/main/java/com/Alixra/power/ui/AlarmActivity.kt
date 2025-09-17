@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
 import com.Alixra.power.databinding.ActivityAlarmBinding
 import com.Alixra.power.receiver.AlarmReceiver
@@ -63,12 +64,12 @@ class AlarmActivity : BaseActivity() {
             binding.challengeQuoteText.text = currentQuote
         } else {
             // اگر جمله‌ای ذخیره نشده، از جملات پیش‌فرض استفاده کن
-            currentQuote = "امروز اولین روز از بقیه عمر توست"
+            currentQuote = getString(R.string.default_motivational_quote)
             binding.challengeQuoteText.text = currentQuote
         }
 
         // تنظیم placeholder برای EditText
-        binding.userInputEditText.hint = "شروع به تایپ کنید..."
+        binding.userInputEditText.hint = getString(R.string.typing_hint_placeholder)
 
         // نمایش تاریخ فعلی
         val formatter = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault())
@@ -136,7 +137,7 @@ class AlarmActivity : BaseActivity() {
 
     private fun manualCheckUserInput(userInput: String) {
         if (userInput.isEmpty()) {
-            showToast("لطفاً جمله را تایپ کنید!")
+            showToast(getString(R.string.enter_sentence_message))
             return
         }
 
@@ -234,12 +235,12 @@ class AlarmActivity : BaseActivity() {
 
     private fun showCancelWarning() {
         // هشدار برای لغو (اختیاری)
-        Toast.makeText(this, "برای خاموش کردن زنگ، جمله را کامل تایپ کنید!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.complete_typing_message), Toast.LENGTH_LONG).show()
     }
 
     private fun finishChallenge(success: Boolean) {
         if (success) {
-            showToast("موفقیت آمیز! روز خوبی داشته باشید 🌟")
+            showToast(getString(R.string.success_message))
         }
 
         // بستن Activity
@@ -249,7 +250,7 @@ class AlarmActivity : BaseActivity() {
     override fun onBackPressed() {
         if (isAlarmActive) {
             // جلوگیری از خروج با دکمه Back فقط اگر زنگ هنوز فعال است
-            showToast("برای خاموش کردن زنگ، جمله را کامل تایپ کنید!")
+            showToast(getString(R.string.complete_typing_message))
         } else {
             // اگر زنگ خاموش شده، اجازه خروج
             super.onBackPressed()

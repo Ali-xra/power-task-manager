@@ -76,8 +76,8 @@ class CategoriesWithTasksAdapter(
             val progress = if (tasks.isNotEmpty()) (completedTasks * 100 / tasks.size) else 0
 
             // نمایش آمار
-            totalTasksCount.text = "${tasks.size} کار"
-            completedTasksCount.text = "$completedTasks انجام شده"
+            totalTasksCount.text = itemView.context.getString(R.string.task_count_dynamic, tasks.size)
+            completedTasksCount.text = itemView.context.getString(R.string.completed_tasks_dynamic, completedTasks)
             progressPercentage.text = "$progress%"
 
             // تنظیم RecyclerView برای کارها
@@ -94,7 +94,7 @@ class CategoriesWithTasksAdapter(
             // نمایش/مخفی کردن دکمه و لیست کارها
             if (tasks.isNotEmpty()) {
                 toggleTasksButton.visibility = View.VISIBLE
-                toggleTasksButton.text = if (isTasksVisible) "مخفی کردن کارها" else "نمایش کارها"
+                toggleTasksButton.text = if (isTasksVisible) itemView.context.getString(R.string.hide_tasks_button) else itemView.context.getString(R.string.show_tasks_button)
                 tasksRecyclerView.visibility = if (isTasksVisible) View.VISIBLE else View.GONE
             } else {
                 toggleTasksButton.visibility = View.GONE
@@ -120,7 +120,7 @@ class CategoriesWithTasksAdapter(
             toggleTasksButton.setOnClickListener {
                 isTasksVisible = !isTasksVisible
                 tasksRecyclerView.visibility = if (isTasksVisible) View.VISIBLE else View.GONE
-                toggleTasksButton.text = if (isTasksVisible) "مخفی کردن کارها" else "نمایش کارها"
+                toggleTasksButton.text = if (isTasksVisible) itemView.context.getString(R.string.hide_tasks_button) else itemView.context.getString(R.string.show_tasks_button)
             }
         }
     }

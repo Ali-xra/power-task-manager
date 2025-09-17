@@ -26,6 +26,19 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <!-- نام روز (فقط برای نمایش هفته) -->
+            <TextView
+                android:id="@+id/dayNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text=""
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="شنبه"
+                tools:visibility="visible" />
+
             <!-- شماره روز -->
             <TextView
                 android:id="@+id/dayNumberTextView"

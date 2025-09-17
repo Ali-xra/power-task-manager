@@ -3,6 +3,7 @@ package com.Alixra.power.data
 import android.content.Context
 import android.net.Uri
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import java.io.*
 import java.text.SimpleDateFormat
@@ -14,7 +15,11 @@ import java.util.*
 class BackupManager(private val context: Context) {
     
     private val preferencesManager = PreferencesManager(context)
-    private val gson = Gson()
+    private val gson = GsonBuilder()
+        .disableHtmlEscaping()
+        .setPrettyPrinting()
+        .serializeNulls()
+        .create()
     
     /**
      * داده‌های کامل اپلیکیشن برای backup
@@ -108,8 +113,10 @@ class BackupManager(private val context: Context) {
             val jsonString = gson.toJson(backupData)
             
             context.contentResolver.openOutputStream(uri)?.use { outputStream ->
-                outputStream.write(jsonString.toByteArray())
-                outputStream.flush()
+                OutputStreamWriter(outputStream, Charsets.UTF_8).use { writer ->
+                    writer.write(jsonString)
+                    writer.flush()
+                }
             }
             
             BackupResult.Success("✅ بکاپ با موفقیت ذخیره شد")
@@ -124,7 +131,9 @@ class BackupManager(private val context: Context) {
     fun importBackupFromFile(uri: Uri): BackupResult {
         return try {
             val jsonString = context.contentResolver.openInputStream(uri)?.use { inputStream ->
-                inputStream.bufferedReader().readText()
+                InputStreamReader(inputStream, Charsets.UTF_8).use { reader ->
+                    reader.readText()
+                }
             } ?: return BackupResult.Error("❌ نمی‌توان فایل را خواند")
             
             val backupData = gson.fromJson(jsonString, AppBackupData::class.java)
@@ -160,7 +169,9 @@ class BackupManager(private val context: Context) {
     fun getBackupInfo(uri: Uri): BackupInfo? {
         return try {
             val jsonString = context.contentResolver.openInputStream(uri)?.use { inputStream ->
-                inputStream.bufferedReader().readText()
+                InputStreamReader(inputStream, Charsets.UTF_8).use { reader ->
+                    reader.readText()
+                }
             } ?: return null
             
             val backupData = gson.fromJson(jsonString, AppBackupData::class.java)
@@ -171,7 +182,7 @@ class BackupManager(private val context: Context) {
                 deviceInfo = backupData.deviceInfo,
                 tasksCount = backupData.tasks.size,
                 categoriesCount = backupData.categories.size,
-                fileSize = jsonString.length.toLong()
+                fileSize = jsonString.toByteArray(Charsets.UTF_8).size.toLong()
             )
         } catch (e: Exception) {
             null

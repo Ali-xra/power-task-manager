@@ -56,7 +56,6 @@
     <string name="back_button">←</string>
     <string name="add_button">+</string>
     <string name="edit_button">✏️</string>
-    <string name="delete_button">🗑️</string>
     <string name="arrow_right">></string>
     
     <!-- Alarms Activity -->
@@ -110,7 +109,6 @@
     <string name="last_backup_label">📅 آخرین پشتیبان:</string>
     <string name="never_backed_up">هنوز انجام نشده</string>
     <string name="restore_title">بازیابی</string>
-    <string name="restore_button">بازیابی از فایل</string>
     <string name="restore_warning">⚠️</string>
     <string name="restore_warning_message">بازیابی تمام داده‌های فعلی را جایگزین می‌کند</string>
     <string name="advanced_settings_title">تنظیمات پیشرفته</string>
@@ -135,6 +133,7 @@
     <string name="rating_format">%.1f از 10</string>
     
     <!-- Evening Activity -->
+    <string name="evening_activity_title">ارزیابی روزانه</string>
     <string name="good_night">شب بخیر!</string>
     <string name="satisfaction_question">امروز چقدر از خودتان راضی بودید؟</string>
     <string name="rating_label">امتیاز:</string>
@@ -190,7 +189,6 @@
     <string name="never_backed_up_text">هنوز انجام نشده</string>
     <string name="restore_section_title">بازیابی</string>
     <string name="restore_from_file_text">بازیابی از فایل</string>
-    <string name="restore_warning_message">بازیابی تمام داده‌های فعلی را جایگزین می‌کند</string>
     <string name="advanced_settings_text">تنظیمات پیشرفته</string>
     <string name="auto_backup_text">پشتیبان‌گیری خودکار</string>
     
@@ -302,4 +300,167 @@
     <string name="exact_alarm_permission_message">برای اینکه زنگ‌ها دقیقا سر وقت به صدا درآیند، به این مجوز ویژه نیاز داریم.</string>
     <string name="battery_optimization_title">بهینه‌سازی باتری</string>
     <string name="battery_optimization_message">برای جلوگیری از توقف برنامه توسط سیستم، لطفاً آن را از لیست بهینه‌سازی باتری خارج کنید.</string>
+    
+    <!-- All Kotlin Code Messages -->
+    <!-- AlarmsActivity -->
+    <string name="sample_quote_1">امروز اولین روز از بقیه عمر توست</string>
+    <string name="sample_quote_2">موفقیت پایان نیست، شکست کشنده نیست</string>
+    <string name="sample_quote_3">تنها راه انجام کارهای بزرگ، دوست داشتن کاری است که انجام می‌دهی</string>
+    <string name="add_quote_first_message">ابتدا حداقل یک جمله اضافه کنید!</string>
+    <string name="morning_alarm_set_message">زنگ صبح برای ساعت %1$d:%2$02d تنظیم شد</string>
+    <string name="evening_reminder_set_message">یادآور شب برای ساعت %1$d:%2$02d تنظیم شد</string>
+    <string name="morning_alarm_disabled_message">زنگ صبح غیرفعال شد</string>
+    <string name="evening_alarm_disabled_message">یادآور شب غیرفعال شد</string>
+    <string name="alarm_status_active">فعال</string>
+    <string name="alarm_status_inactive">غیرفعال</string>
+    <string name="select_days_title">📅 انتخاب روزهای هفته:</string>
+    <string name="day_sunday">یکشنبه</string>
+    <string name="day_monday">دوشنبه</string>
+    <string name="day_tuesday">سه‌شنبه</string>
+    <string name="day_wednesday">چهارشنبه</string>
+    <string name="day_thursday">پنج‌شنبه</string>
+    <string name="day_friday">جمعه</string>
+    <string name="day_saturday">شنبه</string>
+    <string name="select_at_least_one_day">لطفاً حداقل یک روز انتخاب کنید!</string>
+    <string name="all_days_selected">همه روزها</string>
+    <string name="days_selected_count">%d روز انتخاب شده</string>
+    <string name="quote_added_message">جمله اضافه شد!</string>
+    <string name="enter_quote_message">لطفاً جمله‌ای وارد کنید!</string>
+    <string name="delete_quote_title">حذف جمله</string>
+    <string name="delete_quote_message">آیا مطمئن هستید که می‌خواهید این جمله را حذف کنید؟</string>
+    <string name="quote_deleted_message">جمله حذف شد!</string>
+    <string name="yes_button">بله</string>
+    
+    <!-- AlarmActivity -->
+    <string name="default_motivational_quote">امروز اولین روز از بقیه عمر توست</string>
+    <string name="typing_hint_placeholder">شروع به تایپ کنید...</string>
+    <string name="enter_sentence_message">لطفاً جمله را تایپ کنید!</string>
+    <string name="complete_typing_message">برای خاموش کردن زنگ، جمله را کامل تایپ کنید!</string>
+    <string name="success_message">موفقیت آمیز! روز خوبی داشته باشید 🌟</string>
+    
+    <!-- CalendarActivity -->
+    <string name="calendar_this_week_title">تقویم این هفته</string>
+    <string name="calendar_this_month_title">تقویم این ماه</string>
+    <string name="calendar_this_season_title">تقویم این فصل</string>
+    <string name="calendar_this_year_title">تقویم امسال</string>
+    <string name="calendar_default_title">تقویم</string>
+    <string name="task_title_hint">عنوان کار</string>
+    <string name="add_task_for_date_title">افزودن کار برای %1$s</string>
+    <string name="add_action">افزودن</string>
+    <string name="enter_task_title_message">لطفاً عنوان کار را وارد کنید!</string>
+    <string name="no_goal_option">بدون هدف</string>
+    <string name="select_goal_optional_title">انتخاب هدف (اختیاری)</string>
+    <string name="new_task_added_message">کار جدید اضافه شد!</string>
+    <string name="tasks_for_date_title">کارهای %1$s</string>
+    <string name="add_new_task_button">افزودن کار جدید</string>
+    <string name="close_button">بستن</string>
+    <string name="task_details_title">جزئیات کار</string>
+    <string name="ok_button">باشه</string>
+    <string name="unknown_category">نامشخص</string>
+    <string name="priority_normal">عادی</string>
+    <string name="priority_high">مهم</string>
+    <string name="priority_urgent">خیلی مهم</string>
+    
+    <!-- GoalsActivity -->
+    <string name="new_goal_name_hint">نام هدف جدید</string>
+    <string name="add_new_goal_title">افزودن هدف جدید</string>
+    <string name="create_button">ایجاد</string>
+    <string name="new_goal_added_message">هدف جدید اضافه شد!</string>
+    <string name="enter_goal_name_message">لطفاً نام هدف را وارد کنید!</string>
+    <string name="goal_name_hint">نام هدف</string>
+    <string name="edit_goal_title">ویرایش هدف</string>
+    <string name="save_button">ذخیره</string>
+    <string name="goal_updated_message">هدف ویرایش شد!</string>
+    <string name="delete_goal_title">حذف هدف</string>
+    <string name="delete_goal_message">آیا مطمئن هستید که می‌خواهید این هدف و تمام کارهای مرتبط با آن را حذف کنید؟</string>
+    <string name="delete_button">حذف</string>
+    <string name="goal_deleted_message">هدف حذف شد!</string>
+    <string name="goal_stats_title">آمار هدف</string>
+    <string name="view_all_button">مشاهده همه</string>
+    <string name="no_tasks_for_goal_message">هیچ کاری برای این هدف ثبت نشده است.</string>
+    <string name="complete_details_title">جزئیات کامل</string>
+    <string name="mark_completed_button">علامت‌گذاری</string>
+    <string name="all_tasks_completed_message">همه کارهای این هدف انجام شده است! 🎉</string>
+    <string name="select_completed_tasks_title">انتخاب کارهای انجام شده</string>
+    
+    <!-- TasksActivity -->
+    <string name="today_tasks_title">امروز</string>
+    <string name="this_week_tasks_title">این هفته</string>
+    <string name="this_month_tasks_title">این ماه</string>
+    <string name="this_season_tasks_title">این فصل</string>
+    <string name="this_year_tasks_title">امسال</string>
+    <string name="tasks_for_period_title">کارهای %1$s</string>
+    <string name="add_new_task_title">افزودن کار جدید</string>
+    <string name="task_completed_message">کار انجام شد! 🎉</string>
+    <string name="task_uncompleted_message">کار به حالت در انتظار برگشت</string>
+    
+    <!-- EveningActivity -->
+    <string name="see_you_tomorrow_message">باشه، فردا شب دوباره می‌بینمت!</string>
+    <string name="rating_0_3_message">متأسفم که روز خوبی نداشتید. فردا بهتر خواهد بود!</string>
+    <string name="rating_4_6_message">یک روز معمولی! امیدوارم فردا پر از اتفاق خوب باشه.</string>
+    <string name="rating_7_8_message">عالیه! یه روز خوب رو پشت سر گذاشتی.</string>
+    <string name="rating_9_10_message">فوق‌العاده! بهت تبریک می‌گم!</string>
+    <string name="rating_default_message">ممنون از پاسخت!</string>
+    <string name="greeting_1">امروز چطور بود؟ 🤔</string>
+    <string name="greeting_2">زمان ارزیابی روزتان! 📊</string>
+    <string name="greeting_3">بیایید روز امروز را بررسی کنیم! ✨</string>
+    <string name="greeting_4">چند دقیقه وقت دارید؟ 🕒</string>
+    
+    <!-- BackupActivity -->
+    <string name="backup_restore_title">پشتیبان‌گیری و بازیابی</string>
+    <string name="never_backed_up_message">هنوز پشتیبان‌گیری نشده</string>
+    <string name="complete_settings_message">تنظیمات کامل</string>
+    <string name="confirm_restore_title">تأیید بازیابی</string>
+    <string name="restore_button">بازیابی</string>
+    <string name="preparing_backup_message">در حال تهیه...</string>
+    <string name="restoring_message">در حال بازیابی...</string>
+    <string name="restore_from_file_button">بازیابی از فایل</string>
+    <string name="enabled_status">فعال</string>
+    <string name="disabled_status">غیرفعال</string>
+    <string name="current_data_details_title">جزئیات داده‌های فعلی</string>
+    <string name="enable_auto_backup_message">فعال‌سازی پشتیبان‌گیری خودکار</string>
+    <string name="daily_backup_message">پشتیبان‌گیری روزانه</string>
+    
+    <!-- Adapters -->
+    <string name="hide_tasks_button">مخفی کردن کارها</string>
+    <string name="show_tasks_button">نمایش کارها</string>
+    
+    <!-- Dynamic Formats -->
+    <string name="task_count_dynamic">%d کار</string>
+    <string name="goal_count_dynamic">%d هدف</string>
+    <string name="day_count_dynamic">%d روز</string>
+    <string name="times_count_dynamic">%d بار</string>
+    <string name="completed_format_dynamic">(%d انجام شده)</string>
+    <string name="enter_new_quote_hint">جمله جدید را اینجا وارد کنید...</string>
+    <string name="type_sentence_hint">این جمله را دقیقاً تایپ کنید...</string>
+    <string name="incomplete_tasks_transfer">%d کار انجام نشده به فردا منتقل می‌شود</string>
+    <string name="completed_tasks_dynamic">%d انجام شده</string>
+    <string name="total_label">کل</string>
+    <string name="today_label">امروز</string>
+    <string name="task_stats_format">%1$d از %2$d کار</string>
+    
+    <!-- Day Names -->
+    <string name="saturday_full">شنبه</string>
+    <string name="sunday_full">یکشنبه</string>
+    <string name="monday_full">دوشنبه</string>
+    <string name="tuesday_full">سه‌شنبه</string>
+    <string name="wednesday_full">چهارشنبه</string>
+    <string name="thursday_full">پنج‌شنبه</string>
+    <string name="friday_full">جمعه</string>
+    
+    <!-- Month Names -->
+    <string-array name="month_names">
+        <item>ژانویه</item>
+        <item>فوریه</item>
+        <item>مارس</item>
+        <item>آوریل</item>
+        <item>مه</item>
+        <item>ژوئن</item>
+        <item>جولای</item>
+        <item>آگوست</item>
+        <item>سپتامبر</item>
+        <item>اکتبر</item>
+        <item>نوامبر</item>
+        <item>دسامبر</item>
+    </string-array>
 </resources>

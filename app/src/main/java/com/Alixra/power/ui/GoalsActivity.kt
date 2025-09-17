@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ class GoalsActivity : BaseActivity() {
     private lateinit var addGoalButton: Button
     private lateinit var fabAddGoal: FloatingActionButton
     private lateinit var categoriesRecyclerView: RecyclerView
+    private lateinit var goalsCountText: TextView
 
     private lateinit var prefsManager: PreferencesManager
     private lateinit var categoriesAdapter: CategoriesAdapter
@@ -45,6 +47,7 @@ class GoalsActivity : BaseActivity() {
         addGoalButton = findViewById(R.id.addGoalButton)
         fabAddGoal = findViewById(R.id.fabAddGoal)
         categoriesRecyclerView = findViewById(R.id.categoriesRecyclerView)
+        goalsCountText = findViewById(R.id.goalsCountText)
     }
 
     private fun setupRecyclerView() {
@@ -86,8 +89,11 @@ class GoalsActivity : BaseActivity() {
 
     private fun loadDefaultCategories() {
         val savedCategories = prefsManager.getTaskCategories()
-        if (savedCategories.isEmpty()) {
-            // بخش‌های پیش‌فرض با رنگ‌های مدرن
+        if (prefsManager.areCategoriesInitialized()) {
+            // کاربر قبلاً با سیستم دسته‌بندی کار کرده، حتی اگر الان خالی باشد
+            updateCategoriesList()
+        } else {
+            // اولین بار است که اپ اجرا می‌شود، افزودن دسته‌های پیش‌فرض
             val defaultCategories = listOf(
                 TaskCategory("health", "🏃 سلامتی", "#10B981"),     // Green
                 TaskCategory("work", "💼 کار", "#3B82F6"),         // Blue
@@ -99,23 +105,27 @@ class GoalsActivity : BaseActivity() {
             for (category in defaultCategories) {
                 prefsManager.saveTaskCategory(category)
             }
+            updateCategoriesList()
         }
-        updateCategoriesList()
     }
 
     private fun updateCategoriesList() {
         val categories = prefsManager.getTaskCategories()
         categoriesAdapter.updateCategories(categories)
+        
+        // به‌روزرسانی شمارنده اهداف
+        val countText = getString(R.string.goals_count_format, categories.size)
+        goalsCountText.text = countText
     }
 
     private fun showAddCategoryDialog() {
         val editText = EditText(this)
-        editText.hint = "نام هدف جدید"
+        editText.hint = getString(R.string.new_goal_name_hint)
 
         AlertDialog.Builder(this)
-            .setTitle("افزودن هدف جدید")
+            .setTitle(getString(R.string.add_new_goal_title))
             .setView(editText)
-            .setPositiveButton("ایجاد") { _, _ ->
+            .setPositiveButton(getString(R.string.create_button)) { _, _ ->
                 val categoryName = editText.text.toString().trim()
                 if (categoryName.isNotEmpty()) {
                     val newCategory = TaskCategory(
@@ -125,9 +135,9 @@ class GoalsActivity : BaseActivity() {
                     )
                     prefsManager.saveTaskCategory(newCategory)
                     updateCategoriesList()
-                    showToast("هدف جدید اضافه شد!")
+                    showToast(getString(R.string.new_goal_added_message))
                 } else {
-                    showToast("لطفاً نام هدف را وارد کنید!")
+                    showToast(getString(R.string.enter_goal_name_message))
                 }
             }
             .setNegativeButton("لغو", null)
@@ -139,12 +149,12 @@ class GoalsActivity : BaseActivity() {
         // حذف ایموجی از نام فعلی برای ویرایش
         val currentName = category.name.replaceFirst("^[🎯🏃💼📚💡👨‍👩‍👧‍👦💰📝]\\s*".toRegex(), "")
         editText.setText(currentName)
-        editText.hint = "نام هدف"
+        editText.hint = getString(R.string.goal_name_hint)
 
         AlertDialog.Builder(this)
-            .setTitle("ویرایش هدف")
+            .setTitle(getString(R.string.edit_goal_title))
             .setView(editText)
-            .setPositiveButton("ذخیره") { _, _ ->
+            .setPositiveButton(getString(R.string.save_button)) { _, _ ->
                 val newName = editText.text.toString().trim()
                 if (newName.isNotEmpty()) {
                     // اضافه کردن ایموجی مناسب بر اساس نام
@@ -152,9 +162,9 @@ class GoalsActivity : BaseActivity() {
                     val updatedCategory = category.copy(name = "$emoji $newName")
                     prefsManager.saveTaskCategory(updatedCategory)
                     updateCategoriesList()
-                    showToast("هدف ویرایش شد!")
+                    showToast(getString(R.string.goal_updated_message))
                 } else {
-                    showToast("لطفاً نام هدف را وارد کنید!")
+                    showToast(getString(R.string.enter_goal_name_message))
                 }
             }
             .setNegativeButton("لغو", null)
@@ -163,12 +173,12 @@ class GoalsActivity : BaseActivity() {
 
     private fun showDeleteCategoryDialog(category: TaskCategory) {
         AlertDialog.Builder(this)
-            .setTitle("حذف هدف")
-            .setMessage("آیا مطمئن هستید که می‌خواهید این هدف و تمام کارهای مرتبط با آن را حذف کنید؟")
-            .setPositiveButton("حذف") { _, _ ->
+            .setTitle(getString(R.string.delete_goal_title))
+            .setMessage(getString(R.string.delete_goal_message))
+            .setPositiveButton(getString(R.string.delete_button)) { _, _ ->
                 prefsManager.deleteTaskCategory(category.id)
                 updateCategoriesList()
-                showToast("هدف حذف شد!")
+                showToast(getString(R.string.goal_deleted_message))
             }
             .setNegativeButton("لغو", null)
             .show()
@@ -190,7 +200,7 @@ class GoalsActivity : BaseActivity() {
             appendLine()
             
             // آمار امروز + لیست کارها
-            appendLine("📅 امروز: $todayCompleted از ${todayTasks.size} کار")
+            appendLine("📅 امروز: ${getString(R.string.task_stats_format, todayCompleted, todayTasks.size)}")
             if (todayTasks.isNotEmpty()) {
                 for (task in todayTasks) {
                     val status = if (task.isCompleted) "✅" else "⏳"
@@ -200,7 +210,7 @@ class GoalsActivity : BaseActivity() {
             }
             
             // آمار این هفته + لیست کارها
-            appendLine("🗓️ این هفته: $weekCompleted از ${weekTasks.size} کار")
+            appendLine("🗓️ این هفته: ${getString(R.string.task_stats_format, weekCompleted, weekTasks.size)}")
             if (weekTasks.isNotEmpty()) {
                 for (task in weekTasks) {
                     val status = if (task.isCompleted) "✅" else "⏳"
@@ -210,7 +220,7 @@ class GoalsActivity : BaseActivity() {
             }
             
             // آمار این ماه + لیست کارها (محدود به 10 کار اول)
-            appendLine("📆 این ماه: $monthCompleted از ${monthTasks.size} کار")
+            appendLine("📆 این ماه: ${getString(R.string.task_stats_format, monthCompleted, monthTasks.size)}")
             if (monthTasks.isNotEmpty()) {
                 val displayTasks = monthTasks.take(10)
                 for (task in displayTasks) {
@@ -218,13 +228,13 @@ class GoalsActivity : BaseActivity() {
                     appendLine("   $status ${task.title}")
                 }
                 if (monthTasks.size > 10) {
-                    appendLine("   ... و ${monthTasks.size - 10} کار دیگر")
+                    appendLine("   ... و ${getString(R.string.task_count_dynamic, monthTasks.size - 10)} دیگر")
                 }
                 appendLine()
             }
             
             // آمار امسال (فقط تعداد کل)
-            appendLine("📅 امسال: $yearCompleted از ${yearTasks.size} کار")
+            appendLine("📅 امسال: ${getString(R.string.task_stats_format, yearCompleted, yearTasks.size)}")
             if (yearTasks.isNotEmpty()) {
                 val yearProgress = (yearCompleted * 100 / yearTasks.size)
                 appendLine("📈 پیشرفت کلی: %$yearProgress")
@@ -232,10 +242,10 @@ class GoalsActivity : BaseActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("آمار هدف")
+            .setTitle(getString(R.string.goal_stats_title))
             .setMessage(message)
             .setPositiveButton("باشه", null)
-            .setNeutralButton("مشاهده همه") { _, _ ->
+            .setNeutralButton(getString(R.string.view_all_button)) { _, _ ->
                 showDetailedTasksDialog(category, yearTasks)
             }
             .show()
@@ -247,7 +257,7 @@ class GoalsActivity : BaseActivity() {
             appendLine()
             
             if (allTasks.isEmpty()) {
-                appendLine("هیچ کاری برای این هدف ثبت نشده است.")
+                appendLine(getString(R.string.no_tasks_for_goal_message))
             } else {
                 // گروه‌بندی بر اساس وضعیت
                 val completedTasks = allTasks.filter { it.isCompleted }
@@ -286,10 +296,10 @@ class GoalsActivity : BaseActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("جزئیات کامل")
+            .setTitle(getString(R.string.complete_details_title))
             .setMessage(message)
             .setPositiveButton("باشه", null)
-            .setNegativeButton("علامت‌گذاری") { _, _ ->
+            .setNegativeButton(getString(R.string.mark_completed_button)) { _, _ ->
                 showTaskMarkingDialog(category, allTasks.filter { !it.isCompleted })
             }
             .show()
@@ -297,7 +307,7 @@ class GoalsActivity : BaseActivity() {
 
     private fun showTaskMarkingDialog(category: TaskCategory, pendingTasks: List<Task>) {
         if (pendingTasks.isEmpty()) {
-            showToast("همه کارهای این هدف انجام شده است! 🎉")
+            showToast(getString(R.string.all_tasks_completed_message))
             return
         }
 
@@ -305,12 +315,12 @@ class GoalsActivity : BaseActivity() {
         val checkedItems = BooleanArray(pendingTasks.size) { false }
 
         AlertDialog.Builder(this)
-            .setTitle("انتخاب کارهای انجام شده")
+            .setTitle(getString(R.string.select_completed_tasks_title))
             .setMultiChoiceItems(taskTitles, checkedItems,
                 DialogInterface.OnMultiChoiceClickListener { _, which, isChecked ->
                     checkedItems[which] = isChecked
                 })
-            .setPositiveButton("علامت‌گذاری") { _, _ ->
+            .setPositiveButton(getString(R.string.mark_completed_button)) { _, _ ->
                 var markedCount = 0
                 for (index in checkedItems.indices) {
                     if (checkedItems[index]) {

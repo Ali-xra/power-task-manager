@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
 import com.Alixra.power.data.Task
 import com.Alixra.power.data.TaskCategory
@@ -195,7 +196,7 @@ class EveningActivity : BaseActivity() {
             }
 
             binding.skipButton.setOnClickListener {
-                Toast.makeText(this, "باشه، فردا شب دوباره می‌بینمت!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.see_you_tomorrow_message), Toast.LENGTH_SHORT).show()
                 clearEveningNotification()
                 finish()
             }
@@ -292,7 +293,7 @@ class EveningActivity : BaseActivity() {
             val incompleteTasks = todayTasks.filter { !it.isCompleted }
             if (incompleteTasks.isNotEmpty()) {
                 binding.incompleteTasksText.visibility = View.VISIBLE
-                binding.incompleteTasksText.text = "${incompleteTasks.size} کار انجام نشده به فردا منتقل می‌شود"
+                binding.incompleteTasksText.text = getString(R.string.incomplete_tasks_transfer, incompleteTasks.size)
             } else {
                 binding.incompleteTasksText.visibility = View.GONE
             }
@@ -343,21 +344,21 @@ class EveningActivity : BaseActivity() {
 
     private fun showThankYouMessage() {
         val message = when (dailyRating) {
-            in 0..3 -> "متأسفم که روز خوبی نداشتید. فردا بهتر خواهد بود!"
-            in 4..6 -> "یک روز معمولی! امیدوارم فردا پر از اتفاق خوب باشه."
-            in 7..8 -> "عالیه! یه روز خوب رو پشت سر گذاشتی."
-            in 9..10 -> "فوق‌العاده! بهت تبریک می‌گم!"
-            else -> "ممنون از پاسخت!"
+            in 0..3 -> getString(R.string.rating_0_3_message)
+            in 4..6 -> getString(R.string.rating_4_6_message)
+            in 7..8 -> getString(R.string.rating_7_8_message)
+            in 9..10 -> getString(R.string.rating_9_10_message)
+            else -> getString(R.string.rating_default_message)
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     private fun showMotivationalMessage() {
         val messages = arrayOf(
-            "امروز چطور بود؟ 🤔",
-            "زمان ارزیابی روزتان! 📊",
-            "بیایید روز امروز را بررسی کنیم! ✨",
-            "چند دقیقه وقت دارید؟ 🕒"
+            getString(R.string.greeting_1),
+            getString(R.string.greeting_2),
+            getString(R.string.greeting_3),
+            getString(R.string.greeting_4)
         )
         val randomMessage = messages.random()
         Toast.makeText(this, randomMessage, Toast.LENGTH_SHORT).show()

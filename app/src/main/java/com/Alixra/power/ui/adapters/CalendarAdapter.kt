@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.Alixra.power.R
 import com.Alixra.power.data.Task
+import com.Alixra.power.data.TimePeriod
 import com.Alixra.power.ui.CalendarActivity
 import com.google.android.material.card.MaterialCardView
 
 class CalendarAdapter(
     private val onDayClick: (CalendarActivity.CalendarDay) -> Unit,
     private val onTaskClick: (Task) -> Unit,
-    private val getTasksForDate: (Long) -> List<Task>
+    private val getTasksForDate: (Long) -> List<Task>,
+    private val timePeriod: TimePeriod = TimePeriod.THIS_MONTH
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarDayViewHolder>() {
 
     private var calendarDays: List<CalendarActivity.CalendarDay> = emptyList()
@@ -39,6 +41,7 @@ class CalendarAdapter(
 
     inner class CalendarDayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val cardView: MaterialCardView = itemView.findViewById(R.id.calendarDayCard)
+        private val dayNameTextView: TextView = itemView.findViewById(R.id.dayNameTextView)
         private val dayNumberTextView: TextView = itemView.findViewById(R.id.dayNumberTextView)
         private val tasksCountTextView: TextView = itemView.findViewById(R.id.tasksCountTextView)
         private val todayIndicator: View = itemView.findViewById(R.id.todayIndicator)
@@ -61,6 +64,14 @@ class CalendarAdapter(
 
             // نمایش شماره روز
             dayNumberTextView.text = calendarDay.dayNumber.toString()
+            
+            // نمایش نام روز (فقط برای THIS_WEEK)
+            if (timePeriod == TimePeriod.THIS_WEEK && calendarDay.dayName.isNotEmpty()) {
+                dayNameTextView.text = calendarDay.dayName
+                dayNameTextView.visibility = View.VISIBLE
+            } else {
+                dayNameTextView.visibility = View.GONE
+            }
 
             // نشانگر امروز
             if (calendarDay.isToday) {
@@ -90,7 +101,7 @@ class CalendarAdapter(
 
             // نمایش تعداد کارها
             if (tasksForDay.isNotEmpty()) {
-                tasksCountTextView.text = "${tasksForDay.size} کار"
+                tasksCountTextView.text = itemView.context.getString(R.string.task_count_dynamic, tasksForDay.size)
                 tasksCountTextView.visibility = View.VISIBLE
                 
                 val color = when {

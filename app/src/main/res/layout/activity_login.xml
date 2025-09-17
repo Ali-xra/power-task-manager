@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="32dp">
 
-    <!-- لوگو و عنوان -->
+    <!-- Logo and title -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:layout_marginBottom="48dp">
 
-        <!-- لوگو -->
+        <!-- Logo -->
         <TextView
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -28,7 +28,7 @@
             android:textSize="48sp"
             android:layout_marginBottom="24dp" />
 
-        <!-- عنوان اپلیکیشن -->
+        <!-- App title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
-        <!-- زیرنویس -->
+        <!-- Subtitle -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 
     </LinearLayout>
 
-    <!-- فرم ورود -->
+    <!-- Login form -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:orientation="vertical"
             android:padding="32dp">
 
-            <!-- عنوان ورود -->
+            <!-- Login title -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="16dp" />
 
-            <!-- انتخاب زبان -->
+            <!-- Language selection -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
 
             </LinearLayout>
 
-            <!-- راهنمای ایمیل -->
+            <!-- Email guide -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp" />
 
-            <!-- فیلد ایمیل -->
+            <!-- Email field -->
             <EditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
@@ -141,7 +141,7 @@
                 android:layout_marginBottom="24dp"
                 tools:text="ali@example.com" />
 
-            <!-- دکمه ورود -->
+            <!-- Login button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
@@ -157,7 +157,7 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- اطلاعات امنیت -->
+    <!-- Security info -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

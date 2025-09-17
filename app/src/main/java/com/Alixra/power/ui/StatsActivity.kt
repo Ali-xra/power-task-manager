@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
 import com.Alixra.power.data.TimePeriod
 import com.Alixra.power.databinding.ActivityStatsBinding
@@ -48,7 +49,7 @@ class StatsActivity : BaseActivity() {
 
         if (allRatings.isEmpty()) {
             binding.averageRatingText.text = getString(R.string.no_rating_recorded)
-            binding.totalDaysText.text = "0 روز"
+            binding.totalDaysText.text = getString(R.string.day_count_dynamic, 0)
             binding.lastWeekAverageText.text = getString(R.string.no_data_available)
         } else {
             // محاسبه میانگین کل
@@ -56,7 +57,7 @@ class StatsActivity : BaseActivity() {
             binding.averageRatingText.text = String.format("%.1f از 10", averageRating)
 
             // تعداد روزهای ثبت شده
-            binding.totalDaysText.text = "${allRatings.size} روز"
+            binding.totalDaysText.text = getString(R.string.day_count_dynamic, allRatings.size)
 
             // میانگین هفته اخیر
             val lastWeekAverage = calculateLastWeekAverage(allRatings)
@@ -71,7 +72,7 @@ class StatsActivity : BaseActivity() {
     private fun displayAlarmStats() {
         // تعداد دفعات موفقیت در آلارم صبح
         val successCount = prefsManager.getSuccessCount()
-        binding.successCountText.text = "$successCount بار"
+        binding.successCountText.text = getString(R.string.times_count_dynamic, successCount)
     }
 
     private fun displayTaskStats() {
@@ -80,8 +81,8 @@ class StatsActivity : BaseActivity() {
         // اضافه کردن آمار کارها به صفحه
         // این نیاز به تغییر در layout دارد، فعلاً در کامنت گذاشتم
         /*
-        binding.totalTasksText.text = "${taskStats["totalTasks"]} کار کل"
-        binding.todayTasksText.text = "${taskStats["todayTasks"]} کار امروز"
+        binding.totalTasksText.text = getString(R.string.task_count_dynamic, taskStats["totalTasks"] ?: 0) + " " + getString(R.string.total_label)
+        binding.todayTasksText.text = getString(R.string.task_count_dynamic, taskStats["todayTasks"] ?: 0) + " " + getString(R.string.today_label)
         binding.completedTodayText.text = "${taskStats["completedToday"]} انجام شده"
         binding.todayProgressText.text = "${taskStats["todayProgress"]}% پیشرفت"
         */

@@ -54,6 +54,7 @@
 
         <!-- هدر روزهای هفته -->
         <LinearLayout
+            android:id="@+id/weekDaysHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="ش"
+                android:text="@string/saturday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="ی"
+                android:text="@string/sunday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -84,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="د"
+                android:text="@string/monday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -94,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="س"
+                android:text="@string/tuesday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -104,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="چ"
+                android:text="@string/wednesday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -114,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="پ"
+                android:text="@string/thursday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -124,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="ج"
+                android:text="@string/friday_short"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />

@@ -34,12 +34,32 @@ object AlarmUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
-            // تنظیم زنگ دقیق برای زمان مشخص شده
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                timeInMillis,
-                pendingIntent
-            )
+            // تنظیم زنگ تکراری روزانه
+            if (enableRepeating) {
+                try {
+                    // اولین روش: استفاده از setRepeating برای آلارم‌های تکراری
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        AlarmManager.INTERVAL_DAY, // تکرار هر 24 ساعت
+                        pendingIntent
+                    )
+                } catch (e: Exception) {
+                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        pendingIntent
+                    )
+                }
+            } else {
+                // برای آلارم‌های یکبار مصرف
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    timeInMillis,
+                    pendingIntent
+                )
+            }
             
             // ذخیره وضعیت فعال بودن آلارم صبح
             if (enableRepeating) {
@@ -56,11 +76,17 @@ object AlarmUtils {
         // ذخیره زمان آلارم
         prefsManager.saveMorningAlarmTime(timeString)
         
-        // محاسبه زمان بعدی آلارم
-        val timeInMillis = getNextAlarmTime(hour, minute)
+        // دریافت روزهای انتخاب شده
+        val selectedDays = prefsManager.getSelectedDays()
         
-        // تنظیم آلارم
-        setMorningAlarm(context, timeInMillis, true)
+        if (selectedDays.isEmpty() || selectedDays.size == 7) {
+            // اگر همه روزها انتخاب شده‌اند، از روش قدیمی استفاده کن
+            val timeInMillis = getNextAlarmTime(hour, minute)
+            setMorningAlarm(context, timeInMillis, true)
+        } else {
+            // برای روزهای خاص، آلارم‌های جداگانه تنظیم کن
+            setMorningAlarmForSpecificDays(context, hour, minute, selectedDays)
+        }
     }
 
     // تابع تنظیم یادآور شب (نسخه جدید با پشتیبانی از تکرار)
@@ -79,11 +105,32 @@ object AlarmUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                timeInMillis,
-                pendingIntent
-            )
+            // تنظیم یادآور تکراری روزانه
+            if (enableRepeating) {
+                try {
+                    // اولین روش: استفاده از setRepeating برای یادآورهای تکراری
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        AlarmManager.INTERVAL_DAY, // تکرار هر 24 ساعت
+                        pendingIntent
+                    )
+                } catch (e: Exception) {
+                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        pendingIntent
+                    )
+                }
+            } else {
+                // برای یادآورهای یکبار مصرف
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    timeInMillis,
+                    pendingIntent
+                )
+            }
             
             // ذخیره وضعیت فعال بودن یادآور شب
             if (enableRepeating) {
@@ -100,30 +147,25 @@ object AlarmUtils {
         // ذخیره زمان یادآور
         prefsManager.saveEveningAlarmTime(timeString)
         
-        // محاسبه زمان بعدی یادآور
-        val timeInMillis = getNextAlarmTime(hour, minute)
+        // دریافت روزهای انتخاب شده برای یادآور شب
+        val selectedDays = prefsManager.getEveningSelectedDays()
         
-        // تنظیم یادآور
-        setEveningAlarm(context, timeInMillis, true)
+        if (selectedDays.isEmpty() || selectedDays.size == 7) {
+            // اگر همه روزها انتخاب شده‌اند، از روش قدیمی استفاده کن
+            val timeInMillis = getNextAlarmTime(hour, minute)
+            setEveningAlarm(context, timeInMillis, true)
+        } else {
+            // برای روزهای خاص، یادآور جداگانه تنظیم کن
+            setEveningAlarmForSpecificDays(context, hour, minute, selectedDays)
+        }
     }
 
     // تابع برای لغو زنگ صبح (نسخه بهبود یافته)
     fun cancelMorningAlarm(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val prefsManager = PreferencesManager(context)
         
-        val intent = Intent(context, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            MORNING_ALARM_REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
-        )
-        // اگر زنگی با این شناسه وجود داشت، لغو کن
-        if (pendingIntent != null) {
-            alarmManager.cancel(pendingIntent)
-            pendingIntent.cancel()
-        }
+        // لغو همه آلارم‌های صبح (روزانه و هفتگی)
+        cancelAllMorningAlarms(context)
         
         // غیرفعال کردن وضعیت آلارم صبح
         prefsManager.setMorningAlarmEnabled(false)
@@ -131,20 +173,10 @@ object AlarmUtils {
 
     // تابع برای لغو یادآور شب (نسخه بهبود یافته)
     fun cancelEveningAlarm(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val prefsManager = PreferencesManager(context)
         
-        val intent = Intent(context, EveningReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            EVENING_ALARM_REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
-        )
-        if (pendingIntent != null) {
-            alarmManager.cancel(pendingIntent)
-            pendingIntent.cancel()
-        }
+        // لغو همه یادآورهای شب (روزانه و هفتگی)
+        cancelAllEveningAlarms(context)
         
         // غیرفعال کردن وضعیت یادآور شب
         prefsManager.setEveningAlarmEnabled(false)
@@ -244,6 +276,194 @@ object AlarmUtils {
             set(Calendar.MILLISECOND, 0)
         }
         return calendar.timeInMillis
+    }
+    
+    // تابع تنظیم آلارم صبح برای روزهای خاص هفته
+    private fun setMorningAlarmForSpecificDays(context: Context, hour: Int, minute: Int, selectedDays: List<Int>) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val prefsManager = PreferencesManager(context)
+        
+        // ابتدا همه آلارم‌های قبلی را لغو کن
+        cancelAllMorningAlarms(context)
+        
+        if (canScheduleExactAlarms(alarmManager)) {
+            selectedDays.forEach { dayOfWeek ->
+                val requestCode = MORNING_ALARM_REQUEST_CODE + dayOfWeek // شناسه منحصر به فرد برای هر روز
+                
+                val intent = Intent(context, AlarmReceiver::class.java)
+                intent.putExtra("isRepeating", true)
+                intent.putExtra("dayOfWeek", dayOfWeek)
+                
+                val pendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    requestCode,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                
+                // محاسبه زمان بعدی برای این روز خاص
+                val nextAlarmTime = getNextAlarmTimeForDay(hour, minute, dayOfWeek)
+                
+                try {
+                    // تنظیم آلارم تکراری هفتگی برای این روز
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        nextAlarmTime,
+                        AlarmManager.INTERVAL_DAY * 7, // تکرار هر هفته
+                        pendingIntent
+                    )
+                } catch (e: Exception) {
+                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        nextAlarmTime,
+                        pendingIntent
+                    )
+                }
+            }
+            
+            prefsManager.setMorningAlarmEnabled(true)
+        }
+    }
+    
+    // محاسبه زمان بعدی آلارم برای یک روز خاص هفته
+    private fun getNextAlarmTimeForDay(hour: Int, minute: Int, targetDayOfWeek: Int): Long {
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        
+        val currentDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        var daysToAdd = targetDayOfWeek - currentDayOfWeek
+        
+        // اگر روز هدف امروز است و زمان گذشته، برای هفته بعد تنظیم کن
+        if (daysToAdd == 0 && calendar.before(Calendar.getInstance())) {
+            daysToAdd = 7
+        } else if (daysToAdd < 0) {
+            // اگر روز هدف در هفته گذشته است، برای هفته بعد تنظیم کن
+            daysToAdd += 7
+        }
+        
+        calendar.add(Calendar.DAY_OF_YEAR, daysToAdd)
+        return calendar.timeInMillis
+    }
+    
+    // لغو همه آلارم‌های صبح (برای همه روزها)
+    private fun cancelAllMorningAlarms(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        
+        // لغو آلارم روزانه (اگر وجود دارد)
+        val dailyIntent = Intent(context, AlarmReceiver::class.java)
+        val dailyPendingIntent = PendingIntent.getBroadcast(
+            context,
+            MORNING_ALARM_REQUEST_CODE,
+            dailyIntent,
+            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
+        )
+        if (dailyPendingIntent != null) {
+            alarmManager.cancel(dailyPendingIntent)
+            dailyPendingIntent.cancel()
+        }
+        
+        // لغو آلارم‌های مخصوص روزهای هفته
+        for (dayOfWeek in Calendar.SUNDAY..Calendar.SATURDAY) {
+            val requestCode = MORNING_ALARM_REQUEST_CODE + dayOfWeek
+            val intent = Intent(context, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(
+                context,
+                requestCode,
+                intent,
+                PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
+            )
+            if (pendingIntent != null) {
+                alarmManager.cancel(pendingIntent)
+                pendingIntent.cancel()
+            }
+        }
+    }
+    
+    // تابع تنظیم یادآور شب برای روزهای خاص هفته
+    private fun setEveningAlarmForSpecificDays(context: Context, hour: Int, minute: Int, selectedDays: List<Int>) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val prefsManager = PreferencesManager(context)
+        
+        // ابتدا همه یادآورهای قبلی را لغو کن
+        cancelAllEveningAlarms(context)
+        
+        if (canScheduleExactAlarms(alarmManager)) {
+            selectedDays.forEach { dayOfWeek ->
+                val requestCode = EVENING_ALARM_REQUEST_CODE + dayOfWeek // شناسه منحصر به فرد برای هر روز
+                
+                val intent = Intent(context, EveningReceiver::class.java)
+                intent.putExtra("isRepeating", true)
+                intent.putExtra("dayOfWeek", dayOfWeek)
+                
+                val pendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    requestCode,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                
+                // محاسبه زمان بعدی برای این روز خاص
+                val nextAlarmTime = getNextAlarmTimeForDay(hour, minute, dayOfWeek)
+                
+                try {
+                    // تنظیم یادآور تکراری هفتگی برای این روز
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        nextAlarmTime,
+                        AlarmManager.INTERVAL_DAY * 7, // تکرار هر هفته
+                        pendingIntent
+                    )
+                } catch (e: Exception) {
+                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        nextAlarmTime,
+                        pendingIntent
+                    )
+                }
+            }
+            
+            prefsManager.setEveningAlarmEnabled(true)
+        }
+    }
+    
+    // لغو همه یادآورهای شب (برای همه روزها)
+    private fun cancelAllEveningAlarms(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        
+        // لغو یادآور روزانه (اگر وجود دارد)
+        val dailyIntent = Intent(context, EveningReceiver::class.java)
+        val dailyPendingIntent = PendingIntent.getBroadcast(
+            context,
+            EVENING_ALARM_REQUEST_CODE,
+            dailyIntent,
+            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
+        )
+        if (dailyPendingIntent != null) {
+            alarmManager.cancel(dailyPendingIntent)
+            dailyPendingIntent.cancel()
+        }
+        
+        // لغو یادآورهای مخصوص روزهای هفته
+        for (dayOfWeek in Calendar.SUNDAY..Calendar.SATURDAY) {
+            val requestCode = EVENING_ALARM_REQUEST_CODE + dayOfWeek
+            val intent = Intent(context, EveningReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(
+                context,
+                requestCode,
+                intent,
+                PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
+            )
+            if (pendingIntent != null) {
+                alarmManager.cancel(pendingIntent)
+                pendingIntent.cancel()
+            }
+        }
     }
     
     // تابع بررسی وضعیت آلارم‌ها

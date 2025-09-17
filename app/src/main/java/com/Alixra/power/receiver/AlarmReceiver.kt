@@ -34,12 +34,34 @@ class AlarmReceiver : BroadcastReceiver() {
         // ابتدا پاک کردن نوتیفیکیشن‌های قبلی (در صورت وجود)
         clearPreviousNotifications(context)
         
+        // بررسی اینکه آیا امروز یکی از روزهای انتخاب شده است
+        val prefsManager = com.Alixra.power.data.PreferencesManager(context)
+        if (!prefsManager.isMorningAlarmEnabled()) {
+            // اگر آلارم غیرفعال است، کاری نکن
+            return
+        }
+        
+        val selectedDays = prefsManager.getSelectedDays()
+        val today = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_WEEK)
+        
+        // اگر روزهای خاصی انتخاب شده‌اند و امروز جزو آنها نیست، آلارم را اجرا نکن
+        if (selectedDays.isNotEmpty() && selectedDays.size < 7 && !selectedDays.contains(today)) {
+            // امروز روز انتخاب شده نیست، آلارم اجرا نشود
+            return
+        }
+        
         // بررسی اینکه آیا این آلارم تکراری است یا یکباره
         val isRepeating = intent.getBooleanExtra("isRepeating", true)
         
-        // اگر آلارم تکراری است، آلارم فردا را تنظیم کن
+        // نوت: در نسخه جدید، آلارم‌های تکراری توسط setRepeating خودکار تنظیم می‌شوند
+        // فقط در صورت عدم استفاده از setRepeating، آلارم بعدی را دستی تنظیم کن
         if (isRepeating) {
-            AlarmUtils.scheduleNextMorningAlarm(context)
+            try {
+                // اگر setRepeating کار نکرده، آلارم بعدی را دستی تنظیم کن
+                AlarmUtils.scheduleNextMorningAlarm(context)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         // شروع سرویس صدا و ویبره

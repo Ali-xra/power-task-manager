@@ -33,10 +33,8 @@ class BootReceiver : BroadcastReceiver() {
                             val hour = parts[0].toInt()
                             val minute = parts[1].toInt()
 
-                            // محاسبه زمان بعدی زنگ
-                            val timeInMillis = AlarmUtils.getNextAlarmTime(hour, minute)
-                            // تنظیم مجدد زنگ
-                            AlarmUtils.setMorningAlarm(context, timeInMillis, true)
+                            // استفاده از تابع جدید که روزهای انتخاب شده را در نظر می‌گیرد
+                            AlarmUtils.setMorningAlarmWithTime(context, hour, minute)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -57,10 +55,8 @@ class BootReceiver : BroadcastReceiver() {
                             val hour = parts[0].toInt()
                             val minute = parts[1].toInt()
 
-                            // محاسبه زمان بعدی یادآور
-                            val timeInMillis = AlarmUtils.getNextAlarmTime(hour, minute)
-                            // تنظیم مجدد یادآور
-                            AlarmUtils.setEveningAlarm(context, timeInMillis, true)
+                            // استفاده از تابع جدید که روزهای انتخاب شده را در نظر می‌گیرد
+                            AlarmUtils.setEveningAlarmWithTime(context, hour, minute)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()

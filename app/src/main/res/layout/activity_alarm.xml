@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_background"
-                android:hint="این جمله را دقیقاً تایپ کنید..."
+                android:hint="@string/type_sentence_hint"
                 android:minHeight="60dp"
                 android:padding="16dp"
                 android:textSize="16sp" />

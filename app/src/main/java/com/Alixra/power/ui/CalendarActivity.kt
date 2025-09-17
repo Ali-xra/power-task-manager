@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.Alixra.power.R
 import com.Alixra.power.data.PreferencesManager
@@ -26,6 +27,7 @@ class CalendarActivity : BaseActivity() {
     private lateinit var titleTextView: TextView
     private lateinit var calendarRecyclerView: RecyclerView
     private lateinit var emptyCalendarLayout: LinearLayout
+    private lateinit var weekDaysHeader: LinearLayout
 
     // Data
     private lateinit var prefsManager: PreferencesManager
@@ -53,6 +55,7 @@ class CalendarActivity : BaseActivity() {
         titleTextView = findViewById(R.id.titleTextView)
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView)
         emptyCalendarLayout = findViewById(R.id.emptyCalendarLayout)
+        weekDaysHeader = findViewById(R.id.weekDaysHeader)
     }
 
     private fun setupRecyclerView() {
@@ -67,10 +70,24 @@ class CalendarActivity : BaseActivity() {
             },
             getTasksForDate = { date ->
                 getTasksForDate(date)
-            }
+            },
+            timePeriod = timePeriod
         )
 
-        calendarRecyclerView.layoutManager = GridLayoutManager(this, 7) // 7 روز در هفته
+        // تنظیم LayoutManager بر اساس نوع بازه زمانی
+        when (timePeriod) {
+            TimePeriod.THIS_WEEK -> {
+                // نمایش عمودی برای هفته
+                calendarRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                weekDaysHeader.visibility = View.GONE // مخفی کردن header روزهای هفته
+            }
+            else -> {
+                // نمایش گرید برای ماه، فصل و سال
+                calendarRecyclerView.layoutManager = GridLayoutManager(this, 7) // 7 روز در هفته
+                weekDaysHeader.visibility = View.VISIBLE
+            }
+        }
+        
         calendarRecyclerView.adapter = calendarAdapter
     }
 
@@ -82,11 +99,11 @@ class CalendarActivity : BaseActivity() {
 
     private fun updateTitle() {
         val title = when (timePeriod) {
-            TimePeriod.THIS_WEEK -> "تقویم این هفته"
-            TimePeriod.THIS_MONTH -> "تقویم این ماه"
-            TimePeriod.THIS_SEASON -> "تقویم این فصل"
-            TimePeriod.THIS_YEAR -> "تقویم امسال"
-            else -> "تقویم"
+            TimePeriod.THIS_WEEK -> getString(R.string.calendar_this_week_title)
+            TimePeriod.THIS_MONTH -> getString(R.string.calendar_this_month_title)
+            TimePeriod.THIS_SEASON -> getString(R.string.calendar_this_season_title)
+            TimePeriod.THIS_YEAR -> getString(R.string.calendar_this_year_title)
+            else -> getString(R.string.calendar_default_title)
         }
         titleTextView.text = title
     }
@@ -113,12 +130,26 @@ class CalendarActivity : BaseActivity() {
             val dayCalendar = calendar.clone() as Calendar
             dayCalendar.add(Calendar.DAY_OF_YEAR, i)
             
+            // تعیین نام روز بر اساس روز هفته
+            val dayOfWeek = dayCalendar.get(Calendar.DAY_OF_WEEK)
+            val dayName = when (dayOfWeek) {
+                Calendar.SATURDAY -> getString(R.string.saturday_full)
+                Calendar.SUNDAY -> getString(R.string.sunday_full)
+                Calendar.MONDAY -> getString(R.string.monday_full)
+                Calendar.TUESDAY -> getString(R.string.tuesday_full)
+                Calendar.WEDNESDAY -> getString(R.string.wednesday_full)
+                Calendar.THURSDAY -> getString(R.string.thursday_full)
+                Calendar.FRIDAY -> getString(R.string.friday_full)
+                else -> ""
+            }
+            
             val day = CalendarDay(
                 date = dayCalendar.timeInMillis,
                 dayNumber = dayCalendar.get(Calendar.DAY_OF_MONTH),
                 isToday = isToday(dayCalendar),
                 isClickable = true,
-                tasksCount = getTasksCountForDate(dayCalendar.timeInMillis)
+                tasksCount = getTasksCountForDate(dayCalendar.timeInMillis),
+                dayName = dayName
             )
             calendarDays.add(day)
         }
@@ -181,8 +212,7 @@ class CalendarActivity : BaseActivity() {
         }
 
         // اضافه کردن هدر ماه‌ها
-        val monthNames = arrayOf("ژانویه", "فوریه", "مارس", "آوریل", "مه", "ژوئن", 
-                                "جولای", "آگوست", "سپتامبر", "اکتبر", "نوامبر", "دسامبر")
+        val monthNames = resources.getStringArray(R.array.month_names)
 
         for (month in seasonMonths) {
             // اضافه کردن هدر ماه
@@ -285,24 +315,24 @@ class CalendarActivity : BaseActivity() {
 
     private fun showAddTaskDialog(date: Long) {
         val editText = EditText(this)
-        editText.hint = "عنوان کار"
+        editText.hint = getString(R.string.task_title_hint)
 
         val dateFormatter = SimpleDateFormat("d MMMM", Locale.getDefault())
         val dateString = dateFormatter.format(Date(date))
 
         AlertDialog.Builder(this)
-            .setTitle("افزودن کار برای $dateString")
+            .setTitle(getString(R.string.add_task_for_date_title, dateString))
             .setView(editText)
-            .setPositiveButton("افزودن") { _, _ ->
+            .setPositiveButton(getString(R.string.add_action)) { _, _ ->
                 val title = editText.text.toString().trim()
 
                 if (title.isNotEmpty()) {
                     showGoalSelectionDialog(title, date)
                 } else {
-                    showToast("لطفاً عنوان کار را وارد کنید!")
+                    showToast(getString(R.string.enter_task_title_message))
                 }
             }
-            .setNegativeButton("لغو", null)
+            .setNegativeButton(getString(R.string.cancel_option), null)
             .show()
     }
 
@@ -311,10 +341,10 @@ class CalendarActivity : BaseActivity() {
         val categoryNames = categories.map { it.name }.toTypedArray()
         
         // اضافه کردن گزینه "بدون هدف"
-        val options = arrayOf("بدون هدف") + categoryNames
+        val options = arrayOf(getString(R.string.no_goal_option)) + categoryNames
 
         AlertDialog.Builder(this)
-            .setTitle("انتخاب هدف (اختیاری)")
+            .setTitle(getString(R.string.select_goal_optional_title))
             .setItems(options) { _, which ->
                 val selectedCategory = if (which == 0) {
                     // بدون هدف - ایجاد بخش عمومی
@@ -339,9 +369,9 @@ class CalendarActivity : BaseActivity() {
 
                 prefsManager.saveTask(newTask)
                 generateCalendarDays()
-                showToast("کار جدید اضافه شد!")
+                showToast(getString(R.string.new_task_added_message))
             }
-            .setNegativeButton("لغو", null)
+            .setNegativeButton(getString(R.string.cancel_option), null)
             .show()
     }
 
@@ -352,15 +382,15 @@ class CalendarActivity : BaseActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("کارهای $dateString")
+            .setTitle(getString(R.string.tasks_for_date_title, dateString))
             .setItems(taskTitles.toTypedArray()) { _, which ->
                 val selectedTask = tasks[which]
                 showTaskDetailsDialog(selectedTask)
             }
-            .setPositiveButton("افزودن کار جدید") { _, _ ->
+            .setPositiveButton(getString(R.string.add_new_task_button)) { _, _ ->
                 showAddTaskDialog(date)
             }
-            .setNegativeButton("بستن", null)
+            .setNegativeButton(getString(R.string.close_button), null)
             .show()
     }
 
@@ -379,22 +409,22 @@ class CalendarActivity : BaseActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("جزئیات کار")
+            .setTitle(getString(R.string.task_details_title))
             .setMessage(message)
-            .setPositiveButton("باشه", null)
+            .setPositiveButton(getString(R.string.ok_button), null)
             .show()
     }
 
     private fun getCategoryName(categoryId: String): String {
         val categories = prefsManager.getTaskCategories()
-        return categories.find { it.id == categoryId }?.name ?: "نامشخص"
+        return categories.find { it.id == categoryId }?.name ?: getString(R.string.unknown_category)
     }
 
     private fun getPriorityName(priority: TaskPriority): String {
         return when (priority) {
-            TaskPriority.NORMAL -> "عادی"
-            TaskPriority.HIGH -> "مهم"
-            TaskPriority.URGENT -> "خیلی مهم"
+            TaskPriority.NORMAL -> getString(R.string.priority_normal)
+            TaskPriority.HIGH -> getString(R.string.priority_high)
+            TaskPriority.URGENT -> getString(R.string.priority_urgent)
         }
     }
 
@@ -413,6 +443,7 @@ class CalendarActivity : BaseActivity() {
         val dayNumber: Int,
         val isToday: Boolean,
         val isClickable: Boolean,
-        val tasksCount: Int
+        val tasksCount: Int,
+        val dayName: String = ""
     )
 }

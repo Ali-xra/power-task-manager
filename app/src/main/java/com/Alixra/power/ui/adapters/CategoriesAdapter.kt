@@ -49,7 +49,7 @@ class CategoriesAdapter(
             
             // نمایش تعداد کارهای واقعی
             val tasksCount = getTasksCount(category.id)
-            tasksCountTextView.text = "$tasksCount کار"
+            tasksCountTextView.text = itemView.context.getString(R.string.task_count_dynamic, tasksCount)
 
             // تنظیم رنگ
             try {

@@ -163,14 +163,14 @@ class TasksActivity : BaseActivity() {
         tasksLayout.visibility = View.VISIBLE
 
         val periodName = when (currentPeriod) {
-            TimePeriod.TODAY -> "امروز"
-            TimePeriod.THIS_WEEK -> "این هفته"
-            TimePeriod.THIS_MONTH -> "این ماه"
-            TimePeriod.THIS_SEASON -> "این فصل"
-            TimePeriod.THIS_YEAR -> "امسال"
+            TimePeriod.TODAY -> getString(R.string.today_tasks_title)
+            TimePeriod.THIS_WEEK -> getString(R.string.this_week_tasks_title)
+            TimePeriod.THIS_MONTH -> getString(R.string.this_month_tasks_title)
+            TimePeriod.THIS_SEASON -> getString(R.string.this_season_tasks_title)
+            TimePeriod.THIS_YEAR -> getString(R.string.this_year_tasks_title)
         }
 
-        currentPeriodTitle.text = "کارهای $periodName"
+        currentPeriodTitle.text = getString(R.string.tasks_for_period_title, periodName)
         loadTasksList()
     }
 
@@ -182,11 +182,11 @@ class TasksActivity : BaseActivity() {
         val seasonTasks = getTasksForTimePeriod(TimePeriod.THIS_SEASON)
         val yearTasks = getTasksForTimePeriod(TimePeriod.THIS_YEAR)
 
-        todayTasksCount.text = "${todayTasks.size} کار"
-        thisWeekTasksCount.text = "${weekTasks.size} کار"
-        thisMonthTasksCount.text = "${monthTasks.size} کار"
-        thisSeasonTasksCount.text = "${seasonTasks.size} کار"
-        thisYearTasksCount.text = "${yearTasks.size} کار"
+        todayTasksCount.text = getString(R.string.task_count_dynamic, todayTasks.size)
+        thisWeekTasksCount.text = getString(R.string.task_count_dynamic, weekTasks.size)
+        thisMonthTasksCount.text = getString(R.string.task_count_dynamic, monthTasks.size)
+        thisSeasonTasksCount.text = getString(R.string.task_count_dynamic, seasonTasks.size)
+        thisYearTasksCount.text = getString(R.string.task_count_dynamic, yearTasks.size)
 
         // نمایش تعداد کارهای انجام شده
         val todayCompleted = todayTasks.count { it.isCompleted }
@@ -195,11 +195,11 @@ class TasksActivity : BaseActivity() {
         val seasonCompleted = seasonTasks.count { it.isCompleted }
         val yearCompleted = yearTasks.count { it.isCompleted }
 
-        todayCompletedCount.text = "($todayCompleted انجام شده)"
-        thisWeekCompletedCount.text = "($weekCompleted انجام شده)"
-        thisMonthCompletedCount.text = "($monthCompleted انجام شده)"
-        thisSeasonCompletedCount.text = "($seasonCompleted انجام شده)"
-        thisYearCompletedCount.text = "($yearCompleted انجام شده)"
+        todayCompletedCount.text = getString(R.string.completed_format_dynamic, todayCompleted)
+        thisWeekCompletedCount.text = getString(R.string.completed_format_dynamic, weekCompleted)
+        thisMonthCompletedCount.text = getString(R.string.completed_format_dynamic, monthCompleted)
+        thisSeasonCompletedCount.text = getString(R.string.completed_format_dynamic, seasonCompleted)
+        thisYearCompletedCount.text = getString(R.string.completed_format_dynamic, yearCompleted)
     }
 
     private fun loadTasksList() {
@@ -236,18 +236,18 @@ class TasksActivity : BaseActivity() {
 
     private fun showAddTaskDialog() {
         val editText = EditText(this)
-        editText.hint = "عنوان کار"
+        editText.hint = getString(R.string.task_title_hint)
 
         AlertDialog.Builder(this)
-            .setTitle("افزودن کار جدید")
+            .setTitle(getString(R.string.add_new_task_title))
             .setView(editText)
-            .setPositiveButton("افزودن") { _, _ ->
+            .setPositiveButton(getString(R.string.add_action)) { _, _ ->
                 val title = editText.text.toString().trim()
 
                 if (title.isNotEmpty()) {
                     showGoalSelectionDialog(title)
                 } else {
-                    showToast("لطفاً عنوان کار را وارد کنید!")
+                    showToast(getString(R.string.enter_task_title_message))
                 }
             }
             .setNegativeButton("لغو", null)
@@ -259,10 +259,10 @@ class TasksActivity : BaseActivity() {
         val categoryNames = categories.map { it.name }.toTypedArray()
         
         // اضافه کردن گزینه "بدون هدف"
-        val options = arrayOf("بدون هدف") + categoryNames
+        val options = arrayOf(getString(R.string.no_goal_option)) + categoryNames
 
         AlertDialog.Builder(this)
-            .setTitle("انتخاب هدف (اختیاری)")
+            .setTitle(getString(R.string.select_goal_optional_title))
             .setItems(options) { _, which ->
                 val selectedCategory = if (which == 0) {
                     // بدون هدف - ایجاد بخش عمومی
@@ -287,7 +287,7 @@ class TasksActivity : BaseActivity() {
                 prefsManager.saveTask(newTask)
                 loadTasksList()
                 updateTaskCounts()
-                showToast("کار جدید اضافه شد!")
+                showToast(getString(R.string.new_task_added_message))
             }
             .setNegativeButton("لغو", null)
             .show()
@@ -304,15 +304,15 @@ class TasksActivity : BaseActivity() {
         loadTasksList()
         updateTaskCounts()
 
-        val message = if (isCompleted) "کار انجام شد! 🎉" else "کار به حالت در انتظار برگشت"
+        val message = if (isCompleted) getString(R.string.task_completed_message) else getString(R.string.task_uncompleted_message)
         showToast(message)
     }
 
     private fun getPriorityName(priority: TaskPriority): String {
         return when (priority) {
-            TaskPriority.NORMAL -> "عادی"
-            TaskPriority.HIGH -> "مهم"
-            TaskPriority.URGENT -> "خیلی مهم"
+            TaskPriority.NORMAL -> getString(R.string.priority_normal)
+            TaskPriority.HIGH -> getString(R.string.priority_high)
+            TaskPriority.URGENT -> getString(R.string.priority_urgent)
         }
     }
 

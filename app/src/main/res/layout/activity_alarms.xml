@@ -67,14 +67,40 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <!-- عنوان و نشانگر وضعیت -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:text="@string/morning_alarm_title"
-                        android:textColor="#333333"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/morning_alarm_title"
+                            android:textColor="#333333"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/morningAlarmStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="غیرفعال"
+                            android:textColor="#FF5722"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Switch
+                            android:id="@+id/morningAlarmSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:thumb="@android:drawable/btn_star_big_on"
+                            android:track="@android:color/darker_gray" />
+                    </LinearLayout>
 
                     <TimePicker
                         android:id="@+id/morningTimePicker"
@@ -85,6 +111,104 @@
                         android:theme="@android:style/Theme.Material.Light"
                         android:background="#FAFAFA"
                         android:padding="8dp" />
+
+                    <!-- انتخاب روزهای هفته -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/select_days_title"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxSunday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_sunday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxMonday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_monday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxTuesday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_tuesday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxWednesday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_wednesday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxThursday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_thursday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxFriday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_friday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/morningCheckboxSaturday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_saturday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <!-- فضای خالی برای تراز کردن -->
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/setMorningAlarmBtn"
@@ -111,14 +235,40 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <!-- عنوان و نشانگر وضعیت -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:text="@string/evening_reminder_title"
-                        android:textColor="#4A148C"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/evening_reminder_title"
+                            android:textColor="#4A148C"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/eveningAlarmStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="غیرفعال"
+                            android:textColor="#FF5722"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Switch
+                            android:id="@+id/eveningAlarmSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:thumb="@android:drawable/btn_star_big_on"
+                            android:track="@android:color/darker_gray" />
+                    </LinearLayout>
 
                     <TimePicker
                         android:id="@+id/eveningTimePicker"
@@ -129,6 +279,104 @@
                         android:theme="@android:style/Theme.Material.Light"
                         android:background="#FAFAFA"
                         android:padding="8dp" />
+
+                    <!-- انتخاب روزهای هفته برای یادآور شب -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/select_days_title"
+                        android:textColor="#4A148C"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxSunday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_sunday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxMonday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_monday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxTuesday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_tuesday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxWednesday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_wednesday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxThursday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_thursday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxFriday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_friday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <CheckBox
+                                android:id="@+id/eveningCheckboxSaturday"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/day_saturday"
+                                android:textSize="14sp"
+                                android:checked="true" />
+
+                            <!-- فضای خالی برای تراز کردن -->
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/setEveningAlarmBtn"
@@ -145,6 +393,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -169,7 +418,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/edittext_background"
-                        android:hint="جمله جدید را اینجا وارد کنید..."
+                        android:hint="@string/enter_new_quote_hint"
                         android:minLines="2"
                         android:padding="12dp"
                         android:textColor="#222222"
@@ -197,12 +446,18 @@
                     <ListView
                         android:id="@+id/quotesListView"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="400dp"
                         android:textColor="#222222"
                         android:background="#FAFAFA"
                         android:divider="#DDDDDD"
                         android:dividerHeight="1dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:scrollbars="vertical"
+                        android:fadeScrollbars="false"
+                        android:scrollbarStyle="outsideOverlay"
+                        android:nestedScrollingEnabled="true"
+                        android:smoothScrollbar="true"
+                        android:fastScrollEnabled="true" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

@@ -56,7 +56,6 @@
     <string name="back_button">←</string>
     <string name="add_button">+</string>
     <string name="edit_button">✏️</string>
-    <string name="delete_button">🗑️</string>
     <string name="arrow_right">></string>
     
     <!-- Alarms Activity -->
@@ -110,7 +109,6 @@
     <string name="last_backup_label">📅 Last Backup:</string>
     <string name="never_backed_up">Never backed up</string>
     <string name="restore_title">Restore</string>
-    <string name="restore_button">Restore from File</string>
     <string name="restore_warning">⚠️</string>
     <string name="restore_warning_message">Restore will replace all current data</string>
     <string name="advanced_settings_title">Advanced Settings</string>
@@ -135,6 +133,7 @@
     <string name="rating_format">%.1f out of 10</string>
     
     <!-- Evening Activity -->
+    <string name="evening_activity_title">Daily Evaluation</string>
     <string name="good_night">Good Night!</string>
     <string name="satisfaction_question">How satisfied were you with yourself today?</string>
     <string name="rating_label">Rating:</string>
@@ -190,7 +189,6 @@
     <string name="never_backed_up_text">Never backed up</string>
     <string name="restore_section_title">Restore</string>
     <string name="restore_from_file_text">Restore from File</string>
-    <string name="restore_warning_message">Restore will replace all current data</string>
     <string name="advanced_settings_text">Advanced Settings</string>
     <string name="auto_backup_text">Automatic Backup</string>
     
@@ -302,4 +300,167 @@
     <string name="exact_alarm_permission_message">We need this special permission for alarms to sound exactly on time.</string>
     <string name="battery_optimization_title">Battery Optimization</string>
     <string name="battery_optimization_message">To prevent the app from being stopped by the system, please exclude it from battery optimization.</string>
+    
+    <!-- All Kotlin Code Messages -->
+    <!-- AlarmsActivity -->
+    <string name="sample_quote_1">Today is the first day of the rest of your life</string>
+    <string name="sample_quote_2">Success is not final, failure is not fatal</string>
+    <string name="sample_quote_3">The only way to do great work is to love what you do</string>
+    <string name="add_quote_first_message">Please add at least one quote first!</string>
+    <string name="morning_alarm_set_message">Morning alarm set for %1$d:%2$02d</string>
+    <string name="evening_reminder_set_message">Evening reminder set for %1$d:%2$02d</string>
+    <string name="morning_alarm_disabled_message">Morning alarm disabled</string>
+    <string name="evening_alarm_disabled_message">Evening reminder disabled</string>
+    <string name="alarm_status_active">Active</string>
+    <string name="alarm_status_inactive">Inactive</string>
+    <string name="select_days_title">📅 Select Days of Week:</string>
+    <string name="day_sunday">Sunday</string>
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="select_at_least_one_day">Please select at least one day!</string>
+    <string name="all_days_selected">All days</string>
+    <string name="days_selected_count">%d days selected</string>
+    <string name="quote_added_message">Quote added!</string>
+    <string name="enter_quote_message">Please enter a quote!</string>
+    <string name="delete_quote_title">Delete Quote</string>
+    <string name="delete_quote_message">Are you sure you want to delete this quote?</string>
+    <string name="quote_deleted_message">Quote deleted!</string>
+    <string name="yes_button">Yes</string>
+    
+    <!-- AlarmActivity -->
+    <string name="default_motivational_quote">Today is the first day of the rest of your life</string>
+    <string name="typing_hint_placeholder">Start typing...</string>
+    <string name="enter_sentence_message">Please type the sentence!</string>
+    <string name="complete_typing_message">To turn off the alarm, type the complete sentence!</string>
+    <string name="success_message">Success! Have a great day 🌟</string>
+    
+    <!-- CalendarActivity -->
+    <string name="calendar_this_week_title">This Week\'s Calendar</string>
+    <string name="calendar_this_month_title">This Month\'s Calendar</string>
+    <string name="calendar_this_season_title">This Season\'s Calendar</string>
+    <string name="calendar_this_year_title">This Year\'s Calendar</string>
+    <string name="calendar_default_title">Calendar</string>
+    <string name="task_title_hint">Task Title</string>
+    <string name="add_task_for_date_title">Add Task for %1$s</string>
+    <string name="add_action">Add</string>
+    <string name="enter_task_title_message">Please enter task title!</string>
+    <string name="no_goal_option">No Goal</string>
+    <string name="select_goal_optional_title">Select Goal (Optional)</string>
+    <string name="new_task_added_message">New task added!</string>
+    <string name="tasks_for_date_title">Tasks for %1$s</string>
+    <string name="add_new_task_button">Add New Task</string>
+    <string name="close_button">Close</string>
+    <string name="task_details_title">Task Details</string>
+    <string name="ok_button">OK</string>
+    <string name="unknown_category">Unknown</string>
+    <string name="priority_normal">Normal</string>
+    <string name="priority_high">Important</string>
+    <string name="priority_urgent">Very Important</string>
+    
+    <!-- GoalsActivity -->
+    <string name="new_goal_name_hint">New Goal Name</string>
+    <string name="add_new_goal_title">Add New Goal</string>
+    <string name="create_button">Create</string>
+    <string name="new_goal_added_message">New goal added!</string>
+    <string name="enter_goal_name_message">Please enter goal name!</string>
+    <string name="goal_name_hint">Goal Name</string>
+    <string name="edit_goal_title">Edit Goal</string>
+    <string name="save_button">Save</string>
+    <string name="goal_updated_message">Goal updated!</string>
+    <string name="delete_goal_title">Delete Goal</string>
+    <string name="delete_goal_message">Are you sure you want to delete this goal and all its related tasks?</string>
+    <string name="delete_button">Delete</string>
+    <string name="goal_deleted_message">Goal deleted!</string>
+    <string name="goal_stats_title">Goal Statistics</string>
+    <string name="view_all_button">View All</string>
+    <string name="no_tasks_for_goal_message">No tasks recorded for this goal.</string>
+    <string name="complete_details_title">Complete Details</string>
+    <string name="mark_completed_button">Mark as Completed</string>
+    <string name="all_tasks_completed_message">All tasks for this goal are completed! 🎉</string>
+    <string name="select_completed_tasks_title">Select Completed Tasks</string>
+    
+    <!-- TasksActivity -->
+    <string name="today_tasks_title">Today</string>
+    <string name="this_week_tasks_title">This Week</string>
+    <string name="this_month_tasks_title">This Month</string>
+    <string name="this_season_tasks_title">This Season</string>
+    <string name="this_year_tasks_title">This Year</string>
+    <string name="tasks_for_period_title">Tasks for %1$s</string>
+    <string name="add_new_task_title">Add New Task</string>
+    <string name="task_completed_message">Task completed! 🎉</string>
+    <string name="task_uncompleted_message">Task returned to pending status</string>
+    
+    <!-- EveningActivity -->
+    <string name="see_you_tomorrow_message">Alright, see you tomorrow night!</string>
+    <string name="rating_0_3_message">Sorry you didn\'t have a good day. Tomorrow will be better!</string>
+    <string name="rating_4_6_message">An ordinary day! Hope tomorrow is full of good things.</string>
+    <string name="rating_7_8_message">Great! You had a good day.</string>
+    <string name="rating_9_10_message">Excellent! Congratulations!</string>
+    <string name="rating_default_message">Thanks for your response!</string>
+    <string name="greeting_1">How was today? 🤔</string>
+    <string name="greeting_2">Time to evaluate your day! 📊</string>
+    <string name="greeting_3">Let\'s review today! ✨</string>
+    <string name="greeting_4">Do you have a few minutes? 🕒</string>
+    
+    <!-- BackupActivity -->
+    <string name="backup_restore_title">Backup and Restore</string>
+    <string name="never_backed_up_message">Never backed up</string>
+    <string name="complete_settings_message">Complete Settings</string>
+    <string name="confirm_restore_title">Confirm Restore</string>
+    <string name="restore_button">Restore</string>
+    <string name="preparing_backup_message">Preparing...</string>
+    <string name="restoring_message">Restoring...</string>
+    <string name="restore_from_file_button">Restore from File</string>
+    <string name="enabled_status">Enabled</string>
+    <string name="disabled_status">Disabled</string>
+    <string name="current_data_details_title">Current Data Details</string>
+    <string name="enable_auto_backup_message">Enable Automatic Backup</string>
+    <string name="daily_backup_message">Daily Backup</string>
+    
+    <!-- Adapters -->
+    <string name="hide_tasks_button">Hide Tasks</string>
+    <string name="show_tasks_button">Show Tasks</string>
+    
+    <!-- Dynamic Formats -->
+    <string name="task_count_dynamic">%d tasks</string>
+    <string name="goal_count_dynamic">%d goals</string>
+    <string name="day_count_dynamic">%d days</string>
+    <string name="times_count_dynamic">%d times</string>
+    <string name="completed_format_dynamic">(%d completed)</string>
+    <string name="enter_new_quote_hint">Enter new quote here...</string>
+    <string name="type_sentence_hint">Type this sentence exactly...</string>
+    <string name="incomplete_tasks_transfer">%d incomplete tasks will be transferred to tomorrow</string>
+    <string name="completed_tasks_dynamic">%d completed</string>
+    <string name="total_label">total</string>
+    <string name="today_label">today</string>
+    <string name="task_stats_format">%1$d of %2$d tasks</string>
+    
+    <!-- Day Names -->
+    <string name="saturday_full">Saturday</string>
+    <string name="sunday_full">Sunday</string>
+    <string name="monday_full">Monday</string>
+    <string name="tuesday_full">Tuesday</string>
+    <string name="wednesday_full">Wednesday</string>
+    <string name="thursday_full">Thursday</string>
+    <string name="friday_full">Friday</string>
+    
+    <!-- Month Names -->
+    <string-array name="month_names">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

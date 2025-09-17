@@ -46,7 +46,7 @@
             android:alpha="0.8"
             android:textSize="16sp" />
 
-        <!-- نمایش کاربر -->
+        <!-- User display -->
         <TextView
             android:id="@+id/userEmailHeader"
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
 
     </LinearLayout>
 
-    <!-- منوی اصلی -->
+    <!-- Main menu -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:layout_marginBottom="24dp"
         android:orientation="vertical">
 
-        <!-- دکمه زنگ‌ها -->
+        <!-- Alarms button -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/alarmsBtn"
             android:layout_width="match_parent"
@@ -135,7 +135,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- دکمه مدیریت اهداف (جدید) -->
+        <!-- Goals management button -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/goalsBtn"
             android:layout_width="match_parent"
@@ -195,7 +195,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- دکمه مدیریت کارها بر اساس زمان (تغییر یافته) -->
+        <!-- Time-based tasks management button -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/tasksBtn"
             android:layout_width="match_parent"
@@ -255,7 +255,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- دکمه گزارشات -->
+        <!-- Reports button -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/reportsBtn"
             android:layout_width="match_parent"
@@ -315,7 +315,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- دکمه تنظیمات -->
+        <!-- Settings button -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/settingsBtn"
             android:layout_width="match_parent"
@@ -369,7 +369,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="◄"
+                    android:text="@string/arrow_right"
                     android:textColor="#64748B"
                     android:textSize="20sp" />
 

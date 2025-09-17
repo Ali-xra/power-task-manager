@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Ali/AndroidStudioProjects/power/**)",
+      "Read(//c/Users/Ali/AndroidStudioProjects/power/app/**)",
+      "Bash(./gradlew:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
