@@ -232,14 +232,21 @@ class AlarmService : Service() {
 
     private fun acquireWakeLock() {
         try {
-            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+            val powerManager = getSystemService(Context.POWER_SERVICE) as? PowerManager
+            if (powerManager == null) {
+                android.util.Log.w("AlarmService", "PowerManager not available")
+                return
+            }
+
             wakeLock = powerManager.newWakeLock(
                 PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
                 "PowerApp:AlarmWakeLock"
             )
             wakeLock?.acquire(10 * 60 * 1000L) // 10 دقیقه maximum
+        } catch (e: SecurityException) {
+            android.util.Log.e("AlarmService", "SecurityException: Missing wake lock permission", e)
         } catch (e: Exception) {
-            e.printStackTrace()
+            android.util.Log.e("AlarmService", "Failed to acquire wake lock", e)
         }
     }
 
