@@ -43,11 +43,9 @@ enum class TaskPriority {
     /**
      * بازگشت ایموجی مناسب برای هر اولویت
      */
-    fun getEmoji(): String {
-        return when (this) {
-            NORMAL -> "📋"
-            HIGH -> "⚠️"
-            URGENT -> "🚨"
-        }
+    fun getEmoji(): String = when (this) {
+        NORMAL -> "📋"
+        HIGH -> "⚠️"
+        URGENT -> "🚨"
     }
 }
