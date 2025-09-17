@@ -75,6 +75,10 @@ object AlarmUtils {
     
     // تابع تنظیم آلارم صبح با ساعت و دقیقه
     fun setMorningAlarmWithTime(context: Context, hour: Int, minute: Int) {
+        if (hour !in 0..23 || minute !in 0..59) {
+            throw IllegalArgumentException("Invalid time: hour must be 0-23, minute must be 0-59")
+        }
+
         val prefsManager = PreferencesManager(context)
         val timeString = String.format("%02d:%02d", hour, minute)
         
