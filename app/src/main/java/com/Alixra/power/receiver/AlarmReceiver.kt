@@ -20,7 +20,12 @@ class AlarmReceiver : BroadcastReceiver() {
         const val ALARM_CHANNEL_ID = "ALARM_CHANNEL"
         const val ALARM_NOTIFICATION_ID = 1001
 
+        // متغیر برای جلوگیری از اجرای همزمان آلارم
+        @Volatile
+        private var isAlarmProcessing = false
+
         // اضافه کردن متد برای پاک کردن نوتیفیکیشن از خارج
+        @Synchronized
         fun clearNotification(context: Context) {
             try {
                 val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
