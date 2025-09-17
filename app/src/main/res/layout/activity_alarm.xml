@@ -111,6 +111,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!-- حذف شده: دکمه لغو برای جلوگیری از خاموش کردن تصادفی آلارم -->
+        <!--
         <Button
             android:id="@+id/cancelButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -121,13 +123,14 @@
             android:text="@string/cancel_alarm_action"
             android:textColor="#FFFFFF"
             app:strokeColor="#FFFFFF" />
+        -->
 
         <Button
             android:id="@+id/submitButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1.5"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
             android:backgroundTint="#4CAF50"
             android:text="@string/confirm_alarm_action"
             android:textColor="#FFFFFF"

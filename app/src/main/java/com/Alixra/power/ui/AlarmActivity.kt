@@ -121,10 +121,9 @@ class AlarmActivity : BaseActivity() {
         // مخفی کردن دکمه تأیید چون دیگر نیازی نداریم
         binding.submitButton.visibility = View.GONE
 
-        // دکمه لغو - فقط برای موارد اضطراری
-        binding.cancelButton.setOnClickListener {
-            showCancelWarning()
-        }
+        // مخفی کردن دکمه لغو برای جلوگیری از خاموش کردن تصادفی
+        // این دکمه می‌تواند در حالت نیمه خواب به اشتباه فشرده شود
+        binding.cancelButton.visibility = View.GONE
 
         // اختیاری: اگر همچنان می‌خواهیم دکمه تأیید موجود باشد
         binding.submitButton.setOnClickListener {
@@ -233,10 +232,7 @@ class AlarmActivity : BaseActivity() {
         }
     }
 
-    private fun showCancelWarning() {
-        // هشدار برای لغو (اختیاری)
-        Toast.makeText(this, getString(R.string.complete_typing_message), Toast.LENGTH_LONG).show()
-    }
+    // حذف شده: showCancelWarning() - دیگر لازم نیست چون دکمه لغو مخفی شده
 
     private fun finishChallenge(success: Boolean) {
         if (success) {

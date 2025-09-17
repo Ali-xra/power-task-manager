@@ -116,8 +116,8 @@ class AlarmReceiver : BroadcastReceiver() {
         // ساخت نوتیفیکیشن با Full Screen Intent
         val notificationBuilder = NotificationCompat.Builder(context, ALARM_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_name)
-            .setContentTitle("⏰ زنگ هوشمند")
-            .setContentText("برای خاموش کردن، چالش را انجام دهید")
+            .setContentTitle("⏰ زنگ صبحگاهی - چالش تایپ")
+            .setContentText("برای خاموش کردن، روی نوتیفیکیشن ضربه بزنید")
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setAutoCancel(false) // جلوگیری از حذف خودکار با swipe
@@ -128,20 +128,9 @@ class AlarmReceiver : BroadcastReceiver() {
             .setDefaults(NotificationCompat.DEFAULT_SOUND or NotificationCompat.DEFAULT_VIBRATE)
             .setTimeoutAfter(5 * 60 * 1000) // timeout بعد از 5 دقیقه (اختیاری)
 
-        // اضافه کردن اکشن برای خاموش کردن مستقیم
-        val dismissIntent = Intent(context, AlarmDismissReceiver::class.java)
-        val dismissPendingIntent = PendingIntent.getBroadcast(
-            context,
-            ALARM_NOTIFICATION_ID + 1,
-            dismissIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        notificationBuilder.addAction(
-            R.drawable.ic_stat_name,
-            "خاموش کردن",
-            dismissPendingIntent
-        )
+        // حذف شده: دکمه خاموش کردن مستقیم برای جلوگیری از خاموش کردن تصادفی
+        // این دکمه می‌تواند در حالت نیمه خواب به اشتباه فشرده شود و کل آلارم را غیرفعال کند
+        // کاربر باید فقط از طریق چالش آلارم را خاموش کند
 
         // نمایش نوتیفیکیشن
         notificationManager.notify(ALARM_NOTIFICATION_ID, notificationBuilder.build())
