@@ -505,5 +505,9 @@ class EveningActivity : BaseActivity() {
                 }
             }
         }
+
+        // پاک‌سازی منابع برای جلوگیری از memory leak
+        todayTasks = emptyList()
+        categoryRatings.clear()
     }
 }
