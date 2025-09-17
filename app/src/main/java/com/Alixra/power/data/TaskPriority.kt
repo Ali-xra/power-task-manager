@@ -34,12 +34,10 @@ enum class TaskPriority {
     /**
      * بازگشت رنگ مناسب برای هر اولویت
      */
-    fun getColor(): String {
-        return when (this) {
-            NORMAL -> "#2196F3"
-            HIGH -> "#FF9800"
-            URGENT -> "#F44336"
-        }
+    fun getColor(): String = when (this) {
+        NORMAL -> "#2196F3"
+        HIGH -> "#FF9800"
+        URGENT -> "#F44336"
     }
 
     /**

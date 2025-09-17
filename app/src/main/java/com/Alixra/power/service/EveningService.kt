@@ -63,12 +63,17 @@ class EveningService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        serviceInstance = null // پاک کردن reference
-        stopEveningSound()
-        stopEveningVibration()
-        // نوتیفیکیشن سرویس را پاک می‌کنیم اما نوتیفیکیشن اصلی باقی می‌ماند
-        clearServiceNotification()
-        releaseWakeLock()
+        try {
+            // پاک‌سازی همه منابع
+            handler.removeCallbacksAndMessages(null)
+            serviceInstance = null
+            stopEveningSound()
+            stopEveningVibration()
+            clearServiceNotification()
+            releaseWakeLock()
+        } catch (e: Exception) {
+            android.util.Log.e("EveningService", "Error during service cleanup", e)
+        }
     }
 
     private fun createNotificationChannel() {
