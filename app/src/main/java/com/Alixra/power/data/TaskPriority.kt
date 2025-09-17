@@ -4,14 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * انواع اولویت کارها
+ *
+ * برای دسته‌بندی و اولویت‌بندی کارها استفاده می‌شود
  */
 enum class TaskPriority {
+    /** اولویت عادی - برای کارهای روتین */
     @SerializedName("normal")
     NORMAL,
 
+    /** اولویت بالا - برای کارهای مهم */
     @SerializedName("high")
     HIGH,
 
+    /** اولویت فوری - برای کارهای ضروری */
     @SerializedName("urgent")
     URGENT;
 
