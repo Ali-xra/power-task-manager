@@ -23,8 +23,23 @@ class CalendarAdapter(
     private var calendarDays: List<CalendarActivity.CalendarDay> = emptyList()
 
     fun updateDays(newDays: List<CalendarActivity.CalendarDay>) {
+        val oldSize = calendarDays.size
         calendarDays = newDays
-        notifyDataSetChanged()
+
+        when {
+            oldSize == 0 && newDays.isNotEmpty() -> {
+                notifyItemRangeInserted(0, newDays.size)
+            }
+            oldSize > newDays.size -> {
+                notifyItemRangeRemoved(newDays.size, oldSize - newDays.size)
+                if (newDays.isNotEmpty()) {
+                    notifyItemRangeChanged(0, newDays.size)
+                }
+            }
+            else -> {
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarDayViewHolder {
