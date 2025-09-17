@@ -193,4 +193,32 @@ data class Task(
     override fun toString(): String {
         return "Task(id='$id', title='$title', isCompleted=$isCompleted, timePeriod=$timePeriod)"
     }
+
+    /**
+     * بیلدر پترن برای ایجاد آسان Task
+     */
+    class Builder {
+        private var id: String = ""
+        private var title: String = ""
+        private var description: String = ""
+        private var categoryId: String = ""
+        private var timePeriod: TimePeriod = TimePeriod.TODAY
+        private var priority: TaskPriority = TaskPriority.NORMAL
+
+        fun id(id: String) = apply { this.id = id }
+        fun title(title: String) = apply { this.title = title }
+        fun description(description: String) = apply { this.description = description }
+        fun categoryId(categoryId: String) = apply { this.categoryId = categoryId }
+        fun timePeriod(timePeriod: TimePeriod) = apply { this.timePeriod = timePeriod }
+        fun priority(priority: TaskPriority) = apply { this.priority = priority }
+
+        fun build() = Task(
+            id = id.ifEmpty { "task_${System.currentTimeMillis()}" },
+            title = title,
+            description = description,
+            categoryId = categoryId,
+            timePeriod = timePeriod,
+            priority = priority
+        )
+    }
 }
