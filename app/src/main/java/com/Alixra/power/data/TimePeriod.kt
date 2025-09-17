@@ -66,6 +66,8 @@ enum class TimePeriod {
      * بررسی اینکه آیا تاریخ داده شده در این بازه زمانی قرار دارد یا نه
      */
     fun isDateInPeriod(timestamp: Long): Boolean {
+        if (timestamp <= 0) return false
+
         val calendar = Calendar.getInstance()
         val targetDate = Calendar.getInstance().apply { timeInMillis = timestamp }
 
