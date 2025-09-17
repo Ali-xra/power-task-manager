@@ -54,6 +54,14 @@ class TasksAdapter(
 
     override fun getItemCount(): Int = tasks.size
 
+    override fun getItemId(position: Int): Long {
+        return if (position < tasks.size) {
+            tasks[position].id.hashCode().toLong()
+        } else {
+            super.getItemId(position)
+        }
+    }
+
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val taskCheckBox: CheckBox = itemView.findViewById(R.id.taskCheckBox)
         private val taskTitle: TextView = itemView.findViewById(R.id.taskTitle)
