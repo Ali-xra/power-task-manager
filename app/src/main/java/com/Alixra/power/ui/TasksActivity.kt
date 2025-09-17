@@ -251,10 +251,19 @@ class TasksActivity : BaseActivity() {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             val title = editText.text.toString().trim()
 
-            if (title.isNotEmpty()) {
-                showGoalSelectionDialog(title, editText, dialog)
-            } else {
-                showToast(getString(R.string.enter_task_title_message))
+            when {
+                title.isEmpty() -> {
+                    showToast(getString(R.string.enter_task_title_message))
+                }
+                title.length > 100 -> {
+                    showToast("عنوان کار نباید بیش از 100 کاراکتر باشد")
+                }
+                title.contains("\n") || title.contains("\r") -> {
+                    showToast("عنوان کار نمی‌تواند شامل خط جدید باشد")
+                }
+                else -> {
+                    showGoalSelectionDialog(title, editText, dialog)
+                }
             }
         }
     }
