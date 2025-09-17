@@ -21,6 +21,12 @@ import java.util.*
 
 class TasksActivity : BaseActivity() {
 
+    companion object {
+        const val EXTRA_TARGET_PERIOD = "target_period"
+        const val EXTRA_FROM_MAIN_PAGE = "from_main_page"
+        const val EXTRA_SHOW_SHORTCUTS = "show_shortcuts"
+    }
+
     // Views
     private lateinit var backButton: Button
     private lateinit var timePeriodsLayout: LinearLayout
@@ -60,6 +66,9 @@ class TasksActivity : BaseActivity() {
     private enum class ViewState { TIME_PERIODS, TASKS }
     private var currentViewState = ViewState.TIME_PERIODS
 
+    // Track navigation source to handle back button correctly
+    private var cameFromMainPage = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks)
@@ -68,7 +77,27 @@ class TasksActivity : BaseActivity() {
         prefsManager = PreferencesManager(this)
         setupRecyclerView()
         setupClickListeners()
-        showTimePeriodsView()
+
+        // Check if we came from main page with specific period
+        val targetPeriod = intent.getSerializableExtra(EXTRA_TARGET_PERIOD) as? TimePeriod
+        cameFromMainPage = intent.getBooleanExtra(EXTRA_FROM_MAIN_PAGE, false)
+        val showShortcuts = intent.getBooleanExtra(EXTRA_SHOW_SHORTCUTS, false)
+
+        when {
+            targetPeriod != null && cameFromMainPage -> {
+                // Direct navigation to specific period from main page
+                currentPeriod = targetPeriod
+                showTasksView()
+            }
+            showShortcuts -> {
+                // Show main page shortcuts (Today and This Year only)
+                showTimePeriodsView(shortcutsOnly = true)
+            }
+            else -> {
+                // Default: show all time periods selection
+                showTimePeriodsView()
+            }
+        }
     }
 
     private fun initViews() {
@@ -114,7 +143,13 @@ class TasksActivity : BaseActivity() {
         // دکمه بازگشت/ناوبری
         backButton.setOnClickListener {
             if (currentViewState == ViewState.TASKS) {
-                showTimePeriodsView()
+                if (cameFromMainPage) {
+                    // If we came directly from main page, go back to main page
+                    finish()
+                } else {
+                    // Otherwise, go back to time periods selection
+                    showTimePeriodsView()
+                }
             } else {
                 finish()
             }
@@ -123,6 +158,10 @@ class TasksActivity : BaseActivity() {
         // کارت‌های بازه زمانی
         todayCard.setOnClickListener {
             currentPeriod = TimePeriod.TODAY
+            // If we're showing shortcuts only, mark as coming from main page
+            if (thisWeekCard.visibility == View.GONE) {
+                cameFromMainPage = true
+            }
             showTasksView()
         }
 
@@ -140,6 +179,10 @@ class TasksActivity : BaseActivity() {
 
         thisYearCard.setOnClickListener {
             currentPeriod = TimePeriod.THIS_YEAR
+            // If we're showing shortcuts only, mark as coming from main page
+            if (thisWeekCard.visibility == View.GONE) {
+                cameFromMainPage = true
+            }
             showTasksView()
         }
 
@@ -149,10 +192,26 @@ class TasksActivity : BaseActivity() {
         }
     }
 
-    private fun showTimePeriodsView() {
+    private fun showTimePeriodsView(shortcutsOnly: Boolean = false) {
         currentViewState = ViewState.TIME_PERIODS
         timePeriodsLayout.visibility = View.VISIBLE
         tasksLayout.visibility = View.GONE
+
+        if (shortcutsOnly) {
+            // Show only Today and This Year cards from main page
+            todayCard.visibility = View.VISIBLE
+            thisYearCard.visibility = View.VISIBLE
+            thisWeekCard.visibility = View.GONE
+            thisMonthCard.visibility = View.GONE
+            thisSeasonCard.visibility = View.GONE
+        } else {
+            // Show all period cards
+            todayCard.visibility = View.VISIBLE
+            thisYearCard.visibility = View.VISIBLE
+            thisWeekCard.visibility = View.VISIBLE
+            thisMonthCard.visibility = View.VISIBLE
+            thisSeasonCard.visibility = View.VISIBLE
+        }
 
         updateTaskCounts()
     }

@@ -174,6 +174,8 @@ class MainActivity : BaseActivity() {
         // دکمه لیست کارها (تغییر یافته)
         tasksBtn.setOnClickListener {
             val intent = Intent(this, TasksActivity::class.java)
+            intent.putExtra(TasksActivity.EXTRA_SHOW_SHORTCUTS, true)
+            intent.putExtra(TasksActivity.EXTRA_FROM_MAIN_PAGE, true)
             startActivity(intent)
         }
 
