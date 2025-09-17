@@ -238,30 +238,35 @@ class TasksActivity : BaseActivity() {
         val editText = EditText(this)
         editText.hint = getString(R.string.task_title_hint)
 
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle(getString(R.string.add_new_task_title))
             .setView(editText)
-            .setPositiveButton(getString(R.string.add_action)) { _, _ ->
-                val title = editText.text.toString().trim()
-
-                if (title.isNotEmpty()) {
-                    showGoalSelectionDialog(title)
-                } else {
-                    showToast(getString(R.string.enter_task_title_message))
-                }
-            }
+            .setPositiveButton(getString(R.string.add_action), null) // null to override later
             .setNegativeButton("لغو", null)
-            .show()
+            .create()
+
+        dialog.show()
+
+        // Override positive button to prevent automatic closing
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val title = editText.text.toString().trim()
+
+            if (title.isNotEmpty()) {
+                showGoalSelectionDialog(title, editText, dialog)
+            } else {
+                showToast(getString(R.string.enter_task_title_message))
+            }
+        }
     }
 
-    private fun showGoalSelectionDialog(title: String) {
+    private fun showGoalSelectionDialog(title: String, editText: EditText, parentDialog: AlertDialog) {
         val categories = prefsManager.getTaskCategories()
         val categoryNames = categories.map { it.name }.toTypedArray()
-        
+
         // اضافه کردن گزینه "بدون هدف"
         val options = arrayOf(getString(R.string.no_goal_option)) + categoryNames
 
-        AlertDialog.Builder(this)
+        val goalDialog = AlertDialog.Builder(this)
             .setTitle(getString(R.string.select_goal_optional_title))
             .setItems(options) { _, which ->
                 val selectedCategory = if (which == 0) {
@@ -288,9 +293,15 @@ class TasksActivity : BaseActivity() {
                 loadTasksList()
                 updateTaskCounts()
                 showToast(getString(R.string.new_task_added_message))
+
+                // Clear the input field and keep the parent dialog open
+                editText.text.clear()
+                editText.requestFocus()
             }
             .setNegativeButton("لغو", null)
-            .show()
+            .create()
+
+        goalDialog.show()
     }
 
     private fun toggleTaskCompletion(task: Task, isCompleted: Boolean) {
