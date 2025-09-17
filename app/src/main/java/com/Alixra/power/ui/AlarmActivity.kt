@@ -210,10 +210,15 @@ class AlarmActivity : BaseActivity() {
     private fun stopAlarmService() {
         try {
             val serviceIntent = Intent(this, AlarmService::class.java)
-            stopService(serviceIntent)
+            val result = stopService(serviceIntent)
             isAlarmActive = false
+
+            if (!result) {
+                // Log if service wasn't running
+                android.util.Log.w("AlarmActivity", "AlarmService was not running")
+            }
         } catch (e: Exception) {
-            e.printStackTrace()
+            android.util.Log.e("AlarmActivity", "Failed to stop AlarmService", e)
         }
     }
 
