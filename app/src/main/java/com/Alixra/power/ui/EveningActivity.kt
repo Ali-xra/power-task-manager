@@ -23,12 +23,20 @@ import java.util.*
 
 class EveningActivity : BaseActivity() {
 
+    companion object {
+        private const val INITIAL_STEP = 1
+        private const val DEFAULT_RATING = 5
+        private const val TOTAL_STEPS = 3
+        private const val MIN_RATING = 0
+        private const val MAX_RATING = 10
+    }
+
     private lateinit var binding: ActivityEveningBinding
     private lateinit var prefsManager: PreferencesManager
 
     // ویژگی‌های جدید برای سیستم چندمرحله‌ای
-    private var currentStep = 1
-    private var dailyRating = 5
+    private var currentStep = INITIAL_STEP
+    private var dailyRating = DEFAULT_RATING
     private val categoryRatings = mutableMapOf<String, Int>()
     private var todayTasks = listOf<Task>()
 
