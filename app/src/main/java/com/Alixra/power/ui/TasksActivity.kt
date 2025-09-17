@@ -305,18 +305,43 @@ class TasksActivity : BaseActivity() {
     }
 
     private fun toggleTaskCompletion(task: Task, isCompleted: Boolean) {
-        val updatedTask = if (isCompleted) {
-            task.copy(isCompleted = true, completionDate = System.currentTimeMillis())
-        } else {
-            task.copy(isCompleted = false, completionDate = null)
+        try {
+            // جلوگیری از تغییر تکراری وضعیت
+            if (task.isCompleted == isCompleted) {
+                return // هیچ تغییری لازم نیست
+            }
+
+            val updatedTask = if (isCompleted) {
+                task.copy(isCompleted = true, completionDate = System.currentTimeMillis())
+            } else {
+                task.copy(isCompleted = false, completionDate = null)
+            }
+
+            // ذخیره کار به‌روزرسانی شده
+            prefsManager.saveTask(updatedTask)
+
+            // به‌روزرسانی لیست کارها
+            val updatedPosition = currentTasks.indexOfFirst { it.id == task.id }
+            if (updatedPosition != -1) {
+                currentTasks[updatedPosition] = updatedTask
+                tasksAdapter.updateTasks(currentTasks)
+            } else {
+                // اگر کار پیدا نشد، کل لیست را بازیابی کن
+                loadTasksList()
+            }
+
+            // به‌روزرسانی شمارنده‌ها
+            updateTaskCounts()
+
+            val message = if (isCompleted) getString(R.string.task_completed_message) else getString(R.string.task_uncompleted_message)
+            showToast(message)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            showToast("خطا در به‌روزرسانی وضعیت کار")
+            // بازیابی کل لیست در صورت خطا
+            loadTasksList()
         }
-
-        prefsManager.saveTask(updatedTask)
-        loadTasksList()
-        updateTaskCounts()
-
-        val message = if (isCompleted) getString(R.string.task_completed_message) else getString(R.string.task_uncompleted_message)
-        showToast(message)
     }
 
     private fun getPriorityName(priority: TaskPriority): String {

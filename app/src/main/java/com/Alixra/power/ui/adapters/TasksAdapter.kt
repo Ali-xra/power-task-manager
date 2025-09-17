@@ -21,7 +21,24 @@ class TasksAdapter(
     private var tasks: List<Task> = emptyList()
 
     fun updateTasks(newTasks: List<Task>) {
+        val oldTasks = tasks
         tasks = newTasks
+
+        // استفاده از notifyItemChanged برای بهینه‌سازی عملکرد
+        if (oldTasks.size == newTasks.size) {
+            // بررسی تغییرات فردی
+            for (i in newTasks.indices) {
+                val oldTask = oldTasks.getOrNull(i)
+                val newTask = newTasks[i]
+                if (oldTask?.id == newTask.id && oldTask.isCompleted != newTask.isCompleted) {
+                    // فقط وضعیت تکمیل تغییر کرده
+                    notifyItemChanged(i)
+                    return
+                }
+            }
+        }
+
+        // اگر تغییرات پیچیده‌تر بود، از notifyDataSetChanged استفاده کن
         notifyDataSetChanged()
     }
 
@@ -46,6 +63,9 @@ class TasksAdapter(
         private val statusIcon: TextView = itemView.findViewById(R.id.statusIcon)
 
         fun bind(task: Task) {
+            // ابتدا listener را حذف کن تا از تداخل جلوگیری شود
+            taskCheckBox.setOnCheckedChangeListener(null)
+
             taskTitle.text = task.title
             taskDescription.text = task.description
             taskCheckBox.isChecked = task.isCompleted
@@ -53,7 +73,7 @@ class TasksAdapter(
             // تنظیم رنگ اولویت با پالت جدید
             val priorityColor = when (task.priority) {
                 TaskPriority.NORMAL -> Color.parseColor("#3B82F6")  // priority_normal
-                TaskPriority.HIGH -> Color.parseColor("#F59E0B")     // priority_high  
+                TaskPriority.HIGH -> Color.parseColor("#F59E0B")     // priority_high
                 TaskPriority.URGENT -> Color.parseColor("#EF4444")   // priority_urgent
             }
             priorityIndicator.setBackgroundColor(priorityColor)
@@ -97,9 +117,12 @@ class TasksAdapter(
                 taskCategory.visibility = View.GONE
             }
 
-            // کلیک روی چک‌باکس
+            // حالا listener را دوباره تنظیم کن
             taskCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                onTaskChecked(task, isChecked)
+                // بررسی اینکه آیا تغییر واقعی رخ داده یا نه
+                if (isChecked != task.isCompleted) {
+                    onTaskChecked(task, isChecked)
+                }
             }
         }
     }
