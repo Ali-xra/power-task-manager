@@ -361,8 +361,12 @@ class TasksActivity : BaseActivity() {
     }
 
     private fun formatDate(timestamp: Long): String {
-        val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
-        return sdf.format(Date(timestamp))
+        return try {
+            val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+            sdf.format(Date(timestamp))
+        } catch (e: Exception) {
+            "تاریخ نامعلوم"
+        }
     }
 
     private fun openCalendar(timePeriod: TimePeriod) {
