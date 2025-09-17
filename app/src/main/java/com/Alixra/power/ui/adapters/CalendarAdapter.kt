@@ -13,6 +13,14 @@ import com.Alixra.power.data.TimePeriod
 import com.Alixra.power.ui.CalendarActivity
 import com.google.android.material.card.MaterialCardView
 
+/**
+ * آداپتر تقویم برای نمایش روزها به همراه کارهای مربوطه
+ *
+ * @param onDayClick کال‌بک کلیک روی روز
+ * @param onTaskClick کال‌بک کلیک روی کار
+ * @param getTasksForDate تابع دریافت کارهای مربوط به تاریخ
+ * @param timePeriod بازه زمانی تقویم
+ */
 class CalendarAdapter(
     private val onDayClick: (CalendarActivity.CalendarDay) -> Unit,
     private val onTaskClick: (Task) -> Unit,
