@@ -15,10 +15,15 @@ import com.Alixra.power.data.TaskPriority
 
 class TasksAdapter(
     private val preferencesManager: PreferencesManager,
-    private val onTaskChecked: (Task, Boolean) -> Unit
+    private val onTaskChecked: (Task, Boolean) -> Unit,
+    private val onTaskLongClick: (Task) -> Unit = {},
+    private val onTaskClick: (Task) -> Unit = {},
+    private val onSelectionChanged: (List<Task>) -> Unit = {}
 ) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
     private var tasks: List<Task> = emptyList()
+    private var isSelectionMode = false
+    private val selectedTasks = mutableSetOf<String>() // Task IDs
 
     fun updateTasks(newTasks: List<Task>) {
         val oldTasks = tasks
@@ -41,6 +46,44 @@ class TasksAdapter(
         // اگر تغییرات پیچیده‌تر بود، از notifyDataSetChanged استفاده کن
         notifyDataSetChanged()
     }
+
+    fun enterSelectionMode(task: Task) {
+        isSelectionMode = true
+        selectedTasks.clear()
+        selectedTasks.add(task.id)
+        notifyDataSetChanged()
+        onSelectionChanged(getSelectedTasks())
+    }
+
+    fun exitSelectionMode() {
+        isSelectionMode = false
+        selectedTasks.clear()
+        notifyDataSetChanged()
+        onSelectionChanged(emptyList())
+    }
+
+    fun toggleTaskSelection(task: Task) {
+        if (selectedTasks.contains(task.id)) {
+            selectedTasks.remove(task.id)
+        } else {
+            selectedTasks.add(task.id)
+        }
+        notifyItemChanged(tasks.indexOfFirst { it.id == task.id })
+        onSelectionChanged(getSelectedTasks())
+
+        // Exit selection mode if no tasks selected
+        if (selectedTasks.isEmpty()) {
+            exitSelectionMode()
+        }
+    }
+
+    fun getSelectedTasks(): List<Task> {
+        return tasks.filter { selectedTasks.contains(it.id) }
+    }
+
+    fun isInSelectionMode(): Boolean = isSelectionMode
+
+    fun getSelectedCount(): Int = selectedTasks.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -76,7 +119,21 @@ class TasksAdapter(
 
             taskTitle.text = task.title
             taskDescription.text = task.description
-            taskCheckBox.isChecked = task.isCompleted
+
+            // در حالت انتخاب، چک‌باکس برای انتخاب است، در غیر این صورت برای تکمیل
+            if (isSelectionMode) {
+                taskCheckBox.isChecked = selectedTasks.contains(task.id)
+                // تغییر ظاهر آیتم در حالت انتخاب
+                itemView.setBackgroundColor(
+                    if (selectedTasks.contains(task.id))
+                        Color.parseColor("#E3F2FD")
+                    else
+                        Color.TRANSPARENT
+                )
+            } else {
+                taskCheckBox.isChecked = task.isCompleted
+                itemView.setBackgroundColor(Color.TRANSPARENT)
+            }
 
             // تنظیم رنگ اولویت با پالت جدید
             val priorityColor = when (task.priority) {
@@ -127,9 +184,34 @@ class TasksAdapter(
 
             // حالا listener را دوباره تنظیم کن
             taskCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                // بررسی اینکه آیا تغییر واقعی رخ داده یا نه
-                if (isChecked != task.isCompleted) {
-                    onTaskChecked(task, isChecked)
+                if (isSelectionMode) {
+                    // در حالت انتخاب، تغییر وضعیت انتخاب
+                    toggleTaskSelection(task)
+                } else {
+                    // در حالت عادی، تغییر وضعیت تکمیل
+                    if (isChecked != task.isCompleted) {
+                        onTaskChecked(task, isChecked)
+                    }
+                }
+            }
+
+            // Long click برای ورود به حالت انتخاب
+            itemView.setOnLongClickListener {
+                if (!isSelectionMode) {
+                    enterSelectionMode(task)
+                    onTaskLongClick(task)
+                    true
+                } else {
+                    false
+                }
+            }
+
+            // Click عادی
+            itemView.setOnClickListener {
+                if (isSelectionMode) {
+                    toggleTaskSelection(task)
+                } else {
+                    onTaskClick(task)
                 }
             }
         }

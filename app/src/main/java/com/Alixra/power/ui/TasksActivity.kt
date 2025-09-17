@@ -60,6 +60,9 @@ class TasksActivity : BaseActivity() {
     private var currentPeriod: TimePeriod = TimePeriod.TODAY
     private var currentTasks: MutableList<Task> = mutableListOf()
 
+    // Selection mode variables
+    private var isInSelectionMode = false
+
     // Navigation Stack
     private enum class ViewState { TIME_PERIODS, TASKS }
     private var currentViewState = ViewState.TIME_PERIODS
@@ -118,9 +121,26 @@ class TasksActivity : BaseActivity() {
     }
 
     private fun setupRecyclerView() {
-        tasksAdapter = TasksAdapter(prefsManager) { task, isCompleted ->
-            toggleTaskCompletion(task, isCompleted)
-        }
+        tasksAdapter = TasksAdapter(
+            preferencesManager = prefsManager,
+            onTaskChecked = { task, isCompleted ->
+                toggleTaskCompletion(task, isCompleted)
+            },
+            onTaskLongClick = { task ->
+                // Enter selection mode
+                showSelectionModeUI()
+            },
+            onTaskClick = { task ->
+                // Handle normal task click if needed
+            },
+            onSelectionChanged = { selectedTasks ->
+                if (selectedTasks.isEmpty()) {
+                    hideSelectionModeUI()
+                } else {
+                    updateSelectionModeUI(selectedTasks.size)
+                }
+            }
+        )
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(this)
         tasksRecyclerView.adapter = tasksAdapter
@@ -162,7 +182,10 @@ class TasksActivity : BaseActivity() {
     }
 
     private fun handleBackNavigation() {
-        if (currentViewState == ViewState.TASKS) {
+        if (isInSelectionMode) {
+            // Exit selection mode
+            exitSelectionMode()
+        } else if (currentViewState == ViewState.TASKS) {
             // From task list, go back to time periods
             showTimePeriodsView()
         } else {
@@ -399,6 +422,98 @@ class TasksActivity : BaseActivity() {
         val intent = Intent(this, CalendarActivity::class.java)
         intent.putExtra("time_period", timePeriod)
         startActivity(intent)
+    }
+
+    private fun showSelectionModeUI() {
+        isInSelectionMode = true
+        // Change the add button to action buttons
+        addTaskButton.text = "حذف"
+        addTaskButton.setOnClickListener {
+            deleteSelectedTasks()
+        }
+
+        // You can add edit button or more actions here
+        // For now, long press on add button for edit
+        addTaskButton.setOnLongClickListener {
+            editSelectedTask()
+            true
+        }
+    }
+
+    private fun hideSelectionModeUI() {
+        isInSelectionMode = false
+        // Restore add button
+        addTaskButton.text = getString(R.string.add_new_task_title)
+        addTaskButton.setOnClickListener {
+            showAddTaskDialog()
+        }
+        addTaskButton.setOnLongClickListener(null)
+    }
+
+    private fun updateSelectionModeUI(selectedCount: Int) {
+        addTaskButton.text = "حذف ($selectedCount)"
+    }
+
+    private fun exitSelectionMode() {
+        tasksAdapter.exitSelectionMode()
+        hideSelectionModeUI()
+    }
+
+    private fun deleteSelectedTasks() {
+        val selectedTasks = tasksAdapter.getSelectedTasks()
+        if (selectedTasks.isEmpty()) return
+
+        val message = if (selectedTasks.size == 1) {
+            "آیا مطمئن هستید که می‌خواهید این کار را حذف کنید؟"
+        } else {
+            "آیا مطمئن هستید که می‌خواهید ${selectedTasks.size} کار را حذف کنید؟"
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("حذف کار")
+            .setMessage(message)
+            .setPositiveButton("حذف") { _, _ ->
+                selectedTasks.forEach { task ->
+                    prefsManager.deleteTask(task.id)
+                }
+                exitSelectionMode()
+                loadTasksList()
+                updateTaskCounts()
+                showToast("کار(ها) حذف شدند")
+            }
+            .setNegativeButton("لغو", null)
+            .show()
+    }
+
+    private fun editSelectedTask() {
+        val selectedTasks = tasksAdapter.getSelectedTasks()
+        if (selectedTasks.size != 1) {
+            showToast("برای ویرایش، تنها یک کار انتخاب کنید")
+            return
+        }
+
+        val task = selectedTasks.first()
+        val editText = EditText(this)
+        editText.setText(task.title)
+        editText.hint = getString(R.string.task_title_hint)
+
+        AlertDialog.Builder(this)
+            .setTitle("ویرایش کار")
+            .setView(editText)
+            .setPositiveButton("ذخیره") { _, _ ->
+                val newTitle = editText.text.toString().trim()
+                if (newTitle.isNotEmpty()) {
+                    val updatedTask = task.copy(title = newTitle)
+                    prefsManager.saveTask(updatedTask)
+                    exitSelectionMode()
+                    loadTasksList()
+                    showToast("کار ویرایش شد")
+                } else {
+                    showToast("عنوان کار نمی‌تواند خالی باشد")
+                }
+            }
+            .setNegativeButton("لغو", null)
+            .show()
     }
 
     private fun showToast(message: String) {
