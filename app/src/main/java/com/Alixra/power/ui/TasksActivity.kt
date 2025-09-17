@@ -129,11 +129,14 @@ class TasksActivity : BaseActivity() {
     private fun setupClickListeners() {
         // دکمه بازگشت/ناوبری
         backButton.setOnClickListener {
+            android.util.Log.d("TasksActivity", "Back button clicked. Current state: $currentViewState")
             if (currentViewState == ViewState.TASKS) {
                 // Always go back to time periods when in task view
+                android.util.Log.d("TasksActivity", "Going back to time periods view")
                 showTimePeriodsView()
             } else {
                 // From time periods view, go back to main page
+                android.util.Log.d("TasksActivity", "Going back to main page")
                 finish()
             }
         }
@@ -168,6 +171,7 @@ class TasksActivity : BaseActivity() {
     }
 
     private fun showTimePeriodsView() {
+        android.util.Log.d("TasksActivity", "showTimePeriodsView() called")
         currentViewState = ViewState.TIME_PERIODS
         timePeriodsLayout.visibility = View.VISIBLE
         tasksLayout.visibility = View.GONE
@@ -176,6 +180,7 @@ class TasksActivity : BaseActivity() {
     }
 
     private fun showTasksView() {
+        android.util.Log.d("TasksActivity", "showTasksView() called")
         currentViewState = ViewState.TASKS
         timePeriodsLayout.visibility = View.GONE
         tasksLayout.visibility = View.VISIBLE
