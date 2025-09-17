@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.PowerManager
 import android.provider.Settings
 import com.Alixra.power.receiver.AlarmReceiver
 import com.Alixra.power.receiver.EveningReceiver
@@ -34,31 +35,35 @@ object AlarmUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
-            // تنظیم زنگ تکراری روزانه
-            if (enableRepeating) {
-                try {
-                    // اولین روش: استفاده از setRepeating برای آلارم‌های تکراری
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        timeInMillis,
-                        AlarmManager.INTERVAL_DAY, // تکرار هر 24 ساعت
-                        pendingIntent
-                    )
-                } catch (e: Exception) {
-                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
+            // استفاده از setExactAndAllowWhileIdle برای آلارم‌های دقیق
+            // این روش تضمین می‌کند که آلارم در زمان دقیق اجرا شود
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    // Android 6+ - setExactAndAllowWhileIdle برای عبور از Doze mode
                     alarmManager.setExactAndAllowWhileIdle(
                         AlarmManager.RTC_WAKEUP,
                         timeInMillis,
                         pendingIntent
                     )
+                } else {
+                    // Android کمتر از 6 - setExact کافی است
+                    alarmManager.setExact(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        pendingIntent
+                    )
                 }
-            } else {
-                // برای آلارم‌های یکبار مصرف
-                alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    timeInMillis,
-                    pendingIntent
-                )
+            } catch (e: Exception) {
+                // fallback به setExactAndAllowWhileIdle
+                try {
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        pendingIntent
+                    )
+                } catch (e2: Exception) {
+                    e2.printStackTrace()
+                }
             }
             
             // ذخیره وضعیت فعال بودن آلارم صبح
@@ -105,31 +110,34 @@ object AlarmUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
-            // تنظیم یادآور تکراری روزانه
-            if (enableRepeating) {
-                try {
-                    // اولین روش: استفاده از setRepeating برای یادآورهای تکراری
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        timeInMillis,
-                        AlarmManager.INTERVAL_DAY, // تکرار هر 24 ساعت
-                        pendingIntent
-                    )
-                } catch (e: Exception) {
-                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
+            // استفاده از setExactAndAllowWhileIdle برای یادآورهای دقیق
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    // Android 6+ - setExactAndAllowWhileIdle برای عبور از Doze mode
                     alarmManager.setExactAndAllowWhileIdle(
                         AlarmManager.RTC_WAKEUP,
                         timeInMillis,
                         pendingIntent
                     )
+                } else {
+                    // Android کمتر از 6 - setExact کافی است
+                    alarmManager.setExact(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        pendingIntent
+                    )
                 }
-            } else {
-                // برای یادآورهای یکبار مصرف
-                alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    timeInMillis,
-                    pendingIntent
-                )
+            } catch (e: Exception) {
+                // fallback به setExactAndAllowWhileIdle
+                try {
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        timeInMillis,
+                        pendingIntent
+                    )
+                } catch (e2: Exception) {
+                    e2.printStackTrace()
+                }
             }
             
             // ذخیره وضعیت فعال بودن یادآور شب
@@ -229,7 +237,7 @@ object AlarmUtils {
                     val nextAlarmTime = getTomorrowAlarmTime(hour, minute)
                     
                     // تنظیم آلارم فردا
-                    setMorningAlarm(context, nextAlarmTime, true)
+                    setMorningAlarm(context, nextAlarmTime, enableRepeating)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -258,7 +266,7 @@ object AlarmUtils {
                     val nextAlarmTime = getTomorrowAlarmTime(hour, minute)
                     
                     // تنظیم یادآور فردا
-                    setEveningAlarm(context, nextAlarmTime, true)
+                    setEveningAlarm(context, nextAlarmTime, enableRepeating)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -305,20 +313,22 @@ object AlarmUtils {
                 val nextAlarmTime = getNextAlarmTimeForDay(hour, minute, dayOfWeek)
                 
                 try {
-                    // تنظیم آلارم تکراری هفتگی برای این روز
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        nextAlarmTime,
-                        AlarmManager.INTERVAL_DAY * 7, // تکرار هر هفته
-                        pendingIntent
-                    )
+                    // استفاده از setExactAndAllowWhileIdle برای آلارم‌های دقیق
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        alarmManager.setExactAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP,
+                            nextAlarmTime,
+                            pendingIntent
+                        )
+                    } else {
+                        alarmManager.setExact(
+                            AlarmManager.RTC_WAKEUP,
+                            nextAlarmTime,
+                            pendingIntent
+                        )
+                    }
                 } catch (e: Exception) {
-                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
-                    alarmManager.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        nextAlarmTime,
-                        pendingIntent
-                    )
+                    e.printStackTrace()
                 }
             }
             
@@ -411,20 +421,22 @@ object AlarmUtils {
                 val nextAlarmTime = getNextAlarmTimeForDay(hour, minute, dayOfWeek)
                 
                 try {
-                    // تنظیم یادآور تکراری هفتگی برای این روز
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        nextAlarmTime,
-                        AlarmManager.INTERVAL_DAY * 7, // تکرار هر هفته
-                        pendingIntent
-                    )
+                    // استفاده از setExactAndAllowWhileIdle برای یادآورهای دقیق
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        alarmManager.setExactAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP,
+                            nextAlarmTime,
+                            pendingIntent
+                        )
+                    } else {
+                        alarmManager.setExact(
+                            AlarmManager.RTC_WAKEUP,
+                            nextAlarmTime,
+                            pendingIntent
+                        )
+                    }
                 } catch (e: Exception) {
-                    // اگر setRepeating کار نکرد، از setExactAndAllowWhileIdle استفاده کن
-                    alarmManager.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        nextAlarmTime,
-                        pendingIntent
-                    )
+                    e.printStackTrace()
                 }
             }
             

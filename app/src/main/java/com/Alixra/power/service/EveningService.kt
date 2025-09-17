@@ -15,6 +15,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.PowerManager
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.core.app.NotificationCompat
@@ -39,11 +40,13 @@ class EveningService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var vibrator: Vibrator? = null
+    private var wakeLock: PowerManager.WakeLock? = null
     private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate() {
         super.onCreate()
         serviceInstance = this // ذخیره reference برای کنترل خارجی
+        acquireWakeLock()
         createNotificationChannel()
         startForegroundService()
         startEveningAlarm()
@@ -65,6 +68,7 @@ class EveningService : Service() {
         stopEveningVibration()
         // نوتیفیکیشن سرویس را پاک می‌کنیم اما نوتیفیکیشن اصلی باقی می‌ماند
         clearServiceNotification()
+        releaseWakeLock()
     }
 
     private fun createNotificationChannel() {
@@ -246,6 +250,32 @@ class EveningService : Service() {
         }
     }
 
+    private fun acquireWakeLock() {
+        try {
+            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+            wakeLock = powerManager.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+                "PowerApp:EveningWakeLock"
+            )
+            wakeLock?.acquire(10 * 60 * 1000L) // 10 دقیقه maximum
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun releaseWakeLock() {
+        try {
+            wakeLock?.let {
+                if (it.isHeld) {
+                    it.release()
+                }
+            }
+            wakeLock = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     /**
      * متد عمومی برای متوقف کردن سرویس از خارج
      * این متد توسط EveningActivity هنگام رفتن به مرحله 2 فراخوانی می‌شود
@@ -257,6 +287,7 @@ class EveningService : Service() {
         stopEveningSound()
         stopEveningVibration()
         clearServiceNotification()
+        releaseWakeLock()
         stopSelf()
     }
 }

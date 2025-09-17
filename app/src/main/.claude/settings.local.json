@@ -4,7 +4,11 @@
       "Read(//c/Users/Ali/AndroidStudioProjects/power/**)",
       "Read(//c/Users/Ali/AndroidStudioProjects/power/app/**)",
       "Bash(./gradlew:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(.gradlew build)"
     ],
     "deny": [],
     "ask": []

@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import com.Alixra.power.R
 import com.Alixra.power.service.AlarmService
@@ -31,8 +32,17 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        // ابتدا پاک کردن نوتیفیکیشن‌های قبلی (در صورت وجود)
-        clearPreviousNotifications(context)
+        // دریافت wake lock برای بیدار کردن دستگاه
+        val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+        val wakeLock = powerManager.newWakeLock(
+            PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+            "PowerApp:AlarmReceiverWakeLock"
+        )
+        wakeLock.acquire(2 * 60 * 1000L) // 2 دقیقه
+
+        try {
+            // ابتدا پاک کردن نوتیفیکیشن‌های قبلی (در صورت وجود)
+            clearPreviousNotifications(context)
         
         // بررسی اینکه آیا امروز یکی از روزهای انتخاب شده است
         val prefsManager = com.Alixra.power.data.PreferencesManager(context)
@@ -136,14 +146,24 @@ class AlarmReceiver : BroadcastReceiver() {
         // نمایش نوتیفیکیشن
         notificationManager.notify(ALARM_NOTIFICATION_ID, notificationBuilder.build())
 
-        // در Android 10+ اگر صفحه قفل نیست، مستقیماً Activity را باز کن
-        try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                context.startActivity(fullScreenIntent)
+            // در Android 10+ اگر صفحه قفل نیست، مستقیماً Activity را باز کن
+            try {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                    context.startActivity(fullScreenIntent)
+                }
+            } catch (e: Exception) {
+                // اگر نتوانست Activity را باز کند، نوتیفیکیشن کافی است
+                e.printStackTrace()
             }
-        } catch (e: Exception) {
-            // اگر نتوانست Activity را باز کند، نوتیفیکیشن کافی است
-            e.printStackTrace()
+        } finally {
+            // آزاد کردن wake lock
+            try {
+                if (wakeLock.isHeld) {
+                    wakeLock.release()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 

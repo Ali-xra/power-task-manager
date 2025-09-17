@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import com.Alixra.power.R
 import com.Alixra.power.service.EveningService
@@ -31,8 +32,17 @@ class EveningReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        // ابتدا پاک کردن نوتیفیکیشن‌های قبلی (در صورت وجود)
-        clearPreviousNotifications(context)
+        // دریافت wake lock برای بیدار کردن دستگاه
+        val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+        val wakeLock = powerManager.newWakeLock(
+            PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+            "PowerApp:EveningReceiverWakeLock"
+        )
+        wakeLock.acquire(2 * 60 * 1000L) // 2 دقیقه
+
+        try {
+            // ابتدا پاک کردن نوتیفیکیشن‌های قبلی (در صورت وجود)
+            clearPreviousNotifications(context)
         
         // بررسی اینکه آیا امروز یکی از روزهای انتخاب شده است
         val prefsManager = com.Alixra.power.data.PreferencesManager(context)
@@ -167,8 +177,18 @@ class EveningReceiver : BroadcastReceiver() {
         // نمایش نوتیفیکیشن
         notificationManager.notify(EVENING_NOTIFICATION_ID, notificationBuilder.build())
 
-        // **تغییر اصلی**: حذف باز کردن مستقیم Activity
-        // فقط نوتیفیکیشن با fullScreenIntent کافی است - مثل AlarmReceiver
+            // **تغییر اصلی**: حذف باز کردن مستقیم Activity
+            // فقط نوتیفیکیشن با fullScreenIntent کافی است - مثل AlarmReceiver
+        } finally {
+            // آزاد کردن wake lock
+            try {
+                if (wakeLock.isHeld) {
+                    wakeLock.release()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun clearPreviousNotifications(context: Context) {

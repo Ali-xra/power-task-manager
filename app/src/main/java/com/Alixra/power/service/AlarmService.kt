@@ -13,6 +13,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.IBinder
+import android.os.PowerManager
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.core.app.NotificationCompat
@@ -29,9 +30,11 @@ class AlarmService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var vibrator: Vibrator? = null
+    private var wakeLock: PowerManager.WakeLock? = null
 
     override fun onCreate() {
         super.onCreate()
+        acquireWakeLock()
         createNotificationChannel()
         startForegroundService()
         startAlarmSound()
@@ -53,6 +56,7 @@ class AlarmService : Service() {
         stopAlarmSound()
         stopVibration()
         clearAllNotifications()
+        releaseWakeLock()
     }
 
     private fun createNotificationChannel() {
@@ -226,6 +230,32 @@ class AlarmService : Service() {
         }
     }
 
+    private fun acquireWakeLock() {
+        try {
+            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+            wakeLock = powerManager.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+                "PowerApp:AlarmWakeLock"
+            )
+            wakeLock?.acquire(10 * 60 * 1000L) // 10 دقیقه maximum
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun releaseWakeLock() {
+        try {
+            wakeLock?.let {
+                if (it.isHeld) {
+                    it.release()
+                }
+            }
+            wakeLock = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     /**
      * متد عمومی برای متوقف کردن سرویس از خارج
      */
@@ -233,6 +263,7 @@ class AlarmService : Service() {
         stopAlarmSound()
         stopVibration()
         clearAllNotifications()
+        releaseWakeLock()
         stopSelf()
     }
 }
