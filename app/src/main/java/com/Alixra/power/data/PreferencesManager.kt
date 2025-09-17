@@ -6,12 +6,13 @@ import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PreferencesManager(context: Context) {
+class PreferencesManager(context: Context?) {
 
     // ایجاد یک فایل private برای ذخیره سازی اطلاعات
-    private val prefs = context.getSharedPreferences("SmartAlarmPrefs", Context.MODE_PRIVATE)
-    private val editor = prefs.edit()
+    private val prefs = context?.getSharedPreferences("SmartAlarmPrefs", Context.MODE_PRIVATE)
     private val gson = Gson()
+
+    private fun getEditor() = prefs?.edit()
 
     // یک کلید منحصر به فرد برای هر داده تعریف می کنیم
     companion object {
