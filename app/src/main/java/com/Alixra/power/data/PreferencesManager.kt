@@ -12,7 +12,7 @@ class PreferencesManager(context: Context?) {
     private val prefs = context?.getSharedPreferences("SmartAlarmPrefs", Context.MODE_PRIVATE)
     private val gson = Gson()
 
-    private fun getEditor() = prefs?.edit()
+    private fun getEditor() = prefs?.edit() ?: throw IllegalStateException("SharedPreferences not initialized")
 
     // یک کلید منحصر به فرد برای هر داده تعریف می کنیم
     companion object {
@@ -61,13 +61,15 @@ class PreferencesManager(context: Context?) {
     // --- توابع مربوط به جملات انگیزشی (قدیمی) ---
     fun saveQuotes(quotes: List<String>) {
         val json = gson.toJson(quotes)
-        editor.putString(QUOTES_LIST_KEY, json)
-        editor.putBoolean(QUOTES_INITIALIZED_KEY, true)
-        editor.apply()
+        getEditor().apply {
+            putString(QUOTES_LIST_KEY, json)
+            putBoolean(QUOTES_INITIALIZED_KEY, true)
+            apply()
+        }
     }
 
     fun getQuotes(): List<String> {
-        val json = prefs.getString(QUOTES_LIST_KEY, null)
+        val json = prefs?.getString(QUOTES_LIST_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<List<String>>() {}.type
             gson.fromJson(json, type)
@@ -77,30 +79,34 @@ class PreferencesManager(context: Context?) {
     }
 
     fun areQuotesInitialized(): Boolean {
-        return prefs.getBoolean(QUOTES_INITIALIZED_KEY, false)
+        return prefs?.getBoolean(QUOTES_INITIALIZED_KEY, false) ?: false
     }
 
     fun areCategoriesInitialized(): Boolean {
-        return prefs.getBoolean(CATEGORIES_INITIALIZED_KEY, false)
+        return prefs?.getBoolean(CATEGORIES_INITIALIZED_KEY, false) ?: false
     }
 
     // --- توابع مربوط به زمان زنگ‌ها (قدیمی) ---
     fun saveMorningAlarmTime(time: String) {
-        editor.putString(MORNING_ALARM_TIME_KEY, time)
-        editor.apply()
+        getEditor().apply {
+            putString(MORNING_ALARM_TIME_KEY, time)
+            apply()
+        }
     }
 
     fun getMorningAlarmTime(): String {
-        return prefs.getString(MORNING_ALARM_TIME_KEY, "") ?: ""
+        return prefs?.getString(MORNING_ALARM_TIME_KEY, "") ?: ""
     }
 
     fun saveEveningAlarmTime(time: String) {
-        editor.putString(EVENING_ALARM_TIME_KEY, time)
-        editor.apply()
+        getEditor().apply {
+            putString(EVENING_ALARM_TIME_KEY, time)
+            apply()
+        }
     }
 
     fun getEveningAlarmTime(): String {
-        return prefs.getString(EVENING_ALARM_TIME_KEY, "") ?: ""
+        return prefs?.getString(EVENING_ALARM_TIME_KEY, "") ?: ""
     }
 
     // --- توابع مربوط به امتیازدهی شبانه (قدیمی) ---
@@ -108,12 +114,14 @@ class PreferencesManager(context: Context?) {
         val allRatings = getAllRatings().toMutableMap()
         allRatings[date] = rating
         val json = gson.toJson(allRatings)
-        editor.putString(DAILY_RATINGS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(DAILY_RATINGS_KEY, json)
+            apply()
+        }
     }
 
     fun getAllRatings(): Map<String, Int> {
-        val json = prefs.getString(DAILY_RATINGS_KEY, null)
+        val json = prefs?.getString(DAILY_RATINGS_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<Map<String, Int>>() {}.type
             gson.fromJson(json, type)
@@ -124,39 +132,47 @@ class PreferencesManager(context: Context?) {
 
     // --- توابع مربوط به آمار (قدیمی) ---
     fun saveLastSuccessDate(date: String) {
-        editor.putString(LAST_SUCCESS_DATE_KEY, date)
-        editor.apply()
+        getEditor().apply {
+            putString(LAST_SUCCESS_DATE_KEY, date)
+            apply()
+        }
     }
 
     fun getLastSuccessDate(): String {
-        return prefs.getString(LAST_SUCCESS_DATE_KEY, "") ?: ""
+        return prefs?.getString(LAST_SUCCESS_DATE_KEY, "") ?: ""
     }
 
     fun saveSuccessCount(count: Int) {
-        editor.putInt(SUCCESS_COUNT_KEY, count)
-        editor.apply()
+        getEditor().apply {
+            putInt(SUCCESS_COUNT_KEY, count)
+            apply()
+        }
     }
 
     fun getSuccessCount(): Int {
-        return prefs.getInt(SUCCESS_COUNT_KEY, 0)
+        return prefs?.getInt(SUCCESS_COUNT_KEY, 0) ?: 0
     }
 
     fun saveAverageRating(average: Double) {
-        editor.putFloat(AVERAGE_RATING_KEY, average.toFloat())
-        editor.apply()
+        getEditor().apply {
+            putFloat(AVERAGE_RATING_KEY, average.toFloat())
+            apply()
+        }
     }
 
     fun getAverageRating(): Double {
-        return prefs.getFloat(AVERAGE_RATING_KEY, 0f).toDouble()
+        return prefs?.getFloat(AVERAGE_RATING_KEY, 0f)?.toDouble() ?: 0.0
     }
 
     fun saveTotalRatingDays(count: Int) {
-        editor.putInt(TOTAL_RATING_DAYS_KEY, count)
-        editor.apply()
+        getEditor().apply {
+            putInt(TOTAL_RATING_DAYS_KEY, count)
+            apply()
+        }
     }
 
     fun getTotalRatingDays(): Int {
-        return prefs.getInt(TOTAL_RATING_DAYS_KEY, 0)
+        return prefs?.getInt(TOTAL_RATING_DAYS_KEY, 0) ?: 0
     }
 
     // --- توابع جدید مربوط به Task Categories ---
@@ -171,13 +187,15 @@ class PreferencesManager(context: Context?) {
         }
 
         val json = gson.toJson(categories)
-        editor.putString(TASK_CATEGORIES_KEY, json)
-        editor.putBoolean(CATEGORIES_INITIALIZED_KEY, true)
-        editor.apply()
+        getEditor().apply {
+            putString(TASK_CATEGORIES_KEY, json)
+            putBoolean(CATEGORIES_INITIALIZED_KEY, true)
+            apply()
+        }
     }
 
     fun getTaskCategories(): List<TaskCategory> {
-        val json = prefs.getString(TASK_CATEGORIES_KEY, null)
+        val json = prefs?.getString(TASK_CATEGORIES_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<List<TaskCategory>>() {}.type
             gson.fromJson(json, type) ?: emptyList()
@@ -191,9 +209,11 @@ class PreferencesManager(context: Context?) {
         categories.removeAll { it.id == categoryId }
 
         val json = gson.toJson(categories)
-        editor.putString(TASK_CATEGORIES_KEY, json)
-        editor.putBoolean(CATEGORIES_INITIALIZED_KEY, true)
-        editor.apply()
+        getEditor().apply {
+            putString(TASK_CATEGORIES_KEY, json)
+            putBoolean(CATEGORIES_INITIALIZED_KEY, true)
+            apply()
+        }
 
         // حذف تمام کارهای مربوط به این بخش
         deleteTasksInCategory(categoryId)
@@ -215,12 +235,14 @@ class PreferencesManager(context: Context?) {
         }
 
         val json = gson.toJson(tasks)
-        editor.putString(TASKS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(TASKS_KEY, json)
+            apply()
+        }
     }
 
     fun getAllTasks(): List<Task> {
-        val json = prefs.getString(TASKS_KEY, null)
+        val json = prefs?.getString(TASKS_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<List<Task>>() {}.type
             gson.fromJson(json, type) ?: emptyList()
@@ -238,8 +260,10 @@ class PreferencesManager(context: Context?) {
         tasks.removeAll { it.id == taskId }
 
         val json = gson.toJson(tasks)
-        editor.putString(TASKS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(TASKS_KEY, json)
+            apply()
+        }
     }
 
     fun deleteTasksInCategory(categoryId: String) {
@@ -247,8 +271,10 @@ class PreferencesManager(context: Context?) {
         tasks.removeAll { it.categoryId == categoryId }
 
         val json = gson.toJson(tasks)
-        editor.putString(TASKS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(TASKS_KEY, json)
+            apply()
+        }
     }
 
     fun getTasksForPeriod(categoryId: String, timePeriod: TimePeriod): List<Task> {
@@ -287,12 +313,14 @@ class PreferencesManager(context: Context?) {
         allRatings[date] = dayRatings
 
         val json = gson.toJson(allRatings)
-        editor.putString(CATEGORY_RATINGS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(CATEGORY_RATINGS_KEY, json)
+            apply()
+        }
     }
 
     fun getCategoryRatings(): Map<String, Map<String, Int>> {
-        val json = prefs.getString(CATEGORY_RATINGS_KEY, null)
+        val json = prefs?.getString(CATEGORY_RATINGS_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<Map<String, Map<String, Int>>>() {}.type
             gson.fromJson(json, type) ?: emptyMap()
@@ -317,8 +345,10 @@ class PreferencesManager(context: Context?) {
      * @param step مرحله فعلی (1=امتیاز کلی، 2=امتیاز بخش‌ها، 3=کارهای امروز)
      */
     fun saveEveningStep(step: Int) {
-        editor.putInt(EVENING_STEP_KEY, step)
-        editor.apply()
+        getEditor().apply {
+            putInt(EVENING_STEP_KEY, step)
+            apply()
+        }
     }
 
     /**
@@ -326,7 +356,7 @@ class PreferencesManager(context: Context?) {
      * @return مرحله فعلی (پیش‌فرض: 1)
      */
     fun getEveningStep(): Int {
-        return prefs.getInt(EVENING_STEP_KEY, 1)
+        return prefs?.getInt(EVENING_STEP_KEY, 1) ?: 1
     }
 
     /**
@@ -375,8 +405,10 @@ class PreferencesManager(context: Context?) {
      * ⚠️ خطرناک: تمام اطلاعات کاربر حذف می‌شود
      */
     fun clearAllData() {
-        editor.clear()
-        editor.apply()
+        getEditor().apply {
+            clear()
+            apply()
+        }
     }
 
     /**
@@ -493,10 +525,12 @@ class PreferencesManager(context: Context?) {
      * امتیازات روزانه و سایر داده‌ها حفظ می‌شوند
      */
     fun clearTaskData() {
-        editor.remove(TASK_CATEGORIES_KEY)
-        editor.remove(TASKS_KEY)
-        editor.remove(CATEGORY_RATINGS_KEY)
-        editor.apply()
+        getEditor().apply {
+            remove(TASK_CATEGORIES_KEY)
+            remove(TASKS_KEY)
+            remove(CATEGORY_RATINGS_KEY)
+            apply()
+        }
 
         // بازنشانی مرحله آلارم شبانه
         resetEveningStep()
@@ -519,8 +553,9 @@ class PreferencesManager(context: Context?) {
             if (validTasks.size != tasks.size) {
                 // حذف کارهای نامعتبر
                 val json = gson.toJson(validTasks)
-                editor.putString(TASKS_KEY, json)
-                editor.apply()
+                val editor = getEditor()
+                editor?.putString(TASKS_KEY, json)
+                editor?.apply()
                 issues.add("${tasks.size - validTasks.size} کار نامعتبر حذف شد")
             }
 
@@ -533,8 +568,10 @@ class PreferencesManager(context: Context?) {
             if (validCategories.size != categories.size) {
                 // حذف دسته‌بندی‌های نامعتبر
                 val json = gson.toJson(validCategories)
-                editor.putString(TASK_CATEGORIES_KEY, json)
-                editor.apply()
+                getEditor().apply {
+                    putString(TASK_CATEGORIES_KEY, json)
+                    apply()
+                }
                 issues.add("${categories.size - validCategories.size} دسته‌بندی نامعتبر حذف شد")
             }
 
@@ -553,8 +590,9 @@ class PreferencesManager(context: Context?) {
 
             if (tasksWithValidCategories.size != validTasks.size) {
                 val json = gson.toJson(tasksWithValidCategories)
-                editor.putString(TASKS_KEY, json)
-                editor.apply()
+                val editor = getEditor()
+                editor?.putString(TASKS_KEY, json)
+                editor?.apply()
                 issues.add("${validTasks.size - tasksWithValidCategories.size} کار بدون بخش معتبر حذف شد")
             }
 
@@ -568,8 +606,10 @@ class PreferencesManager(context: Context?) {
 
             if (cleanedRatings.size != categoryRatings.size) {
                 val json = gson.toJson(cleanedRatings)
-                editor.putString(CATEGORY_RATINGS_KEY, json)
-                editor.apply()
+                getEditor().apply {
+                    putString(CATEGORY_RATINGS_KEY, json)
+                    apply()
+                }
                 issues.add("امتیازات بخش‌های نامعتبر پاک شد")
             }
 
@@ -640,8 +680,10 @@ class PreferencesManager(context: Context?) {
      * @param enabled true برای فعال، false برای غیرفعال
      */
     fun setMorningAlarmEnabled(enabled: Boolean) {
-        editor.putBoolean(MORNING_ALARM_ENABLED_KEY, enabled)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(MORNING_ALARM_ENABLED_KEY, enabled)
+            apply()
+        }
     }
     
     /**
@@ -649,7 +691,7 @@ class PreferencesManager(context: Context?) {
      * @return true اگر فعال باشد، false اگر غیرفعال باشد
      */
     fun isMorningAlarmEnabled(): Boolean {
-        return prefs.getBoolean(MORNING_ALARM_ENABLED_KEY, false)
+        return prefs?.getBoolean(MORNING_ALARM_ENABLED_KEY, false) ?: false
     }
     
     /**
@@ -657,8 +699,10 @@ class PreferencesManager(context: Context?) {
      * @param enabled true برای فعال، false برای غیرفعال
      */
     fun setEveningAlarmEnabled(enabled: Boolean) {
-        editor.putBoolean(EVENING_ALARM_ENABLED_KEY, enabled)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(EVENING_ALARM_ENABLED_KEY, enabled)
+            apply()
+        }
     }
     
     /**
@@ -666,7 +710,7 @@ class PreferencesManager(context: Context?) {
      * @return true اگر فعال باشد، false اگر غیرفعال باشد
      */
     fun isEveningAlarmEnabled(): Boolean {
-        return prefs.getBoolean(EVENING_ALARM_ENABLED_KEY, false)
+        return prefs?.getBoolean(EVENING_ALARM_ENABLED_KEY, false) ?: false
     }
     
     /**
@@ -715,12 +759,12 @@ class PreferencesManager(context: Context?) {
         val eveningTime = getEveningAlarmTime()
         
         // اگر زمان آلارم صبح تنظیم شده ولی وضعیت آن مشخص نیست
-        if (morningTime.isNotEmpty() && !prefs.contains(MORNING_ALARM_ENABLED_KEY)) {
+        if (morningTime.isNotEmpty() && prefs?.contains(MORNING_ALARM_ENABLED_KEY) != true) {
             setMorningAlarmEnabled(true)
         }
         
         // اگر زمان یادآور شب تنظیم شده ولی وضعیت آن مشخص نیست
-        if (eveningTime.isNotEmpty() && !prefs.contains(EVENING_ALARM_ENABLED_KEY)) {
+        if (eveningTime.isNotEmpty() && prefs?.contains(EVENING_ALARM_ENABLED_KEY) != true) {
             setEveningAlarmEnabled(true)
         }
     }
@@ -730,21 +774,23 @@ class PreferencesManager(context: Context?) {
     // --- تنظیمات آلارم صبح ---
     fun isAlarmEnabled(): Boolean = isMorningAlarmEnabled()
     
-    fun getAlarmHour(): Int = prefs.getInt(ALARM_HOUR_KEY, 7)
+    fun getAlarmHour(): Int = prefs?.getInt(ALARM_HOUR_KEY, 7) ?: 7
     
-    fun getAlarmMinute(): Int = prefs.getInt(ALARM_MINUTE_KEY, 0)
+    fun getAlarmMinute(): Int = prefs?.getInt(ALARM_MINUTE_KEY, 0) ?: 0
     
     fun setAlarmEnabled(enabled: Boolean) = setMorningAlarmEnabled(enabled)
     
     fun setAlarmTime(hour: Int, minute: Int) {
-        editor.putInt(ALARM_HOUR_KEY, hour)
-        editor.putInt(ALARM_MINUTE_KEY, minute)
-        editor.apply()
+        getEditor().apply {
+            putInt(ALARM_HOUR_KEY, hour)
+            putInt(ALARM_MINUTE_KEY, minute)
+            apply()
+        }
     }
     
     // --- روزهای انتخاب شده ---
     fun getSelectedDays(): List<Int> {
-        val json = prefs.getString(SELECTED_DAYS_KEY, null)
+        val json = prefs?.getString(SELECTED_DAYS_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<List<Int>>() {}.type
             gson.fromJson(json, type) ?: listOf(1, 2, 3, 4, 5, 6, 7)
@@ -755,13 +801,15 @@ class PreferencesManager(context: Context?) {
     
     fun setSelectedDays(days: List<Int>) {
         val json = gson.toJson(days)
-        editor.putString(SELECTED_DAYS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(SELECTED_DAYS_KEY, json)
+            apply()
+        }
     }
     
     // --- روزهای انتخاب شده برای یادآور شب ---
     fun getEveningSelectedDays(): List<Int> {
-        val json = prefs.getString(EVENING_SELECTED_DAYS_KEY, null)
+        val json = prefs?.getString(EVENING_SELECTED_DAYS_KEY, null)
         return if (json != null) {
             val type = object : TypeToken<List<Int>>() {}.type
             gson.fromJson(json, type) ?: listOf(1, 2, 3, 4, 5, 6, 7)
@@ -772,24 +820,30 @@ class PreferencesManager(context: Context?) {
     
     fun setEveningSelectedDays(days: List<Int>) {
         val json = gson.toJson(days)
-        editor.putString(EVENING_SELECTED_DAYS_KEY, json)
-        editor.apply()
+        getEditor().apply {
+            putString(EVENING_SELECTED_DAYS_KEY, json)
+            apply()
+        }
     }
     
     // --- تنظیمات لرزش ---
-    fun isVibrationEnabled(): Boolean = prefs.getBoolean(VIBRATION_ENABLED_KEY, true)
+    fun isVibrationEnabled(): Boolean = prefs?.getBoolean(VIBRATION_ENABLED_KEY, true) ?: true
     
     fun setVibrationEnabled(enabled: Boolean) {
-        editor.putBoolean(VIBRATION_ENABLED_KEY, enabled)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(VIBRATION_ENABLED_KEY, enabled)
+            apply()
+        }
     }
     
     // --- صدای آلارم ---
-    fun getAlarmSoundUri(): String? = prefs.getString(ALARM_SOUND_URI_KEY, null)
+    fun getAlarmSoundUri(): String? = prefs?.getString(ALARM_SOUND_URI_KEY, null)
     
     fun setAlarmSoundUri(uri: String) {
-        editor.putString(ALARM_SOUND_URI_KEY, uri)
-        editor.apply()
+        getEditor().apply {
+            putString(ALARM_SOUND_URI_KEY, uri)
+            apply()
+        }
     }
     
     // --- متن‌های انگیزشی ---
@@ -800,16 +854,18 @@ class PreferencesManager(context: Context?) {
     // --- تنظیمات آلارم شب ---
     fun isEveningEnabled(): Boolean = isEveningAlarmEnabled()
     
-    fun getEveningHour(): Int = prefs.getInt(EVENING_HOUR_KEY, 21)
+    fun getEveningHour(): Int = prefs?.getInt(EVENING_HOUR_KEY, 21) ?: 21
     
-    fun getEveningMinute(): Int = prefs.getInt(EVENING_MINUTE_KEY, 0)
+    fun getEveningMinute(): Int = prefs?.getInt(EVENING_MINUTE_KEY, 0) ?: 0
     
     fun setEveningEnabled(enabled: Boolean) = setEveningAlarmEnabled(enabled)
     
     fun setEveningTime(hour: Int, minute: Int) {
-        editor.putInt(EVENING_HOUR_KEY, hour)
-        editor.putInt(EVENING_MINUTE_KEY, minute)
-        editor.apply()
+        getEditor().apply {
+            putInt(EVENING_HOUR_KEY, hour)
+            putInt(EVENING_MINUTE_KEY, minute)
+            apply()
+        }
     }
     
     // --- دسته‌بندی‌ها ---
@@ -830,32 +886,40 @@ class PreferencesManager(context: Context?) {
     }
     
     // --- تنظیمات اپلیکیشن ---
-    fun isDarkMode(): Boolean = prefs.getBoolean(DARK_MODE_KEY, false)
+    fun isDarkMode(): Boolean = prefs?.getBoolean(DARK_MODE_KEY, false) ?: false
     
     fun setDarkMode(enabled: Boolean) {
-        editor.putBoolean(DARK_MODE_KEY, enabled)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(DARK_MODE_KEY, enabled)
+            apply()
+        }
     }
     
-    fun getLanguage(): String = prefs.getString(LANGUAGE_KEY, "fa") ?: "fa"
+    fun getLanguage(): String = prefs?.getString(LANGUAGE_KEY, "fa") ?: "fa"
     
     fun setLanguage(language: String) {
-        editor.putString(LANGUAGE_KEY, language)
-        editor.apply()
+        getEditor().apply {
+            putString(LANGUAGE_KEY, language)
+            apply()
+        }
     }
     
-    fun areNotificationsEnabled(): Boolean = prefs.getBoolean(NOTIFICATIONS_ENABLED_KEY, true)
+    fun areNotificationsEnabled(): Boolean = prefs?.getBoolean(NOTIFICATIONS_ENABLED_KEY, true) ?: true
     
     fun setNotificationsEnabled(enabled: Boolean) {
-        editor.putBoolean(NOTIFICATIONS_ENABLED_KEY, enabled)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(NOTIFICATIONS_ENABLED_KEY, enabled)
+            apply()
+        }
     }
     
-    fun isAutoBackupEnabled(): Boolean = prefs.getBoolean(AUTO_BACKUP_ENABLED_KEY, false)
+    fun isAutoBackupEnabled(): Boolean = prefs?.getBoolean(AUTO_BACKUP_ENABLED_KEY, false) ?: false
     
     fun setAutoBackupEnabled(enabled: Boolean) {
-        editor.putBoolean(AUTO_BACKUP_ENABLED_KEY, enabled)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(AUTO_BACKUP_ENABLED_KEY, enabled)
+            apply()
+        }
     }
     
     // === متدهای مربوط به کاربر ===
@@ -864,39 +928,45 @@ class PreferencesManager(context: Context?) {
      * ذخیره ایمیل کاربر
      */
     fun saveUserEmail(email: String) {
-        editor.putString(USER_EMAIL_KEY, email)
-        editor.apply()
+        getEditor().apply {
+            putString(USER_EMAIL_KEY, email)
+            apply()
+        }
     }
     
     /**
      * دریافت ایمیل کاربر
      */
     fun getUserEmail(): String? {
-        return prefs.getString(USER_EMAIL_KEY, null)
+        return prefs?.getString(USER_EMAIL_KEY, null)
     }
     
     /**
      * تنظیم وضعیت ورود کاربر
      */
     fun setUserLoggedIn(isLoggedIn: Boolean) {
-        editor.putBoolean(USER_LOGGED_IN_KEY, isLoggedIn)
-        editor.apply()
+        getEditor().apply {
+            putBoolean(USER_LOGGED_IN_KEY, isLoggedIn)
+            apply()
+        }
     }
     
     /**
      * بررسی وضعیت ورود کاربر
      */
     fun isUserLoggedIn(): Boolean {
-        return prefs.getBoolean(USER_LOGGED_IN_KEY, false)
+        return prefs?.getBoolean(USER_LOGGED_IN_KEY, false) ?: false
     }
     
     /**
      * خروج کاربر از حساب
      */
     fun logoutUser() {
-        editor.remove(USER_EMAIL_KEY)
-        editor.putBoolean(USER_LOGGED_IN_KEY, false)
-        editor.apply()
+        getEditor().apply {
+            remove(USER_EMAIL_KEY)
+            putBoolean(USER_LOGGED_IN_KEY, false)
+            apply()
+        }
     }
     
     /**

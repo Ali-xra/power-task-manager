@@ -241,7 +241,7 @@ object AlarmUtils {
                     val nextAlarmTime = getTomorrowAlarmTime(hour, minute)
                     
                     // تنظیم آلارم فردا
-                    setMorningAlarm(context, nextAlarmTime, enableRepeating)
+                    setMorningAlarm(context, nextAlarmTime, true)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -270,7 +270,7 @@ object AlarmUtils {
                     val nextAlarmTime = getTomorrowAlarmTime(hour, minute)
                     
                     // تنظیم یادآور فردا
-                    setEveningAlarm(context, nextAlarmTime, enableRepeating)
+                    setEveningAlarm(context, nextAlarmTime, true)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

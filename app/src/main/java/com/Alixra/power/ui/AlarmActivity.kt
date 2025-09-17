@@ -123,7 +123,7 @@ class AlarmActivity : BaseActivity() {
 
         // مخفی کردن دکمه لغو برای جلوگیری از خاموش کردن تصادفی
         // این دکمه می‌تواند در حالت نیمه خواب به اشتباه فشرده شود
-        binding.cancelButton.visibility = View.GONE
+        // binding.cancelButton.visibility = View.GONE // Button removed from layout
 
         // اختیاری: اگر همچنان می‌خواهیم دکمه تأیید موجود باشد
         binding.submitButton.setOnClickListener {
