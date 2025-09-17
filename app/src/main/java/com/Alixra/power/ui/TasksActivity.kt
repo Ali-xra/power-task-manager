@@ -280,14 +280,13 @@ class TasksActivity : BaseActivity() {
                     categories[which - 1]
                 }
 
-                val newTask = Task(
-                    id = "task_${System.currentTimeMillis()}",
-                    title = title,
-                    description = "",
-                    categoryId = selectedCategory.id,
-                    timePeriod = currentPeriod,
-                    priority = TaskPriority.NORMAL
-                )
+                val newTask = Task.Builder()
+                    .id("task_${System.currentTimeMillis()}")
+                    .title(title)
+                    .categoryId(selectedCategory.id)
+                    .timePeriod(currentPeriod)
+                    .priority(TaskPriority.NORMAL)
+                    .build()
 
                 prefsManager.saveTask(newTask)
                 loadTasksList()
